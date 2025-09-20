@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>松本会計｜ツールポータル</title>
+<meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営のための四天王と各種便利ツール。" />
+<style>
+  :root{
+    --brand:#578899;           /* 事務所コーポレートカラー */
+    --brand-700:#456d77;       /* 濃いめ */
+    --brand-300:#7aa5b4;       /* 明るめ */
+    --ink:#0f172a;             /* 文字色 (slate-900) */
+    --muted:#64748b;           /* 補助文字 (slate-500) */
+    --bg:#f8fafc;              /* 背景 */
+    --card:#ffffff;            /* カード */
+    --line:#e2e8f0;            /* 罫線 */
+    --shadow:0 8px 24px rgba(15,23,42,.08);
+    --radius:18px;
+  }
+  :root.dark{
+    --bg:#0b1220;
+    --card:#0f172a;
+    --ink:#e5e7eb;
+    --muted:#94a3b8;
+    --line:#1f2a44;
+    --shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  html,body{height:100%;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    line-height:1.55;
+  }
+  /* ヘッダー */
+  .hero{
+    position:relative; overflow:hidden; isolation:isolate;
+    background: radial-gradient(1200px 400px at 10% -10%, rgba(87,136,153,.35), transparent),
+                radial-gradient(900px 400px at 110% -20%, rgba(69,109,119,.25), transparent),
+                linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
+    padding: clamp(24px, 4vw, 40px) 16px 18px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .topbar{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; 
+    max-width:1100px; margin:0 auto;
+  }
+  .branding{display:flex; align-items:center; gap:12px;}
+  .logo{width:38px;height:38px;border-radius:12px;background:var(--brand); box-shadow: inset 0 0 0 3px rgba(255,255,255,.5);
+        display:grid; place-items:center; color:#fff; font-weight:700; letter-spacing:.5px;}
+  .title{font-size: clamp(18px,2.6vw,28px); font-weight:800;}
+  .subtitle{color:var(--muted); font-size: clamp(12px,1.8vw,14px);}
+  .actions{display:flex; gap:8px; align-items:center;}
+  .btn{appearance:none; border:none; outline:none; cursor:pointer; padding:10px 14px; border-radius:12px; font-weight:600;}
+  .btn.primary{background:var(--brand); color:#fff; box-shadow:var(--shadow);}  
+  .btn.ghost{background:transparent; border:1px solid var(--line); color:var(--ink);} 
+  .btn:hover{filter:brightness(0.98);} 
+  .btn:active{transform: translateY(1px);} 
+
+  .hero .searchbar{max-width:1100px; margin:14px auto 0; display:flex; gap:10px;}
+  .search{flex:1; display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--line); border-radius:14px; padding:10px 12px; box-shadow: var(--shadow);} 
+  .search input{flex:1; border:none; outline:none; font-size:16px; background:transparent; color:var(--ink);} 
+  .tags{display:flex; gap:6px; flex-wrap:wrap;}
+  .tag{font-size:12px; color:#fff; background:var(--brand-700); padding:6px 10px; border-radius:999px;}
+
+  /* セクション */
+  .section{max-width:1100px; margin:24px auto; padding:0 16px;}
+  .section h2{display:flex; align-items:center; gap:10px; font-size: clamp(18px,2.4vw,22px); margin:22px 0 12px;}
+  .chip{font-size:12px; font-weight:700; color:#fff; background:var(--brand); padding:6px 10px; border-radius:999px; letter-spacing:.5px;}
+  .desc{color:var(--muted); font-size:14px; margin-bottom:10px;}
+
+  /* グリッドカード */
+  .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px;}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow: var(--shadow); position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .card .inner{padding:16px 16px 12px;}
+  .card .head{display:flex; align-items:center; gap:12px;}
+  .badge{width:44px; height:44px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff;}
+  .card h3{margin:0; font-size:18px;}
+  .card p{margin:6px 0 0; color:var(--muted); font-size:13px; min-height:2.5em;}
+  .card .foot{display:flex; gap:8px; padding:0 12px 14px;}
+  .linkbtn{flex:1; text-align:center; border-radius:12px; padding:10px 12px; font-weight:700; border:1px solid var(--line); background:#fff; color:var(--brand-700); cursor:pointer;}
+  .linkbtn.primary{background:var(--brand); color:#fff; border-color:transparent;}
+  .linkbtn:active{transform: translateY(1px);} 
+
+  /* 目次ナビ */
+  .toc{position:sticky; top:0; z-index:20; backdrop-filter: saturate(1.2) blur(6px); background:color-mix(in oklab, var(--bg) 70%, #fff 30%); border-bottom:1px solid var(--line);} 
+  .toc .wrap{max-width:1100px; margin:0 auto; padding:8px 16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .toc a{display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:700; color:var(--brand-700); background:#fff; border:1px solid var(--line); padding:8px 12px; border-radius:999px;}
+
+  /* トースト */
+  .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:#111827; color:#fff; padding:10px 14px; border-radius:12px; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:.25s ease;}
+  .toast.show{opacity:1;}
+
+  /* フッター */
+  footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
+
+  /* 小さめ端末調整 */
+  @media (max-width:420px){
+    .linkbtn{padding:10px 10px; font-size:14px;}
+    .card h3{font-size:17px;}
+  }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="topbar">
+      <div class="branding">
+        <div class="logo" aria-hidden="true">MK</div>
+        <div>
+          <div class="title">松本会計｜ツールポータル</div>
+          <div class="subtitle">黒字経営を加速する社内外向けリンク集</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" id="toggleTheme" title="テーマ切替">🌓</button>
+        <a class="btn primary" href="#shitenno">四天王 へ</a>
+      </div>
+    </div>
+    <div class="searchbar">
+      <div class="search" role="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="q" type="search" placeholder="ツール名・用途で検索 (例: 人件費 / 自動化 / 損益)" autocomplete="off" />
+      </div>
+      <div class="tags" aria-label="クイックジャンプ">
+        <a class="tag" href="#shitenno">四天王</a>
+        <a class="tag" href="#others">その他便利</a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <div class="wrap">
+      <a href="#shitenno">⚡ 黒字経営のための四天王</a>
+      <a href="#others">🧰 その他便利ツール</a>
+    </div>
+  </nav>
+
+  <!-- 四天王 -->
+  <section id="shitenno" class="section" aria-labelledby="h2-shitenno">
+    <h2 id="h2-shitenno"><span class="chip">黒字経営のための四天王</span></h2>
+    <p class="desc">管理会計×現場の意思決定を支える4つのキーツール。まずはここからご活用ください。</p>
+
+    <div class="grid" id="grid-shitenno">
+      <!-- 1. ボールで学ぶ変動損益計算書 -->
+      <article class="card" data-key="変動損益 限界利益 売上 固定費 黒字 ボール">
+        <div class="inner">
+          <div class="head">
+            <div class="badge" aria-hidden="true">
+              <!-- bounce icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 18c3-3 6-4 9-1s6 2 9-1" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="8" r="3.5" fill="white"/></svg>
+            </div>
+            <div>
+              <h3>ボールで学ぶ変動損益計算書</h3>
+              <p>固定費＝ハードル、売上＝落下高さ。限界利益で黒字突破を体感学習。</p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <a class="linkbtn primary" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">開く</a>
+          <button class="linkbtn" data-copy="https://takatrp.github.io/hendou_PL/">URLコピー</button>
+        </div>
+      </article>
+
+      <!-- 2. それ、売上に直すといくら？ -->
+      <article class="card" data-key="売上換算 変動費 限界 利益 必要販売数">
+        <div class="inner">
+          <div class="head">
+            <div class="badge" aria-hidden="true">
+              <!-- convert icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 6h7v4H6zM11 14h7v4h-7z" stroke="white" stroke-width="2"/><path d="M13 8l3 3-3 3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3>それ、売上に直すといくらですか？</h3>
+              <p>費用＝何円の売上相当？ 限界利益率から一発試算。</p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <a class="linkbtn primary" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">開く</a>
+          <button class="linkbtn" data-copy="https://takatrp.github.io/convert-to-sales/">URLコピー</button>
+        </div>
+      </article>
+
+      <!-- 3. 人件費見える化ツール -->
+      <article class="card" data-key="人件費 単価 分 単位 時間 コスト 見える化">
+        <div class="inner">
+          <div class="head">
+            <div class="badge" aria-hidden="true">
+              <!-- stopwatch icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="13" r="7" stroke="white" stroke-width="2"/><path d="M12 13V9m-2-5h4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3>人件費見える化ツール</h3>
+              <p>1分・1時間あたり原価を即表示。会議・作業の『コスト感』を共有。</p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <a class="linkbtn primary" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">開く</a>
+          <button class="linkbtn" data-copy="https://takatrp.github.io/time-unit-cost/">URLコピー</button>
+        </div>
+      </article>
+
+      <!-- 4. 自動化効果試算ツール -->
+      <article class="card" data-key="自動化 効果 時短 コスト 削減 ROI 投資回収">
+        <div class="inner">
+          <div class="head">
+            <div class="badge" aria-hidden="true">
+              <!-- robot/gear icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="5" stroke="white" stroke-width="2"/><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5l-1.4 1.4M7 17l-1.4 1.4M17 17l1.4 1.4M7 7 5.6 5.6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3>自動化効果試算ツール</h3>
+              <p>作業削減×人件費で定量化。投資回収の意思決定を後押し。</p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <a class="linkbtn primary" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">開く</a>
+          <button class="linkbtn" data-copy="https://takatrp.github.io/jidouka-kouka/">URLコピー</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- その他便利ツール -->
+  <section id="others" class="section" aria-labelledby="h2-others">
+    <h2 id="h2-others"><span class="chip">その他便利ツール</span></h2>
+    <p class="desc">日常業務で役立つ周辺ツールをコンパクトに集約。</p>
+
+    <div class="grid" id="grid-others">
+      <!-- 受取利息配当金 -->
+      <article class="card" data-key="受取利息 受取配当金 源泉 税務 仕訳">
+        <div class="inner">
+          <div class="head">
+            <div class="badge" aria-hidden="true">
+              <!-- bank/percent icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 10l8-5 8 5v8H4v-8z" stroke="white" stroke-width="2"/><path d="M7 18h10M8 13h3" stroke="white" stroke-width="2"/></svg>
+            </div>
+            <div>
+              <h3>受取利息・配当金 仕訳補助</h3>
+              <p>入金額から自動で仕訳素案を提示。法人前提の勘定科目に対応。</p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <a class="linkbtn primary" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">開く</a>
+          <button class="linkbtn" data-copy="https://takatrp.github.io/withholding/">URLコピー</button>
+        </div>
+      </article>
+
+      <!-- 減価償却費計算 -->
+      <article class="card" data-key="減価償却 償却率 耐用年数 定額 定率 国税庁">
+        <div class="inner">
+          <div class="head">
+            <div class="badge" aria-hidden="true">
+              <!-- calculator icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="3" stroke="white" stroke-width="2"/><path d="M8 8h8M8 12h3m0 4h5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h3>減価償却費 計算ツール</h3>
+              <p>耐用年数・償却率に沿って毎期償却費を試算。注記の検討にも。</p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <a class="linkbtn primary" href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">開く</a>
+          <button class="linkbtn" data-copy="https://takatrp.github.io/genkasyoukyaku/">URLコピー</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <div>当ページはリンクポータルです。各ツールの最終確認は必ず実務手順・法令に照らして行ってください。</div>
+    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r1</strong> / 最終更新: 2025-09-20</div>
+  </footer>
+
+  <div class="toast" id="toast">URLをコピーしました</div>
+
+<script>
+  // 検索フィルタ
+  const q = document.querySelector('#q');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  q?.addEventListener('input', (e)=>{
+    const v = (e.target.value || '').trim();
+    const kw = v.replace(/\s+/g,' ').split(' ').filter(Boolean).map(s=>s.toLowerCase());
+    cards.forEach(c=>{
+      const hay = (c.textContent + ' ' + (c.dataset.key||'')).toLowerCase();
+      const ok = kw.length===0 || kw.every(k=> hay.includes(k));
+      c.style.display = ok ? '' : 'none';
+    });
+  });
+
+  // クリップボードコピー & トースト
+  const toast = document.getElementById('toast');
+  function showToast(msg){
+    toast.textContent = msg || 'コピーしました';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 1500);
+  }
+  document.addEventListener('click', async (e)=>{
+    const btn = e.target.closest('[data-copy]');
+    if(!btn) return;
+    const url = btn.getAttribute('data-copy');
+    try{
+      await navigator.clipboard.writeText(url);
+      showToast('URLをコピーしました');
+    }catch(err){
+      showToast('コピーに失敗しました');
+    }
+  });
+
+  // テーマ切替（保持）
+  const root = document.documentElement;
+  const themeKey = 'mk-tools-theme';
+  function setTheme(mode){
+    if(mode==='dark'){ root.classList.add('dark'); }
+    else{ root.classList.remove('dark'); }
+    localStorage.setItem(themeKey, mode);
+  }
+  const saved = localStorage.getItem(themeKey);
+  if(saved){ setTheme(saved); }
+  document.getElementById('toggleTheme')?.addEventListener('click', ()=>{
+    const dark = root.classList.toggle('dark');
+    localStorage.setItem(themeKey, dark ? 'dark' : 'light');
+  });
+
+  // iOSキーボードでのズーム防止（視差）
+  document.addEventListener('touchstart', ()=>{}, {passive:true});
+</script>
+</body>
+</html>
