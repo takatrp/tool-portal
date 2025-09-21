@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>松本会計｜ツールポータル</title>
-<meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営のための四天王と各種便利ツール。" />
+<meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営4WDと各種便利ツール。" \/>
 <style>
   :root{
     --brand:#578899;           /* 事務所コーポレートカラー */
@@ -103,6 +103,48 @@
     .linkbtn{padding:10px 10px; font-size:14px;}
     .card h3{font-size:17px;}
   }
+  
+  /* === 黒字経営4WD ホイール === */
+  .wheel{position:relative;margin:16px auto 10px;width:min(760px,96vw);aspect-ratio:1/1;}
+  .hub{position:absolute;top:50%;left:50%;translate:-50% -50%;width:50%;aspect-ratio:3/4;display:grid;place-items:center;color:var(--brand-700);} 
+  .hub svg{width:100%;height:100%;}
+  /* ハブ四隅に配置するリンク */
+  .wheel .corner{position:absolute;display:flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--brand-700);font-weight:800;padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);}
+  .wheel .corner:hover{filter:brightness(0.98);} 
+  .wheel .corner svg{flex:0 0 auto;}
+  /* ハブの四隅（少し外側に張り出す） */
+  .wheel .corner.tl{top:-6%;left:-8%;}
+  .wheel .corner.tr{top:-6%;right:-8%;}
+  .wheel .corner.bl{bottom:-6%;left:-8%;}
+  .wheel .corner.br{bottom:-6%;right:-8%;}
+  @media (max-width:520px){
+    .wheel{width:min(560px,94vw);} 
+    .hub{width:64%;}
+    .wheel .corner{font-size:13px;padding:8px 10px;}
+    .wheel .corner.tl{top:-9%;left:-10%;}
+    .wheel .corner.tr{top:-9%;right:-10%;}
+    .wheel .corner.bl{bottom:-9%;left:-10%;}
+    .wheel .corner.br{bottom:-9%;right:-10%;}
+  }
+
+  /* === 黒字経営4WD レクタングル === */
+  .awd{position:relative;margin:16px auto 6px;width:min(780px,96vw);aspect-ratio:3/4;}
+  .rect{position:absolute;top:50%;left:50%;translate:-50% -50%;width:42%;height:68%;border-radius:28px;border:2px dashed var(--brand-300);background:linear-gradient(180deg,#ffffff 0%,#f3f8fb 100%);box-shadow:var(--shadow);}  
+  .rect::after{content:"";position:absolute;inset:10% 12%;border-radius:22px;border:1px solid var(--line);opacity:.6;}
+  .center{position:absolute;top:50%;left:50%;translate:-50% -50%;display:grid;place-items:center;width:36%;aspect-ratio:1/1;border-radius:24px;background:radial-gradient(70% 60% at 50% 35%, #ffffff 0%, #eaf3f7 100%);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--brand-700);} 
+  .center span{font-weight:900;font-size:clamp(28px,6.2vw,40px);letter-spacing:.5px;}
+  .corner{position:absolute;display:flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--brand-700);font-weight:800;padding:12px 14px;border-radius:999px;box-shadow:var(--shadow);} 
+  .corner svg{flex:0 0 auto;}
+  .corner.tl{top:4%;left:4%;}
+  .corner.tr{top:4%;right:4%;}
+  .corner.bl{bottom:4%;left:4%;}
+  .corner.br{bottom:4%;right:4%;}
+  @media (max-width:600px){
+    .awd{width:min(560px,94vw);} 
+    .rect{width:52%;height:66%;}
+    .center{width:44%;}
+    .corner{padding:10px 12px;font-size:13px;}
+  }
 </style>
 </head>
 <body>
@@ -117,7 +159,7 @@
       </div>
       <div class="actions">
         <button class="btn ghost" id="toggleTheme" title="テーマ切替">🌓</button>
-        <a class="btn primary" href="#shitenno">四天王 へ</a>
+        <a class="btn primary" href="#shitenno">4WD へ</a>
       </div>
     </div>
     <div class="searchbar">
@@ -126,7 +168,7 @@
         <input id="q" type="search" placeholder="ツール名・用途で検索 (例: 人件費 / 自動化 / 損益)" autocomplete="off" />
       </div>
       <div class="tags" aria-label="クイックジャンプ">
-        <a class="tag" href="#shitenno">四天王</a>
+        <a class="tag" href="#shitenno">4WD<\/a>
         <a class="tag" href="#others">その他便利</a>
       </div>
     </div>
@@ -134,15 +176,54 @@
 
   <nav class="toc">
     <div class="wrap">
-      <a href="#shitenno">⚡ 黒字経営のための四天王</a>
+      <a href="#shitenno">⚡ 黒字経営4WD</a>
       <a href="#others">🧰 その他便利ツール</a>
     </div>
   </nav>
 
   <!-- 四天王 -->
   <section id="shitenno" class="section" aria-labelledby="h2-shitenno">
-    <h2 id="h2-shitenno"><span class="chip">黒字経営のための四天王</span></h2>
-    <p class="desc">管理会計×現場の意思決定を支える4つのキーツール。まずはここからご活用ください。</p>
+    <h2 id="h2-shitenno"><span class="chip">黒字経営4WD</span></h2>
+    <p class="desc">四つの実務ツールで、黒字を駆動する。</p>
+
+    <!-- 黒字経営4WD：車の四輪レイアウト -->
+    <div class="wheel" role="group" aria-label="黒字経営4WD：四輪レイアウト">
+      <div class="hub" aria-label="4WDハブ">
+        <!-- いただいた画像のシルエットをSVGで再現（軽量・高解像度） -->
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <!-- 車体（中央） -->
+          <rect x="36" y="8" width="28" height="84" rx="14" fill="currentColor"/>
+          <!-- タイヤ（4本） -->
+          <rect x="8" y="16" width="16" height="26" rx="8" fill="currentColor"/>
+          <rect x="8" y="58" width="16" height="26" rx="8" fill="currentColor"/>
+          <rect x="76" y="16" width="16" height="26" rx="8" fill="currentColor"/>
+          <rect x="76" y="58" width="16" height="26" rx="8" fill="currentColor"/>
+          <!-- コネクタ -->
+          <rect x="27" y="31" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="27" y="64" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="67" y="31" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="67" y="64" width="6" height="6" rx="1" fill="currentColor"/>
+        </svg>
+        
+        <!-- 四隅リンク（ハブ基準） -->
+        <a class="corner tl" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener" title="ボールで学ぶ変動損益計算書">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18c3-3 6-4 9-1s6 2 9-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg>
+          <span>変動損益</span>
+        </a>
+        <a class="corner tr" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener" title="それ、売上に直すといくらですか？">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h7v4H6zM11 14h7v4h-7z" stroke="currentColor" stroke-width="2"/><path d="M13 8l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>売上換算</span>
+        </a>
+        <a class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener" title="人件費見える化ツール">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 13V9m-2-5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>人件費</span>
+        </a>
+        <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener" title="自動化効果試算ツール">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5l-1.4 1.4M7 17l-1.4 1.4M17 17l1.4 1.4M7 7 5.6 5.6" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>
+          <span>自動化効果</span>
+        </a>
+      </div>
+    </div>
 
     <div class="grid" id="grid-shitenno">
       <!-- 1. ボールで学ぶ変動損益計算書 -->
@@ -277,7 +358,7 @@
 
   <footer>
     <div>当ページはリンクポータルです。各ツールの最終確認は必ず実務手順・法令に照らして行ってください。</div>
-    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r1</strong> / 最終更新: 2025-09-20</div>
+    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r3</strong> / 最終更新: 2025-09-21</div>
   </footer>
 
   <div class="toast" id="toast">URLをコピーしました</div>
