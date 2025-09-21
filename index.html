@@ -153,6 +153,7 @@
   #link-convert{top:11%; right:6%;}
   #link-jinkenhi{bottom:11%; left:6%;}
   #link-jidouka{bottom:11%; right:6%;}
+  .hub img{width:100%;height:100%;object-fit:contain;}
 </style>
 </head>
 <body>
@@ -188,39 +189,7 @@
     <div class="wheel" role="group" aria-label="黒字経営4WD：四輪レイアウト">
       <div class="hub" aria-label="4WDハブ">
         <!-- いただいた画像のシルエットをSVGで再現（軽量・高解像度） -->
-        <svg viewBox="0 0 140 140" aria-hidden="true" focusable="false">
-          <!-- ===== Car Top View (more car-like) ===== -->
-          <!-- Body (slightly squarer silhouette) -->
-          <path d="M54 10h32c8 0 14 6 14 14v92c0 8-6 14-14 14H54c-8 0-14-6-14-14V24c0-8 6-14 14-14Z" fill="currentColor"/>
-
-          <!-- Side mirrors (small fins) -->
-          <path d="M48 66c0-2 2-4 4-4h2v8h-2c-2 0-4-2-4-4Z" fill="currentColor"/>
-          <path d="M92 66c0-2-2-4-4-4h-2v8h2c2 0 4-2 4-4Z" fill="currentColor"/>
-
-          <!-- Windows (trapezoids) -->
-          <path d="M56 52h28c4 0 6 2 6 6v6c0 4-2 6-6 6H56c-4 0-6-2-6-6v-6c0-4 2-6 6-6Z" fill="#ffffff" fill-opacity="0.95" transform="skewX(-6) translate(-6,0)"/>
-          <path d="M56 96h28c4 0 6 2 6 6v6c0 4-2 6-6 6H56c-4 0-6-2-6-6v-6c0-4 2-6 6-6Z" fill="#ffffff" fill-opacity="0.95" transform="skewX(6) translate(6,0)"/>
-
-          <!-- Headlight highlights (top corners) -->
-          <path d="M60 16c3 0 6 2 6 4s-3 4-6 4-6-2-6-4 3-4 6-4Z" fill="#ffffff"/>
-          <path d="M80 16c3 0 6 2 6 4s-3 4-6 4-6-2-6-4 3-4 6-4Z" fill="#ffffff"/>
-
-          <!-- Taillight highlights (bottom corners) -->
-          <ellipse cx="62" cy="124" rx="4.5" ry="2.6" fill="#ffffff"/>
-          <ellipse cx="78" cy="124" rx="4.5" ry="2.6" fill="#ffffff"/>
-
-          <!-- Tyres (protruding) -->
-          <rect x="14" y="26" width="24" height="32" rx="12" fill="currentColor"/>
-          <rect x="14" y="86" width="24" height="32" rx="12" fill="currentColor"/>
-          <rect x="102" y="26" width="24" height="32" rx="12" fill="currentColor"/>
-          <rect x="102" y="86" width="24" height="32" rx="12" fill="currentColor"/>
-
-          <!-- Tyre hubs (subtle inner dots) -->
-          <circle cx="26" cy="42" r="3" fill="#ffffff" fill-opacity="0.25"/>
-          <circle cx="26" cy="102" r="3" fill="#ffffff" fill-opacity="0.25"/>
-          <circle cx="114" cy="42" r="3" fill="#ffffff" fill-opacity="0.25"/>
-          <circle cx="114" cy="102" r="3" fill="#ffffff" fill-opacity="0.25"/>
-        </svg>
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABA..." alt="car silhouette" style="width:100%;height:100%;object-fit:contain;border-radius:14px;"/>
         
         <!-- 四隅リンク（ハブ基準） -->
         <a class="corner tl" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener" title="ボールで学ぶ変動損益計算書">
@@ -375,7 +344,7 @@
 
   <footer>
     <div>当ページはリンクポータルです。各ツールの最終確認は必ず実務手順・法令に照らして行ってください。</div>
-    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r10</strong> / 最終更新: 2025-09-21</div>
+    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r11</strong> / 最終更新: 2025-09-21</div>
   </footer>
 
   <div class="toast" id="toast">URLをコピーしました</div>
