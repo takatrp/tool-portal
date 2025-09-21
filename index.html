@@ -149,11 +149,18 @@
   .wheel .corner svg{width:28px;height:28px;}
   .wheel .corner.br svg{width:28px;height:28px;}
   /* --- 4WD corner positions: align to tyre centers --- */
-  #link-pl{top:11%; left:6%;}
-  #link-convert{top:11%; right:6%;}
-  #link-jinkenhi{bottom:11%; left:6%;}
-  #link-jidouka{bottom:11%; right:6%;}
+  #link-pl{top:7%; left:7%;}
+  #link-convert{top:7%; right:7%;}
+  #link-jinkenhi{bottom:7%; left:7%;}
+  #link-jidouka{bottom:7%; right:7%;}
   .hub img{width:100%;height:100%;object-fit:contain;}
+  /* Layering & corner positions (pull away from car) */
+  .hub{z-index:1;}
+  .wheel .corner{z-index:2;}
+  #link-pl{top:7%; left:7%;}
+  #link-convert{top:7%; right:7%;}
+  #link-jinkenhi{bottom:7%; left:7%;}
+  #link-jidouka{bottom:7%; right:7%;}
 </style>
 </head>
 <body>
@@ -189,14 +196,14 @@
     <div class="wheel" role="group" aria-label="黒字経営4WD：四輪レイアウト">
       <div class="hub" aria-label="4WDハブ・車イラスト">
         <svg viewBox="0 0 140 140" aria-hidden="true" focusable="false">
-          <!-- Body (squarer silhouette) -->
-          <rect x="50" y="8" width="40" height="124" rx="16" fill="currentColor"/>
+          <!-- Body (wider & squarer) -->
+          <rect x="45" y="8" width="50" height="124" rx="16" fill="currentColor"/>
 
           <!-- Side mirrors -->
           <path d="M48 66c0-2 2-4 4-4h2v8h-2c-2 0-4-2-4-4Z" fill="currentColor"/>
           <path d="M92 66c0-2-2-4-4-4h-2v8h2c2 0 4-2 4-4Z" fill="currentColor"/>
 
-          <!-- Windows (centered trapezoids; front/back aligned left-right) -->
+          <!-- Windows (front/back aligned) -->
           <path d="M60 52 h20 l6 6 v6 l-6 6 h-20 l-6 -6 v-6 z" fill="#ffffff" fill-opacity="0.96"/>
           <path d="M60 96 h20 l6 6 v6 l-6 6 h-20 l-6 -6 v-6 z" fill="#ffffff" fill-opacity="0.96"/>
 
@@ -204,19 +211,37 @@
           <ellipse cx="60" cy="19" rx="6" ry="4" fill="#ffffff"/>
           <ellipse cx="80" cy="19" rx="6" ry="4" fill="#ffffff"/>
 
-          <!-- Tyres (protruding to sides) -->
-          <rect x="12" y="26" width="26" height="32" rx="13" fill="currentColor"/>
-          <rect x="12" y="86" width="26" height="32" rx="13" fill="currentColor"/>
-          <rect x="102" y="26" width="26" height="32" rx="13" fill="currentColor"/>
-          <rect x="102" y="86" width="26" height="32" rx="13" fill="currentColor"/>
+          <!-- Tyres (protruding rectangles) -->
+          <rect x="12" y="26" width="26" height="32" fill="currentColor"/>
+          <rect x="12" y="86" width="26" height="32" fill="currentColor"/>
+          <rect x="102" y="26" width="26" height="32" fill="currentColor"/>
+          <rect x="102" y="86" width="26" height="32" fill="currentColor"/>
 
-          <!-- Tyre hubs (subtle) -->
-          <circle cx="25" cy="42" r="3" fill="#ffffff" fill-opacity="0.25"/>
-          <circle cx="25" cy="102" r="3" fill="#ffffff" fill-opacity="0.25"/>
-          <circle cx="115" cy="42" r="3" fill="#ffffff" fill-opacity="0.25"/>
-          <circle cx="115" cy="102" r="3" fill="#ffffff" fill-opacity="0.25"/>
+          <!-- Connectors: tyres ↔ body (thin bars) -->
+          <rect x="38" y="40" width="7" height="8" fill="currentColor"/>
+          <rect x="38" y="100" width="7" height="8" fill="currentColor"/>
+          <rect x="95" y="40" width="7" height="8" fill="currentColor"/>
+          <rect x="95" y="100" width="7" height="8" fill="currentColor"/>
         </svg>
       </div>
+
+      <!-- Four corner tool links (as siblings of hub, to avoid overlap) -->
+      <a id="link-pl" class="corner tl" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener" title="ボールで学ぶ変動損益計算書">
+        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18c3-3 6-4 9-1s6 2 9-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg>
+        <span>変動損益</span>
+      </a>
+      <a id="link-convert" class="corner tr" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener" title="それ、売上に直すといくらですか？">
+        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h7v4H6zM11 14h7v4h-7z" stroke="currentColor" stroke-width="2"/><path d="M13 8l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>売上換算</span>
+      </a>
+      <a id="link-jinkenhi" class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener" title="人件費見える化ツール">
+        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 13V9m-2-5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>人件費</span>
+      </a>
+      <a id="link-jidouka" class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener" title="自動化効果試算ツール">
+        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5l-1.4 1.4M7 17l-1.4 1.4M17 17l1.4 1.4M7 7 5.6 5.6" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>
+        <span>自動化効果</span>
+      </a>
     </div>
 
     <div class="grid" id="grid-shitenno">
@@ -352,7 +377,7 @@
 
   <footer>
     <div>当ページはリンクポータルです。各ツールの最終確認は必ず実務手順・法令に照らして行ってください。</div>
-    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r12</strong> / 最終更新: 2025-09-21</div>
+    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r15</strong> / 最終更新: 2025-09-21</div>
   </footer>
 
   <div class="toast" id="toast">URLをコピーしました</div>
