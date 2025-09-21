@@ -183,19 +183,38 @@
     <div class="wheel" role="group" aria-label="黒字経営4WD：四輪レイアウト">
       <div class="hub" aria-label="4WDハブ">
         <!-- いただいた画像のシルエットをSVGで再現（軽量・高解像度） -->
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-          <!-- 車体（中央） -->
-          <rect x="36" y="8" width="28" height="84" rx="14" fill="currentColor"/>
+        <svg viewBox="0 0 100 140" aria-hidden="true" focusable="false">
+          <!-- 車体（トップビュー） -->
+          <rect x="28" y="10" width="44" height="120" rx="18" fill="currentColor"/>
+          
+          <!-- フロント／リアガラス（白・半透明） -->
+          <rect x="32" y="20" width="36" height="18" rx="6" fill="#ffffff" fill-opacity="0.9"/>
+          <rect x="32" y="102" width="36" height="18" rx="6" fill="#ffffff" fill-opacity="0.9"/>
+          
+          <!-- キャビン（天井の窓） -->
+          <rect x="32" y="46" width="36" height="44" rx="8" fill="#ffffff" fill-opacity="0.9"/>
+
+          <!-- サイドミラー（左右） -->
+          <rect x="20" y="58" width="8" height="12" rx="3" fill="currentColor"/>
+          <rect x="72" y="58" width="8" height="12" rx="3" fill="currentColor"/>
+
+          <!-- ヘッドライト／テールライト（控えめ） -->
+          <circle cx="36" cy="16" r="2" fill="#ffffff"/>
+          <circle cx="64" cy="16" r="2" fill="#ffffff"/>
+          <circle cx="36" cy="124" r="2" fill="#ffffff"/>
+          <circle cx="64" cy="124" r="2" fill="#ffffff"/>
+
+          <!-- 車軸（コネクタ） -->
+          <rect x="24" y="36" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="24" y="98" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="70" y="36" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="70" y="98" width="6" height="6" rx="1" fill="currentColor"/>
+
           <!-- タイヤ（4本） -->
-          <rect x="8" y="16" width="16" height="26" rx="8" fill="currentColor"/>
-          <rect x="8" y="58" width="16" height="26" rx="8" fill="currentColor"/>
-          <rect x="76" y="16" width="16" height="26" rx="8" fill="currentColor"/>
-          <rect x="76" y="58" width="16" height="26" rx="8" fill="currentColor"/>
-          <!-- コネクタ -->
-          <rect x="27" y="31" width="6" height="6" rx="1" fill="currentColor"/>
-          <rect x="27" y="64" width="6" height="6" rx="1" fill="currentColor"/>
-          <rect x="67" y="31" width="6" height="6" rx="1" fill="currentColor"/>
-          <rect x="67" y="64" width="6" height="6" rx="1" fill="currentColor"/>
+          <rect x="6" y="26" width="16" height="30" rx="8" fill="currentColor"/>
+          <rect x="6" y="88" width="16" height="30" rx="8" fill="currentColor"/>
+          <rect x="78" y="26" width="16" height="30" rx="8" fill="currentColor"/>
+          <rect x="78" y="88" width="16" height="30" rx="8" fill="currentColor"/>
         </svg>
         
         <!-- 四隅リンク（ハブ基準） -->
@@ -351,7 +370,7 @@
 
   <footer>
     <div>当ページはリンクポータルです。各ツールの最終確認は必ず実務手順・法令に照らして行ってください。</div>
-    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r6</strong> / 最終更新: 2025-09-21</div>
+    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r7</strong> / 最終更新: 2025-09-21</div>
   </footer>
 
   <div class="toast" id="toast">URLをコピーしました</div>
