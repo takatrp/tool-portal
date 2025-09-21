@@ -149,10 +149,10 @@
   .wheel .corner svg{width:28px;height:28px;}
   .wheel .corner.br svg{width:28px;height:28px;}
   /* --- 4WD corner positions: align to tyre centers --- */
-  #link-pl{top:12%; left:6%;}
-  #link-convert{top:12%; right:6%;}
-  #link-jinkenhi{bottom:12%; left:6%;}
-  #link-jidouka{bottom:12%; right:6%;}
+  #link-pl{top:11%; left:6%;}
+  #link-convert{top:11%; right:6%;}
+  #link-jinkenhi{bottom:11%; left:6%;}
+  #link-jidouka{bottom:11%; right:6%;}
 </style>
 </head>
 <body>
@@ -189,29 +189,37 @@
       <div class="hub" aria-label="4WDハブ">
         <!-- いただいた画像のシルエットをSVGで再現（軽量・高解像度） -->
         <svg viewBox="0 0 140 140" aria-hidden="true" focusable="false">
-          <!-- 角ばりを増やした車体（トップビュー） -->
-          <rect x="54" y="10" width="32" height="120" rx="14" fill="currentColor"/>
-          
-          <!-- サイドミラー（控えめ） -->
-          <rect x="48" y="64" width="6" height="8" rx="3" fill="currentColor"/>
-          <rect x="86" y="64" width="6" height="8" rx="3" fill="currentColor"/>
+          <!-- ===== Car Top View (more car-like) ===== -->
+          <!-- Body (slightly squarer silhouette) -->
+          <path d="M54 10h32c8 0 14 6 14 14v92c0 8-6 14-14 14H54c-8 0-14-6-14-14V24c0-8 6-14 14-14Z" fill="currentColor"/>
 
-          <!-- フロント／リアガラス（やや台形寄り） -->
-          <path d="M58 50 h24 a6 6 0 0 1 6 6 v6 a6 6 0 0 1 -6 6 h-24 a6 6 0 0 1 -6 -6 v-6 a6 6 0 0 1 6 -6 z" fill="#ffffff" fill-opacity="0.95"/>
-          <path d="M58 96 h24 a6 6 0 0 1 6 6 v6 a6 6 0 0 1 -6 6 h-24 a6 6 0 0 1 -6 -6 v-6 a6 6 0 0 1 6 -6 z" fill="#ffffff" fill-opacity="0.95"/>
+          <!-- Side mirrors (small fins) -->
+          <path d="M48 66c0-2 2-4 4-4h2v8h-2c-2 0-4-2-4-4Z" fill="currentColor"/>
+          <path d="M92 66c0-2-2-4-4-4h-2v8h2c2 0 4-2 4-4Z" fill="currentColor"/>
 
-          <!-- フロントのハイライト楕円（左右） -->
-          <ellipse cx="64" cy="20" rx="5.6" ry="3.6" fill="#ffffff"/>
-          <ellipse cx="76" cy="20" rx="5.6" ry="3.6" fill="#ffffff"/>
-          <!-- テール側の小楕円（左右） -->
-          <ellipse cx="64" cy="130" rx="4.8" ry="3" fill="#ffffff"/>
-          <ellipse cx="76" cy="130" rx="4.8" ry="3" fill="#ffffff"/>
+          <!-- Windows (trapezoids) -->
+          <path d="M56 52h28c4 0 6 2 6 6v6c0 4-2 6-6 6H56c-4 0-6-2-6-6v-6c0-4 2-6 6-6Z" fill="#ffffff" fill-opacity="0.95" transform="skewX(-6) translate(-6,0)"/>
+          <path d="M56 96h28c4 0 6 2 6 6v6c0 4-2 6-6 6H56c-4 0-6-2-6-6v-6c0-4 2-6 6-6Z" fill="#ffffff" fill-opacity="0.95" transform="skewX(6) translate(6,0)"/>
 
-          <!-- タイヤ（左右に張り出し） -->
-          <rect x="16" y="26" width="22" height="32" rx="11" fill="currentColor"/>
-          <rect x="16" y="86" width="22" height="32" rx="11" fill="currentColor"/>
-          <rect x="102" y="26" width="22" height="32" rx="11" fill="currentColor"/>
-          <rect x="102" y="86" width="22" height="32" rx="11" fill="currentColor"/>
+          <!-- Headlight highlights (top corners) -->
+          <path d="M60 16c3 0 6 2 6 4s-3 4-6 4-6-2-6-4 3-4 6-4Z" fill="#ffffff"/>
+          <path d="M80 16c3 0 6 2 6 4s-3 4-6 4-6-2-6-4 3-4 6-4Z" fill="#ffffff"/>
+
+          <!-- Taillight highlights (bottom corners) -->
+          <ellipse cx="62" cy="124" rx="4.5" ry="2.6" fill="#ffffff"/>
+          <ellipse cx="78" cy="124" rx="4.5" ry="2.6" fill="#ffffff"/>
+
+          <!-- Tyres (protruding) -->
+          <rect x="14" y="26" width="24" height="32" rx="12" fill="currentColor"/>
+          <rect x="14" y="86" width="24" height="32" rx="12" fill="currentColor"/>
+          <rect x="102" y="26" width="24" height="32" rx="12" fill="currentColor"/>
+          <rect x="102" y="86" width="24" height="32" rx="12" fill="currentColor"/>
+
+          <!-- Tyre hubs (subtle inner dots) -->
+          <circle cx="26" cy="42" r="3" fill="#ffffff" fill-opacity="0.25"/>
+          <circle cx="26" cy="102" r="3" fill="#ffffff" fill-opacity="0.25"/>
+          <circle cx="114" cy="42" r="3" fill="#ffffff" fill-opacity="0.25"/>
+          <circle cx="114" cy="102" r="3" fill="#ffffff" fill-opacity="0.25"/>
         </svg>
         
         <!-- 四隅リンク（ハブ基準） -->
@@ -367,7 +375,7 @@
 
   <footer>
     <div>当ページはリンクポータルです。各ツールの最終確認は必ず実務手順・法令に照らして行ってください。</div>
-    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r9</strong> / 最終更新: 2025-09-21</div>
+    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r10</strong> / 最終更新: 2025-09-21</div>
   </footer>
 
   <div class="toast" id="toast">URLをコピーしました</div>
