@@ -169,6 +169,8 @@
   #link-convert{top:12%; right:12%;}
   #link-jinkenhi{bottom:12%; left:12%;}
   #link-jidouka{bottom:12%; right:12%;}
+  /* 変動損益を車の上（中央）に配置 */
+  .wheel .oncar{top:50%; left:50%; transform:translate(-50%,-50%);}
 </style>
 </head>
 <body>
@@ -198,12 +200,12 @@
   <!-- 四天王 -->
   <section id="shitenno" class="section" aria-labelledby="h2-shitenno">
     <h2 id="h2-shitenno"><span class="chip">黒字経営4WD</span></h2>
-    <p class="desc">四つの実務ツールで、黒字を駆動する。</p>
+    <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。</p>
 
     <!-- 黒字経営4WD：車の四輪レイアウト -->
     <div class="wheel" role="group" aria-label="黒字経営4WD：四輪レイアウト">
-      <div class="hub" aria-label="4WDハブ・車画像">
-        <img class="carimg" alt="4WD car" src="./四輪駆動.png" loading="lazy" onerror="this.style.display='none'; document.getElementById('car-fallback').style.display='block';"/>
+      <div class="hub" aria-label="4WDハブ・車画像" data-ver="r18-restore">
+        <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'; document.getElementById('car-fallback').style.display='block';"/>
         <!-- PNGが見つからない場合のフォールバック（SVG） -->
         <svg id="car-fallback" viewBox="0 0 140 140" aria-hidden="true" focusable="false" style="display:none">
           <rect x="45" y="8" width="50" height="124" rx="16" fill="currentColor"/>
@@ -225,13 +227,21 @@
       </div>
 
       <!-- Four corner tool links (as siblings of hub, to avoid overlap) -->
-      <a id="link-pl" class="corner tl" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener" title="ボールで学ぶ変動損益計算書">
+      <a id="link-pl-center" class="corner oncar" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener" title="ボールで学ぶ変動損益計算書">
         <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18c3-3 6-4 9-1s6 2 9-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="8" r="3.5" fill="currentColor"/></svg>
         <span>変動損益</span>
       </a>
-      <a id="link-convert" class="corner tr" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener" title="それ、売上に直すといくらですか？">
+      <a id="link-pl" class="corner tl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener" title="それ、売上に直すといくらですか？">
         <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h7v4H6zM11 14h7v4h-7z" stroke="currentColor" stroke-width="2"/><path d="M13 8l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         <span>売上換算</span>
+      </a>
+      <a id="link-convert" class="corner tr" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener" title="価格改定検討ツール">
+        <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 16V8m0 0l-3 3m3-3l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17 8v8m0 0l3-3m-3 3l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 11h4M10 13h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>価格改定</span>
       </a>
       <a id="link-jinkenhi" class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener" title="人件費見える化ツール">
         <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 13V9m-2-5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -281,6 +291,25 @@
         <div class="foot">
           <a class="linkbtn primary" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">開く</a>
           <button class="linkbtn" data-copy="https://takatrp.github.io/convert-to-sales/">URLコピー</button>
+        </div>
+      </article>
+
+      <!-- 価格改定 検討ツール（convertの下に配置） -->
+      <article class="card" data-key="価格改定 値上げ 値下げ 利益 影響 試算">
+        <div class="inner">
+          <div class="head">
+            <div class="badge" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 16V7m0 0l-3 3m3-3l3 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8v9m0 0l3-3m-3 3l-3-3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3>価格改定検討ツール</h3>
+              <p>値上げ・値下げの売上/利益インパクトを即試算。改定幅の根拠づくりに。</p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <a class="linkbtn primary" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">開く</a>
+          <button class="linkbtn" data-copy="https://takatrp.github.io/price-up-down/">URLコピー</button>
         </div>
       </article>
 
@@ -376,7 +405,7 @@
 
   <footer>
     <div>当ページはリンクポータルです。各ツールの最終確認は必ず実務手順・法令に照らして行ってください。</div>
-    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r18</strong> / 最終更新: 2025-09-21</div>
+    <div style="margin-top:8px">© Matsumoto Kaikei — Tools Portal <strong>r20</strong> / 最終更新: 2025-09-21</div>
   </footer>
 
   <div class="toast" id="toast">URLをコピーしました</div>
