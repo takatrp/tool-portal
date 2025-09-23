@@ -74,6 +74,24 @@
     /* 並び順：車 → PLカード */
     .layout-top .wheel{order:1;}
     #card-pl{order:2; width:100%; justify-self:stretch;}
+    /* 下段：完全1カラムで縦積み */
+    .tools-row, .grid, #others .grid{grid-template-columns: 1fr !important;}
+
+    .wheel{width:min(360px,92vw); margin:10px auto;}
+    .hub{width:clamp(220px,66vw,320px); height:clamp(220px,66vw,320px);}    
+    .wheel .corner{padding:8px 10px; font-size:13px;}
+    .wheel .corner.tl{top:10%;left:8%;}
+    .wheel .corner.tr{top:10%;right:8%;}
+    .wheel .corner.bl{bottom:10%;left:8%;}
+    .wheel .corner.br{bottom:10%;right:8%;}
+
+    /* 高さは必要最小限 */
+    .card{min-height:auto;}
+    .card .foot .linkbtn{white-space:nowrap;}
+  }
+    /* 並び順：車 → PLカード */
+    .layout-top .wheel{order:1;}
+    #card-pl{order:2; width:100%; justify-self:stretch;}
     /* 下段：1カラムで縦積み */
     .tools-row{grid-template-columns: 1fr;}
 
@@ -102,13 +120,29 @@
 
   /* Desktop overrides */
   @media (min-width: 1024px){
-    /* 上段：左=PLカード / 右=車ユニット（全体を中央寄せ） */
+    /* 上段：左=PLカード / 右=車ユニット（中央寄せ） */
     .layout-top{
+      display:grid;
       grid-template-columns: 280px 360px;
       justify-content: center;
-      align-items: center;
+      align-items: center;               /* 中央合わせ */
+      grid-auto-rows: 360px;             /* 行の高さを車ユニットに合わせる */
       column-gap: 24px;
     }
+    #card-pl{width:280px; grid-column:1; align-self:center;} /* カードの中心も行の中心に一致 */
+    .layout-top .wheel{grid-column:2; width:360px; margin:6px auto; justify-self:center;}
+    .hub{width:240px;height:240px;}
+    .tools-row{grid-template-columns: repeat(4, 1fr);} /* 4枚を同一行 */
+    .card{min-height: 180px;} /* 高さ控えめに統一（必要なら自動で伸びる） */
+    #others .grid{grid-template-columns: repeat(4, 1fr); justify-content:flex-start;}
+  }
+    #card-pl{width:280px; grid-column:1;}
+    .layout-top .wheel{grid-column:2; width:360px; margin:6px auto; justify-self:center;}
+    .hub{width:240px;height:240px;}
+    .tools-row{grid-template-columns: repeat(4, 1fr);} /* 4枚を同一行 */
+    .card{min-height: 180px;} /* 高さ控えめに統一（必要なら自動で伸びる） */
+    #others .grid{grid-template-columns: repeat(4, 1fr); justify-content:flex-start;}
+  }
     #card-pl{width:280px;}
     .wheel{width:360px; margin:6px auto; justify-self:center;}
     .hub{width:240px;height:240px;}
@@ -252,7 +286,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r26</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r27</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
   </footer>
 
