@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>松本会計｜ツールポータル</title>
-<meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営4WDと各種便利ツール。" />
+<meta name="description" content="松本会計のツールを一画面に集約。黒字経営4WDと各種便利ツール。" />
 <style>
   :root{
     --brand:#578899; --brand-700:#456d77; --brand-300:#7aa5b4;
@@ -32,8 +32,8 @@
   .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px;}
   .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow: var(--shadow); position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between;}
   .card .inner{padding:16px 16px 12px;}
-  .card .head{display:flex; align-items:center; gap:12px;}
-  .badge{width:44px; height:44px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff; font-weight:800;}
+  .card .head{display:flex; align-items:flex-start; gap:12px;}
+  .badge{width:44px; height:44px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff; font-weight:800; flex:0 0 auto; margin-top:2px;}
   .badge svg{width:24px; height:24px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .card h3{margin:0; font-size:18px;}
   .card p{margin:6px 0 0; color:var(--muted); font-size:13px; min-height:2.5em;}
@@ -103,7 +103,7 @@
         <div class="logo"><img src="./ロゴ.jpg" alt="松本会計ロゴ"></div>
         <div>
           <div class="title">松本会計｜ツールポータル</div>
-          <div class="subtitle">黒字経営を加速する社内外向けリンク集</div>
+          <div class="subtitle">黒字経営を加速するツールリンク集</div>
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@
 
   <section id="shitenno" class="section">
     <h2>🚗 黒字経営4WD</h2>
-    <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。</p>
+    <p class="desc">変動損益計算書＋四つの実務ツールで、黒字経営を駆動する。</p>
 
     <!-- 上段：左にPLカード、右に車ユニット（PCでは横並び） -->
     <div class="layout-top">
