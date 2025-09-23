@@ -78,6 +78,15 @@
     .hub{width:240px;height:240px;}
     .tools-row{grid-template-columns: repeat(4, 1fr);} /* 4枚を同一行 */
     .card{min-height: 220px;} /* 高さ統一 */
+    /* その他便利ツールも4列・左詰め */
+    #others .grid{grid-template-columns: repeat(4, 1fr); justify-content:flex-start;}
+  }
+    /* カード幅＝下段4列の1カラム幅と一致: (100% - 3*gap)/4 = (100% - 42px)/4 */
+    #card-pl{width: clamp(240px, calc((100% - 42px)/4), 280px); justify-self:end;}
+    .wheel{width:340px; margin:6px auto; justify-self:center;}
+    .hub{width:240px;height:240px;}
+    .tools-row{grid-template-columns: repeat(4, 1fr);} /* 4枚を同一行 */
+    .card{min-height: 220px;} /* 高さ統一 */
   }
     /* カード幅＝下段4列の1カラム幅と一致: (100% - 3*gap)/4 = (100% - 42px)/4 */
     #card-pl{width: clamp(240px, calc((100% - 42px)/4), 280px); justify-self:end;}
