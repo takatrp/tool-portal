@@ -24,106 +24,56 @@
   .section h2{display:flex; align-items:center; gap:10px; font-size: clamp(18px,2.2vw,24px); margin:18px 0 10px; font-weight:900; color:var(--brand-700);} 
   .desc{color:var(--muted); font-size:14px; margin:0 0 8px;}
 
-  /* ---- Cards ---- */
-  .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:14px;}
-  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow: var(--shadow); position:relative; overflow:hidden; display:flex; flex-direction:column;}
-  .card .inner{padding:14px 16px 10px;}
-  .card .head{display:flex; align-items:flex-start; gap:12px;}
-  .badge{width:44px; height:44px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff; font-weight:800; flex:0 0 auto; margin-top:2px;}
-  .badge svg{width:24px; height:24px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
-  .card h3{margin:0; font-size:18px;}
-  .card p{margin:6px 0 0; color:var(--muted); font-size:13px;}
-  .card .foot{display:flex; gap:8px; padding:0 12px 12px;}
-  .linkbtn{flex:1; text-align:center; border-radius:12px; padding:10px 12px; font-weight:700; border:1px solid var(--line); background:#fff; color:var(--brand-700); cursor:pointer; font-size: clamp(14px,1.8vw,16px);} 
-  .linkbtn.primary{background:var(--brand); color:#fff; border-color:transparent;}
-  #card-pl .foot button.linkbtn{font-size:14px; white-space:nowrap;}
+  /* ---- Link tiles ---- */
+  .linklist{display:grid; gap:12px;}
+  .tile{display:flex; align-items:center; gap:12px; padding:12px 14px; background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); text-decoration:none; color:var(--ink);} 
+  .tile:hover{background:#fdfefe; border-color:#d7e2ea;}
+  .badge{width:38px; height:38px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff; font-weight:800; flex:0 0 auto;}
+  .badge svg{width:22px; height:22px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  .tile .ttext{display:flex; flex-direction:column; gap:4px;}
+  .tile .ttext .title{font-size:16px; font-weight:800;}
+  .tile .ttext .desc{font-size:13px; color:var(--muted); margin:0;}
 
-  /* ---- 4WD layout ---- */
+  /* ---- 4WD layout (car) ---- */
   .layout-top{display:block;}
   .wheel{position:relative;margin:8px auto;width:min(420px,92vw);aspect-ratio:1/1;}
   .hub{position:absolute;top:50%;left:50%;translate:-50% -50%;width:clamp(260px,46vw,420px);height:clamp(260px,46vw,420px);} 
   .hub img.carimg{width:100%;height:100%;object-fit:contain;display:block !important;}
 
-  .wheel .corner{position:absolute;display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--brand-700);font-weight:800;padding:9px 11px;border-radius:999px;box-shadow:var(--shadow);font-size:14px;} 
-  .wheel .corner.tl{top:6%;left:6%;}
-  .wheel .corner.tr{top:6%;right:6%;}
-  .wheel .corner.bl{bottom:6%;left:6%;}
-  .wheel .corner.br{bottom:6%;right:6%;}
-  .wheel .oncar{top:50%; left:50%; transform:translate(-50%,-50%);} 
+  .wheel .corner{position:absolute;display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--brand-700);font-weight:800;padding:8px 10px;border-radius:999px;box-shadow:var(--shadow);font-size:14px;} 
   .mini-badge{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);color:#fff;font-size:12px;font-weight:800;}
   .mini-badge svg{width:14px;height:14px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
 
-  /* tools row reused */
-  .tools-row{display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(240px,1fr));}
+  /* PC: タイヤ寄せ（中央寄り） */
+  @media (min-width:1024px){
+    .layout-top{display:grid; grid-template-columns: 340px 1fr; grid-template-areas: "wheel tools"; align-items:start; gap:16px;}
+    .wheel{grid-area: wheel; width:340px;}
+    .hub{width:220px;height:220px;}
+    /* タイヤすぐ横に寄せる（中央寄り） */
+    #shitenno .wheel .corner.tl{top:26%; left:16%;}
+    #shitenno .wheel .corner.tr{top:26%; right:16%;}
+    #shitenno .wheel .corner.bl{bottom:26%; left:16%;}
+    #shitenno .wheel .corner.br{bottom:26%; right:16%;}
+    .tiles4{display:grid; grid-template-columns: repeat(4, 1fr); gap:12px;}
+    .pllink{margin:0 0 10px;}
+  }
 
-  /* ---- Toast ---- */
-  .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:#111827; color:#fff; padding:10px 14px; border-radius:12px; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .25s ease;} 
-  .toast.show{opacity:1;}
+  /* Mobile（スマホ）: 縦並び */
+  @media (max-width:767px){
+    .layout-top{display:block;}
+    .wheel{margin-top:4px;}
+    .tiles4{display:grid; grid-template-columns: 1fr; gap:12px;}
+    .pllink{margin:8px 0;}
+    .card{min-height:auto;}
+    /* モバイルのチップ座標（はみ出し防止） */
+    #shitenno .wheel .corner.tl{top:22%; left:12%;}
+    #shitenno .wheel .corner.tr{top:22%; right:12%;}
+    #shitenno .wheel .corner.bl{bottom:22%; left:12%;}
+    #shitenno .wheel .corner.br{bottom:22%; right:12%;}
+  }
 
   /* ---- Footer ---- */
   footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
-
-  /* ======= Desktop (PC) 視認性最適化 ======= */
-  @media (min-width:1024px){
-    /* 上段：左＝車 ／ 右＝PLカード。下段：4WDの4カードを横一列（入れ替え対応） */
-    .layout-top{display:grid; grid-template-columns: 340px minmax(240px,1fr); grid-template-areas: "wheel pl" "tools tools"; align-items:center; gap:14px;}
-    .wheel{grid-area: wheel; width:340px;}
-    #card-pl{grid-area: pl;}
-    .hub{width:220px;height:220px;} /* PCで車をやや小さめにして一覧性UP */
-    .tools-row{grid-area: tools; grid-template-columns: repeat(4, 1fr);} /* 4枚並列 */
-    /* チップはさらに寄せる */
-    #shitenno .wheel .corner.tl{top:4%;left:4%;}
-    #shitenno .wheel .corner.tr{top:4%;right:4%;}
-    #shitenno .wheel .corner.bl{bottom:4%;left:4%;}
-    #shitenno .wheel .corner.br{bottom:4%;right:4%;}
-    /* カード高さを抑制 */
-    .card{min-height:150px;}
-  }
-    .wheel{grid-area: wheel; width:340px;}
-    .hub{width:220px;height:220px;} /* PCで車をやや小さめにして一覧性UP */
-    .tools-row{grid-area: tools; grid-template-columns: repeat(4, 1fr);} /* 4枚並列 */
-    /* チップはさらに寄せる */
-    #shitenno .wheel .corner.tl{top:4%;left:4%;}
-    #shitenno .wheel .corner.tr{top:4%;right:4%;}
-    #shitenno .wheel .corner.bl{bottom:4%;left:4%;}
-    #shitenno .wheel .corner.br{bottom:4%;right:4%;}
-    /* カード高さを抑制 */
-    .card{min-height:150px;}
-  }
-
-  /* ======= Mobile（スマホ）一覧性 ======= */
-  @media (max-width:767px){
-    /* スマホ：車 → PL → 4枚（縦並び） */
-    .layout-top{display:block;}
-    .wheel{margin-top:4px;}
-    #card-pl{margin-top:8px;}
-    .tools-row{display:grid !important; grid-template-columns: 1fr !important; gap:14px;}
-    .tools-row > *{min-width:0;}
-    /* その他便利ツールも1カラム */
-    #others .grid{grid-template-columns: 1fr !important;}
-    /* 高さは必要最小限 */
-    .card{min-height:auto;}
-    .wheel .corner{padding:8px 10px; font-size:13px;}
-    .wheel .corner.tl{top:10%;left:8%;}
-    .wheel .corner.tr{top:10%;right:8%;}
-    .wheel .corner.bl{bottom:10%;left:8%;}
-    .wheel .corner.br{bottom:10%;right:8%;}
-  }
-  /* 念のため 900px 以下も単一カラムにフォールバック */
-  @media (max-width:900px){
-    .tools-row{display:grid !important; grid-template-columns: 1fr !important;}
-    #others .grid{grid-template-columns: 1fr !important;}
-  }
-    .wheel{margin-top:4px;}
-    #card-pl{margin-top:8px;}
-    .tools-row{grid-template-columns:1fr;} /* 縦積み */
-    .card{min-height:auto;} /* 不要な高さを排除 */
-    .wheel .corner{padding:8px 10px; font-size:13px;}
-    .wheel .corner.tl{top:10%;left:8%;}
-    .wheel .corner.tr{top:10%;right:8%;}
-    .wheel .corner.bl{bottom:10%;left:8%;}
-    .wheel .corner.br{bottom:10%;right:8%;}
-  }
 </style>
 </head>
 <body>
@@ -143,9 +93,8 @@
     <h2>🚗 黒字経営4WD</h2>
     <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。</p>
 
-    <!-- 上段：PC=左に車／右に4WDの4カード。スマホ=車→PL→4カードの縦並び -->
     <div class="layout-top">
-      <!-- 車＋四隅チップ（PLは別格として中央） -->
+      <!-- 車＋四隅チップ -->
       <div class="wheel" aria-label="4WD配置">
         <div class="hub">
           <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" loading="eager" />
@@ -157,48 +106,52 @@
         <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 0-6M4.6 9a8 8 0 0 0 0 6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l1.41-1.41M6.34 17.66l-1.41 1.41"/></svg></span><span>自動化効果</span></a>
       </div>
 
-      <!-- 変動PL（別格）カード：スマホでは車の直下、PCでは車の右側下段に回る -->
-      <article class="card" id="card-pl">
-        <div class="inner"><div class="head"><div class="badge">PL</div><div><h3>ボールで学ぶ変動損益計算書</h3><p>粗利と変動費・固定費の関係を体感的に理解できます。</p></div></div></div>
-        <div class="foot"><a class="linkbtn primary" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">開く</a><button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/hendou_PL/')">URLコピー</button></div>
-      </article>
-
-      <!-- 残り4つ（並列表示） -->
-      <div class="tools-row" aria-label="4WDの各ツール説明">
-        <article class="card">
-          <div class="inner"><div class="head"><div class="badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></div><div><h3>それ、売上に直すといくらですか？</h3><p>各KPI・単位を売上金額に換算して意思決定を支援します。</p></div></div></div>
-          <div class="foot"><a class="linkbtn primary" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">開く</a><button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/convert-to-sales/')">URLコピー</button></div>
-        </article>
-        <article class="card">
-          <div class="inner"><div class="head"><div class="badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></div><div><h3>価格改定検討ツール</h3><p>価格を上げ下げした場合の売上・利益影響をシミュレーション。</p></div></div></div>
-          <div class="foot"><a class="linkbtn primary" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">開く</a><button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/price-up-down/')">URLコピー</button></div>
-        </article>
-        <article class="card">
-          <div class="inner"><div class="head"><div class="badge">¥</div><div><h3>人件費見える化ツール</h3><p>時間単価で人件費を可視化し、採算ラインや効率改善を確認できます。</p></div></div></div>
-          <div class="foot"><a class="linkbtn primary" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">開く</a><button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/time-unit-cost/')">URLコピー</button></div>
-        </article>
-        <article class="card">
-          <div class="inner"><div class="head"><div class="badge">⚙︎</div><div><h3>自動化効果試算ツール</h3><p>RPA/自動化の投資対効果を試算し、人件費削減や回収期間を確認できます。</p></div></div></div>
-          <div class="foot"><a class="linkbtn primary" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">開く</a><button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/jidouka-kouka/')">URLコピー</button></div>
-        </article>
+      <!-- 右側：PLリンク + 4WDの4リンク（タイル） -->
+      <div class="linklist" style="grid-area:tools;">
+        <a class="tile pllink" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
+          <div class="badge">PL</div>
+          <div class="ttext"><div class="title">ボールで学ぶ変動損益計算書</div><p class="desc">粗利と変動費・固定費の関係を体感的に理解できます。</p></div>
+        </a>
+        <div class="tiles4">
+          <a class="tile" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
+            <div class="badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></div>
+            <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">KPIや単位を売上金額に即換算。</p></div>
+          </a>
+          <a class="tile" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
+            <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></div>
+            <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の売上・利益影響を試算。</p></div>
+          </a>
+          <a class="tile" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
+            <div class="badge">¥</div>
+            <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化。</p></div>
+          </a>
+          <a class="tile" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
+            <div class="badge">⚙︎</div>
+            <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算。</p></div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="others" class="section">
     <h2>🧰 その他便利ツール</h2>
-    <div class="grid">
-      <article class="card"><div class="inner"><div class="head"><div class="badge">%</div><div><h3>受取利息・配当金 仕訳補助</h3><p>源泉徴収税額の見込みと仕訳補助に必要な数値を簡易計算します。</p></div></div></div><div class="foot"><a class="linkbtn primary" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">開く</a><button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/withholding/')">URLコピー</button></div></article>
-      <article class="card"><div class="inner"><div class="head"><div class="badge">Σ</div><div><h3>減価償却費計算ツール</h3><p>取得価額・耐用年数などから定額/定率の償却費を即時計算します。</p></div></div></div><div class="foot"><a class="linkbtn primary" href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">開く</a><button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/genkasyoukyaku/')">URLコピー</button></div></article>
+    <div class="linklist tiles4">
+      <a class="tile" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
+        <div class="badge">%</div>
+        <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">源泉徴収税額の見込みと仕訳補助のための簡易計算。</p></div>
+      </a>
+      <a class="tile" href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">
+        <div class="badge">Σ</div>
+        <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額/定率の償却費を即時計算。</p></div>
+      </a>
     </div>
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r32</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r33</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
   </footer>
-
-  <div class="toast" id="toast">URLをコピーしました</div>
 
 <script>
   (function(){
@@ -206,8 +159,6 @@
     const upd = document.getElementById('last-updated');
     if (upd) { const d = new Date(document.lastModified); const p=n=>String(n).padStart(2,'0'); upd.textContent = `最終更新: ${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
   })();
-  function copyUrl(url){ if (!navigator.clipboard){ window.prompt('URLをコピーしてください:', url); return; } navigator.clipboard.writeText(url).then(()=>{ showToast('URLをコピーしました'); }); }
-  function showToast(msg){ const t=document.getElementById('toast'); if(!t) return; t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1500); }
 </script>
 </body>
 </html>
