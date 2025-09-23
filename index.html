@@ -44,36 +44,42 @@
   .mini-badge{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);color:#fff;font-size:12px;font-weight:800;}
   .mini-badge svg{width:14px;height:14px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
 
-  /* PC: タイヤ寄せ（中央寄り） */
+  .tiles4{display:grid; gap:12px;}
+
+  /* ======= Desktop (PC) ======= */
   @media (min-width:1024px){
-    .layout-top{display:grid; grid-template-columns: 340px 1fr; grid-template-areas: "wheel tools"; align-items:start; gap:16px;}
+    /* 上段：左=車、右=PLリンク（4WDリンクは一段下げてフル幅） */
+    .layout-top{display:grid; grid-template-columns: 340px 1fr; grid-template-areas: "wheel pl"; align-items:center; gap:16px;}
     .wheel{grid-area: wheel; width:340px;}
     .hub{width:220px;height:220px;}
-    /* タイヤすぐ横に寄せる（中央寄り） */
-    #shitenno .wheel .corner.tl{top:26%; left:16%;}
-    #shitenno .wheel .corner.tr{top:26%; right:16%;}
-    #shitenno .wheel .corner.bl{bottom:26%; left:16%;}
-    #shitenno .wheel .corner.br{bottom:26%; right:16%;}
-    .tiles4{display:grid; grid-template-columns: repeat(4, 1fr); gap:12px;}
-    .pllink{margin:0 0 10px;}
+    /* タイヤから少し離しつつ中央寄り（以前より外側へ） */
+    #shitenno .wheel .corner.tl{top:30%; left:22%;}
+    #shitenno .wheel .corner.tr{top:30%; right:22%;}
+    #shitenno .wheel .corner.bl{bottom:30%; left:22%;}
+    #shitenno .wheel .corner.br{bottom:30%; right:22%;}
+
+    .pllink{grid-area: pl;}
+    /* 下段4つは同一行・フル幅 */
+    .tiles4-row{grid-template-columns: repeat(4, 1fr);} 
   }
 
-  /* Mobile（スマホ）: 縦並び */
+  /* ======= Mobile（スマホ） ======= */
   @media (max-width:767px){
     .layout-top{display:block;}
     .wheel{margin-top:4px;}
-    .tiles4{display:grid; grid-template-columns: 1fr; gap:12px;}
     .pllink{margin:8px 0;}
+    .tiles4-row{grid-template-columns: 1fr;}
     .card{min-height:auto;}
-    /* モバイルのチップ座標（はみ出し防止） */
-    #shitenno .wheel .corner.tl{top:22%; left:12%;}
-    #shitenno .wheel .corner.tr{top:22%; right:12%;}
-    #shitenno .wheel .corner.bl{bottom:22%; left:12%;}
-    #shitenno .wheel .corner.br{bottom:22%; right:12%;}
+    /* モバイルのチップ座標：タイヤに近すぎない中央寄り */
+    #shitenno .wheel .corner.tl{top:28%; left:18%;}
+    #shitenno .wheel .corner.tr{top:28%; right:18%;}
+    #shitenno .wheel .corner.bl{bottom:28%; left:18%;}
+    #shitenno .wheel .corner.br{bottom:28%; right:18%;}
   }
 
   /* ---- Footer ---- */
   footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
+  .site-link{margin-top:8px;}
 </style>
 </head>
 <body>
@@ -91,52 +97,55 @@
 
   <section id="shitenno" class="section">
     <h2>🚗 黒字経営4WD</h2>
-    <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。</p>
+    <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。<br>（㈱TKCのFXクラウドシリーズとの併用を想定しています）</p>
 
+    <!-- 上段：左に車、右に変動PLリンク -->
     <div class="layout-top">
-      <!-- 車＋四隅チップ -->
       <div class="wheel" aria-label="4WD配置">
         <div class="hub">
           <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" loading="eager" />
         </div>
+        <!-- 中央：変動損益（厳密中央） -->
         <a class="corner oncar" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener"><span class="mini-badge">PL</span><span>変動損益</span></a>
+        <!-- 四輪チップ（PCは30%/22%で中央寄り・タイヤから少し離す） -->
         <a class="corner tl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></span><span>売上換算</span></a>
         <a class="corner tr" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></span><span>価格改定</span></a>
         <a class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>人件費</span></a>
         <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 0-6M4.6 9a8 8 0 0 0 0 6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l1.41-1.41M6.34 17.66l-1.41 1.41"/></svg></span><span>自動化効果</span></a>
       </div>
 
-      <!-- 右側：PLリンク + 4WDの4リンク（タイル） -->
-      <div class="linklist" style="grid-area:tools;">
-        <a class="tile pllink" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
+      <div class="linklist pllink">
+        <a class="tile" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
           <div class="badge">PL</div>
           <div class="ttext"><div class="title">ボールで学ぶ変動損益計算書</div><p class="desc">粗利と変動費・固定費の関係を体感的に理解できます。</p></div>
         </a>
-        <div class="tiles4">
-          <a class="tile" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
-            <div class="badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></div>
-            <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">KPIや単位を売上金額に即換算。</p></div>
-          </a>
-          <a class="tile" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
-            <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></div>
-            <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の売上・利益影響を試算。</p></div>
-          </a>
-          <a class="tile" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
-            <div class="badge">¥</div>
-            <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化。</p></div>
-          </a>
-          <a class="tile" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
-            <div class="badge">⚙︎</div>
-            <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算。</p></div>
-          </a>
-        </div>
       </div>
+    </div>
+
+    <!-- 一段下げ：4WDの4リンクを同一行（PC）／縦（モバイル）で表示 -->
+    <div class="tiles4 tiles4-row" aria-label="4WDの各ツール">
+      <a class="tile" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></div>
+        <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">支出額を必要売上金額に即換算。</p></div>
+      </a>
+      <a class="tile" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></div>
+        <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の売上・利益影響を試算。</p></div>
+      </a>
+      <a class="tile" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
+        <div class="badge">¥</div>
+        <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化。</p></div>
+      </a>
+      <a class="tile" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
+        <div class="badge">⚙︎</div>
+        <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算。</p></div>
+      </a>
     </div>
   </section>
 
   <section id="others" class="section">
     <h2>🧰 その他便利ツール</h2>
-    <div class="linklist tiles4">
+    <div class="tiles4">
       <a class="tile" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
         <div class="badge">%</div>
         <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">源泉徴収税額の見込みと仕訳補助のための簡易計算。</p></div>
@@ -149,8 +158,9 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r33</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r34</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
+    <div class="site-link"><a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener">税理士法人松本会計事務所HP</a></div>
   </footer>
 
 <script>
