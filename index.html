@@ -65,8 +65,20 @@
 
   /* ======= Desktop (PC) 視認性最適化 ======= */
   @media (min-width:1024px){
-    /* 上段：左に車、右に4WDの4カード（横並び） */
-    .layout-top{display:grid; grid-template-columns: 340px 1fr; grid-template-areas: "wheel tools"; align-items:start; gap:14px;}
+    /* 上段：左＝車 ／ 右＝PLカード。下段：4WDの4カードを横一列（入れ替え対応） */
+    .layout-top{display:grid; grid-template-columns: 340px minmax(240px,1fr); grid-template-areas: "wheel pl" "tools tools"; align-items:center; gap:14px;}
+    .wheel{grid-area: wheel; width:340px;}
+    #card-pl{grid-area: pl;}
+    .hub{width:220px;height:220px;} /* PCで車をやや小さめにして一覧性UP */
+    .tools-row{grid-area: tools; grid-template-columns: repeat(4, 1fr);} /* 4枚並列 */
+    /* チップはさらに寄せる */
+    #shitenno .wheel .corner.tl{top:4%;left:4%;}
+    #shitenno .wheel .corner.tr{top:4%;right:4%;}
+    #shitenno .wheel .corner.bl{bottom:4%;left:4%;}
+    #shitenno .wheel .corner.br{bottom:4%;right:4%;}
+    /* カード高さを抑制 */
+    .card{min-height:150px;}
+  }
     .wheel{grid-area: wheel; width:340px;}
     .hub{width:220px;height:220px;} /* PCで車をやや小さめにして一覧性UP */
     .tools-row{grid-area: tools; grid-template-columns: repeat(4, 1fr);} /* 4枚並列 */
@@ -163,7 +175,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r30</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r31</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
   </footer>
 
