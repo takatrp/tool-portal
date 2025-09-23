@@ -102,8 +102,21 @@
 
   /* Desktop overrides */
   @media (min-width: 1024px){
-    /* 左: PLカード（他カードと同幅）｜中央: 車ユニット（中央寄せ）｜右: スペーサー */
-    .layout-top{grid-template-columns: 1fr auto 1fr; align-items:center;}
+    /* 上段：左=PLカード / 右=車ユニット（全体を中央寄せ） */
+    .layout-top{
+      grid-template-columns: 280px 360px;
+      justify-content: center;
+      align-items: center;
+      column-gap: 24px;
+    }
+    #card-pl{width:280px;}
+    .wheel{width:360px; margin:6px auto; justify-self:center;}
+    .hub{width:240px;height:240px;}
+    .tools-row{grid-template-columns: repeat(4, 1fr);} /* 4枚を同一行 */
+    .card{min-height: 200px;} /* 高さ控えめに統一 */
+    /* その他便利ツールも4列・左詰め（幅統一） */
+    #others .grid{grid-template-columns: repeat(4, 1fr); justify-content:flex-start;}
+  }
     /* カード幅＝下段4列の1カラム幅と一致: (100% - 3*gap)/4 = (100% - 42px)/4 */
     #card-pl{width: clamp(240px, calc((100% - 42px)/4), 280px); justify-self:end;}
     .wheel{width:340px; margin:6px auto; justify-self:center;}
