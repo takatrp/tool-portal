@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>松本会計｜ツールポータル</title>
-<meta name="description" content="松本会計のツールを一画面に集約。黒字経営4WDと各種便利ツール。" />
+<meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営4WDと各種便利ツール。" />
 <style>
   :root{
     --brand:#578899; --brand-700:#456d77; --brand-300:#7aa5b4;
@@ -68,6 +68,20 @@
   /* ---- Footer ---- */
   footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
 
+  /* Mobile fixes: ensure stable layout on small screens */
+  @media (max-width: 767px){
+    .layout-top{grid-template-columns: 1fr; align-items:start;}
+    #card-pl{width:100%; justify-self:stretch;}
+    .wheel{width:min(360px,92vw); margin:10px auto;}
+    .hub{width:clamp(220px,66vw,320px); height:clamp(220px,66vw,320px);}    
+    .wheel .corner{padding:8px 10px; font-size:13px;}
+    .wheel .corner.tl{top:10%;left:8%;}
+    .wheel .corner.tr{top:10%;right:8%;}
+    .wheel .corner.bl{bottom:10%;left:8%;}
+    .wheel .corner.br{bottom:10%;right:8%;}
+    .card .foot .linkbtn{white-space:nowrap;}
+  }
+
   /* Desktop overrides */
   @media (min-width: 1024px){
     /* 左: PLカード（他カードと同幅）｜中央: 車ユニット（中央寄せ）｜右: スペーサー */
@@ -103,7 +117,7 @@
         <div class="logo"><img src="./ロゴ.jpg" alt="松本会計ロゴ"></div>
         <div>
           <div class="title">松本会計｜ツールポータル</div>
-          <div class="subtitle">黒字経営を加速するツールリンク集</div>
+          <div class="subtitle">黒字経営を加速する社内外向けリンク集</div>
         </div>
       </div>
     </div>
@@ -111,7 +125,7 @@
 
   <section id="shitenno" class="section">
     <h2>🚗 黒字経営4WD</h2>
-    <p class="desc">変動損益計算書＋四つの実務ツールで、黒字経営を駆動する。</p>
+    <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。</p>
 
     <!-- 上段：左にPLカード、右に車ユニット（PCでは横並び） -->
     <div class="layout-top">
