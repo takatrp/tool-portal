@@ -120,15 +120,29 @@
 
   /* Desktop overrides */
   @media (min-width: 1024px){
-    /* 上段：左=PLカード / 右=車ユニット（中央寄せ） */
+    /* 上段：4カラムグリッドにし、PLカード=1カラム幅（他カードと同じ幅）、車ユニット=右側3カラム */
     .layout-top{
       display:grid;
-      grid-template-columns: 280px 360px;
-      justify-content: center;
-      align-items: center;               /* 中央合わせ */
-      grid-auto-rows: 360px;             /* 行の高さを車ユニットに合わせる */
-      column-gap: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+      justify-content:center;   /* 全体を中央に */
+      align-items:center;       /* 縦中央揃え（行の中心を一致） */
     }
+    /* PLカード：他カードと同じ1カラム幅。明示幅指定を外して高さも控えめに */
+    #card-pl{grid-column:1; width:auto; align-self:center;}
+    /* 車ユニット：右3カラムに配置し、スクエア領域で高さ=幅（行高の基準） */
+    .layout-top .wheel{grid-column:2 / span 3; width:360px; margin:6px auto; justify-self:center;}
+    .hub{width:240px;height:240px;}
+
+    /* 下段：4枚を同一行 */
+    .tools-row{grid-template-columns: repeat(4, 1fr);} 
+
+    /* すべてのカード高さをさらに低く */
+    .card{min-height: 160px;} 
+
+    /* その他便利ツールも4列・左詰め（幅統一） */
+    #others .grid{grid-template-columns: repeat(4, 1fr); justify-content:flex-start;}
+  }
     #card-pl{width:280px; grid-column:1; align-self:center;} /* カードの中心も行の中心に一致 */
     .layout-top .wheel{grid-column:2; width:360px; margin:6px auto; justify-self:center;}
     .hub{width:240px;height:240px;}
@@ -286,7 +300,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r27</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r28</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
   </footer>
 
