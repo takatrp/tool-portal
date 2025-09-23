@@ -40,6 +40,8 @@
   .card .foot{display:flex; gap:8px; padding:0 12px 14px;}
   .linkbtn{flex:1; text-align:center; border-radius:12px; padding:10px 12px; font-weight:700; border:1px solid var(--line); background:#fff; color:#578899; cursor:pointer; font-size: clamp(14px,1.8vw,16px);} 
   .linkbtn.primary{background:var(--brand); color:#fff; border-color:transparent;}
+  /* shrink only the URL copy button in the PL card and avoid wrapping */
+  #card-pl .foot button.linkbtn{font-size:14px; white-space:nowrap;}
 
   /* ---- 4WD layout ---- */
   .layout-top{display:grid; gap:16px; align-items:start;}
