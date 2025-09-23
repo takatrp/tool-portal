@@ -20,12 +20,12 @@
   .branding{display:flex; align-items:center; gap:12px;}
   .logo{width:60px;height:60px;border-radius:12px;overflow:hidden;display:grid;place-items:center;}
   .logo img{width:100%;height:100%;object-fit:contain;display:block;}
-  .title{font-size: clamp(18px,2.6vw,28px); font-weight:800;}
+  .title{font-size: clamp(18px,2vw,24px); font-weight:800;}
   .subtitle{color:var(--muted); font-size: clamp(12px,1.8vw,14px);} 
 
   /* ---- Sections ---- */
   .section{max-width:1100px; margin:24px auto; padding:0 16px;}
-  .section h2{display:flex; align-items:center; gap:10px; font-size: clamp(22px,3vw,28px); margin:28px 0 16px; font-weight:900; color:var(--brand-700);} 
+  .section h2{display:flex; align-items:center; gap:10px; font-size: clamp(18px,2.2vw,24px); margin:24px 0 14px; font-weight:900; color:var(--brand-700);}  
   .desc{color:var(--muted); font-size:14px; margin-bottom:10px;}
 
   /* ---- Cards ---- */
@@ -42,8 +42,8 @@
   .linkbtn.primary{background:var(--brand); color:#fff; border-color:transparent;}
 
   /* ---- 4WD layout ---- */
-  .wheel{position:relative;margin:16px auto 10px;width:min(760px,96vw);aspect-ratio:1/1;}
-  .hub{position:absolute;top:50%;left:50%;translate:-50% -50%;width:clamp(360px,60vw,580px);height:clamp(360px,60vw,580px);} /* PNG少し拡大 */
+  .wheel{position:relative;margin:16px auto 10px;width:min(640px,92vw);aspect-ratio:1/1;}
+  .hub{position:absolute;top:50%;left:50%;translate:-50% -50%;width:clamp(300px,46vw,480px);height:clamp(300px,46vw,480px);} /* PNG少し拡大 */
   .hub img.carimg{width:100%;height:100%;object-fit:contain;display:block !important;}
 
   .wheel .corner{position:absolute;display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:1px solid var(--line);color:var(--brand-700);font-weight:800;padding:10px 12px;border-radius:999px;box-shadow:var(--shadow);font-size:14px;} 
