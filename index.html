@@ -93,8 +93,27 @@
 
   /* ======= Mobile（スマホ）一覧性 ======= */
   @media (max-width:767px){
-    /* 順序：車 → PL → 残り4つ（縦並び） */
+    /* スマホ：車 → PL → 4枚（縦並び） */
     .layout-top{display:block;}
+    .wheel{margin-top:4px;}
+    #card-pl{margin-top:8px;}
+    .tools-row{display:grid !important; grid-template-columns: 1fr !important; gap:14px;}
+    .tools-row > *{min-width:0;}
+    /* その他便利ツールも1カラム */
+    #others .grid{grid-template-columns: 1fr !important;}
+    /* 高さは必要最小限 */
+    .card{min-height:auto;}
+    .wheel .corner{padding:8px 10px; font-size:13px;}
+    .wheel .corner.tl{top:10%;left:8%;}
+    .wheel .corner.tr{top:10%;right:8%;}
+    .wheel .corner.bl{bottom:10%;left:8%;}
+    .wheel .corner.br{bottom:10%;right:8%;}
+  }
+  /* 念のため 900px 以下も単一カラムにフォールバック */
+  @media (max-width:900px){
+    .tools-row{display:grid !important; grid-template-columns: 1fr !important;}
+    #others .grid{grid-template-columns: 1fr !important;}
+  }
     .wheel{margin-top:4px;}
     #card-pl{margin-top:8px;}
     .tools-row{grid-template-columns:1fr;} /* 縦積み */
@@ -175,7 +194,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r31</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r32</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
   </footer>
 
