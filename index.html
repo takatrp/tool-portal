@@ -42,7 +42,7 @@
   .linkbtn.primary{background:var(--brand); color:#fff; border-color:transparent;}
 
   /* ---- 4WD layout ---- */
-  .wheel{position:relative;margin:16px auto 10px;width:min(640px,92vw);aspect-ratio:1/1;}
+  .wheel{position:relative;margin:16px auto 10px;width:min(480px,92vw);aspect-ratio:1/1;}
   .hub{position:absolute;top:50%;left:50%;translate:-50% -50%;width:clamp(300px,46vw,480px);height:clamp(300px,46vw,480px);} /* PNG少し拡大 */
   .hub img.carimg{width:100%;height:100%;object-fit:contain;display:block !important;}
 
@@ -62,7 +62,15 @@
   /* ---- Footer ---- */
   footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
   /* Desktop override: limit car PNG size */
+  /* Desktop override: cluster the chips near the car and reduce footprint */
   @media (min-width: 1024px){
+    #shitenno{margin-top:8px;}
+    #shitenno .wheel{width:340px; margin:6px auto 12px;}
+    #shitenno .wheel .corner{padding:8px 10px;}
+    #shitenno .wheel .corner.tl{top:6%;left:6%;}
+    #shitenno .wheel .corner.tr{top:6%;right:6%;}
+    #shitenno .wheel .corner.bl{bottom:6%;left:6%;}
+    #shitenno .wheel .corner.br{bottom:6%;right:6%;}
     .hub{width:240px;height:240px;}
   }
 </style>
