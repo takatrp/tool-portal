@@ -18,7 +18,7 @@
   .hero{position:relative; background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%); padding: 28px 16px 18px; border-bottom:1px solid var(--line);} 
   .hero .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:1100px; margin:0 auto;}
   .branding{display:flex; align-items:center; gap:12px;}
-  .logo{width:46px;height:46px;border-radius:12px;overflow:hidden;display:grid;place-items:center;}
+  .logo{width:60px;height:60px;border-radius:12px;overflow:hidden;display:grid;place-items:center;}
   .logo img{width:100%;height:100%;object-fit:contain;display:block;}
   .title{font-size: clamp(18px,2.6vw,28px); font-weight:800;}
   .subtitle{color:var(--muted); font-size: clamp(12px,1.8vw,14px);} 
@@ -34,10 +34,11 @@
   .card .inner{padding:16px 16px 12px;}
   .card .head{display:flex; align-items:center; gap:12px;}
   .badge{width:44px; height:44px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff; font-weight:800;}
+  .badge svg{width:24px; height:24px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .card h3{margin:0; font-size:18px;}
   .card p{margin:6px 0 0; color:var(--muted); font-size:13px; min-height:2.5em;}
   .card .foot{display:flex; gap:8px; padding:0 12px 14px;}
-  .linkbtn{flex:1; text-align:center; border-radius:12px; padding:10px 12px; font-weight:700; border:1px solid var(--line); background:#fff; color:var(--brand-700); cursor:pointer;}
+  .linkbtn{flex:1; text-align:center; border-radius:12px; padding:10px 12px; font-weight:700; border:1px solid var(--line); background:#fff; color:#578899; cursor:pointer; font-size: clamp(14px,1.8vw,16px);} 
   .linkbtn.primary{background:var(--brand); color:#fff; border-color:transparent;}
 
   /* ---- 4WD layout ---- */
@@ -52,6 +53,7 @@
   .wheel .corner.br{bottom:12%;right:12%;}
   .wheel .oncar{top:50%; left:50%; transform:translate(-50%,-50%);} /* 中央重ね */
   .mini-badge{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);color:#fff;font-size:12px;font-weight:800;}
+  .mini-badge svg{width:14px;height:14px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
 
   /* ---- Toast ---- */
   .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:#111827; color:#fff; padding:10px 14px; border-radius:12px; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .25s ease;} 
@@ -83,25 +85,37 @@
       <div class="hub">
         <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" loading="eager" />
       </div>
-      <!-- 中央：変動損益 -->
+      <!-- 中央：変動損益（PL） -->
       <a id="link-pl-center" class="corner oncar" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
         <span class="mini-badge">PL</span><span>変動損益</span>
       </a>
-      <!-- 左上：売上換算 -->
+      <!-- 左上：売上換算（⇄ を SVG 化／stroke-width=2 で上下と同じ太さ） -->
       <a class="corner tl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
-        <span class="mini-badge">⇄</span><span>売上換算</span>
+        <span class="mini-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg>
+        </span>
+        <span>売上換算</span>
       </a>
-      <!-- 右上：価格改定 -->
+      <!-- 右上：価格改定（⇅ を SVG 化／同じ stroke-width=2） -->
       <a class="corner tr" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
-        <span class="mini-badge">⇅</span><span>価格改定</span>
+        <span class="mini-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg>
+        </span>
+        <span>価格改定</span>
       </a>
       <!-- 左下：人件費 -->
       <a class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
-        <span class="mini-badge">¥</span><span>人件費</span>
+        <span class="mini-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <span>人件費</span>
       </a>
       <!-- 右下：自動化効果 -->
       <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
-        <span class="mini-badge">⚙︎</span><span>自動化効果</span>
+        <span class="mini-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 0-6M4.6 9a8 8 0 0 0 0 6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l1.41-1.41M6.34 17.66l-1.41 1.41"/></svg>
+        </span>
+        <span>自動化効果</span>
       </a>
     </div>
 
@@ -116,17 +130,19 @@
       </article>
 
       <article class="card">
-        <div class="inner"><div class="head"><div class="badge">⇄</div><div><h3>それ、売上に直すといくらですか？</h3><p>各KPI・単位を売上金額に換算して意思決定を支援します。</p></div></div></div>
+        <div class="inner"><div class="head"><div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg>
+        </div><div><h3>それ、売上に直すといくらですか？</h3><p>各KPI・単位を売上金額に換算して意思決定を支援します。</p></div></div></div>
         <div class="foot">
           <a class="linkbtn primary" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">開く</a>
           <button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/convert-to-sales/')">URLコピー</button>
         </div>
       </article>
 
-      <!-- ★ 以前の『価格改定検討ツール』のサブ行は削除しました -->
-
       <article class="card">
-        <div class="inner"><div class="head"><div class="badge">⇅</div><div><h3>価格改定検討ツール</h3><p>価格を上げ下げした場合の売上・利益影響をシミュレーション。</p></div></div></div>
+        <div class="inner"><div class="head"><div class="badge">
+          <svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg>
+        </div><div><h3>価格改定検討ツール</h3><p>価格を上げ下げした場合の売上・利益影響をシミュレーション。</p></div></div></div>
         <div class="foot">
           <a class="linkbtn primary" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">開く</a>
           <button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/price-up-down/')">URLコピー</button>
