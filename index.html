@@ -71,6 +71,24 @@
   /* Mobile fixes: ensure stable layout on small screens */
   @media (max-width: 767px){
     .layout-top{grid-template-columns: 1fr; align-items:start;}
+    /* 並び順：車 → PLカード */
+    .layout-top .wheel{order:1;}
+    #card-pl{order:2; width:100%; justify-self:stretch;}
+    /* 下段：1カラムで縦積み */
+    .tools-row{grid-template-columns: 1fr;}
+
+    .wheel{width:min(360px,92vw); margin:10px auto;}
+    .hub{width:clamp(220px,66vw,320px); height:clamp(220px,66vw,320px);}    
+    .wheel .corner{padding:8px 10px; font-size:13px;}
+    .wheel .corner.tl{top:10%;left:8%;}
+    .wheel .corner.tr{top:10%;right:8%;}
+    .wheel .corner.bl{bottom:10%;left:8%;}
+    .wheel .corner.br{bottom:10%;right:8%;}
+
+    /* 不要な高さの伸びを回避 */
+    .card{min-height:auto;}
+    .card .foot .linkbtn{white-space:nowrap;}
+  }
     #card-pl{width:100%; justify-self:stretch;}
     .wheel{width:min(360px,92vw); margin:10px auto;}
     .hub{width:clamp(220px,66vw,320px); height:clamp(220px,66vw,320px);}    
