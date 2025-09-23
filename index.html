@@ -51,6 +51,7 @@
   .wheel .corner.bl{bottom:12%;left:12%;}
   .wheel .corner.br{bottom:12%;right:12%;}
   .wheel .oncar{top:50%; left:50%; transform:translate(-50%,-50%);} /* 中央重ね */
+  .mini-badge{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);color:#fff;font-size:12px;font-weight:800;}
 
   /* ---- Toast ---- */
   .toast{position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:#111827; color:#fff; padding:10px 14px; border-radius:12px; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .25s ease;} 
@@ -77,16 +78,31 @@
     <h2>🚗 黒字経営4WD</h2>
     <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。</p>
 
-    <!-- 上段：車＋4輪リンク＋中央「変動損益」（略称＋以前のアイコン風） -->
+    <!-- 上段：車＋4輪リンク＋中央チップ（カードと同じアイコン体系） -->
     <div class="wheel" aria-label="4WD配置">
       <div class="hub">
         <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" loading="eager" />
       </div>
-      <a id="link-pl-center" class="corner oncar" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">📊 PL</a>
-      <a class="corner tl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">⇄ 売上</a>
-      <a class="corner tr" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">⬆︎⬇︎ 価格</a>
-      <a class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">⏱ 人件</a>
-      <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">⚙ 自動</a>
+      <!-- 中央：変動損益 -->
+      <a id="link-pl-center" class="corner oncar" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
+        <span class="mini-badge">PL</span><span>変動損益</span>
+      </a>
+      <!-- 左上：売上換算 -->
+      <a class="corner tl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
+        <span class="mini-badge">⇄</span><span>売上換算</span>
+      </a>
+      <!-- 右上：価格改定 -->
+      <a class="corner tr" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
+        <span class="mini-badge">⇅</span><span>価格改定</span>
+      </a>
+      <!-- 左下：人件費 -->
+      <a class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
+        <span class="mini-badge">¥</span><span>人件費</span>
+      </a>
+      <!-- 右下：自動化効果 -->
+      <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
+        <span class="mini-badge">⚙︎</span><span>自動化効果</span>
+      </a>
     </div>
 
     <!-- 下段：各ツールの簡易説明＋リンク（正式名称、URLコピー付き） -->
@@ -98,18 +114,17 @@
           <button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/hendou_PL/')">URLコピー</button>
         </div>
       </article>
+
       <article class="card">
         <div class="inner"><div class="head"><div class="badge">⇄</div><div><h3>それ、売上に直すといくらですか？</h3><p>各KPI・単位を売上金額に換算して意思決定を支援します。</p></div></div></div>
         <div class="foot">
           <a class="linkbtn primary" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">開く</a>
           <button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/convert-to-sales/')">URLコピー</button>
         </div>
-        <!-- 追加の下位リンク：価格改定検討ツール -->
-        <div class="foot" style="padding-top:0;">
-          <a class="linkbtn" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">価格改定検討ツール</a>
-          <button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/price-up-down/')">URLコピー</button>
-        </div>
       </article>
+
+      <!-- ★ 以前の『価格改定検討ツール』のサブ行は削除しました -->
+
       <article class="card">
         <div class="inner"><div class="head"><div class="badge">⇅</div><div><h3>価格改定検討ツール</h3><p>価格を上げ下げした場合の売上・利益影響をシミュレーション。</p></div></div></div>
         <div class="foot">
@@ -117,6 +132,7 @@
           <button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/price-up-down/')">URLコピー</button>
         </div>
       </article>
+
       <article class="card">
         <div class="inner"><div class="head"><div class="badge">¥</div><div><h3>人件費見える化ツール</h3><p>時間単価で人件費を可視化し、採算ラインや効率改善を確認できます。</p></div></div></div>
         <div class="foot">
@@ -124,6 +140,7 @@
           <button class="linkbtn" onclick="copyUrl('https://takatrp.github.io/time-unit-cost/')">URLコピー</button>
         </div>
       </article>
+
       <article class="card">
         <div class="inner"><div class="head"><div class="badge">⚙︎</div><div><h3>自動化効果試算ツール</h3><p>RPA/自動化の投資対効果を試算し、人件費削減や回収期間を確認できます。</p></div></div></div>
         <div class="foot">
@@ -155,7 +172,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r24</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r25</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
   </footer>
 
