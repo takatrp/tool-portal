@@ -4,9 +4,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>松本会計｜オリジナルツールポータル</title>
-<link rel="icon" type="image/png" sizes="192x192" href="favicon192192.png">
-<link rel="apple-touch-icon" sizes="192x192" href="favicon192192.png">
-<link rel="shortcut icon" href="favicon192192.png">
 <meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営4WDと各種便利ツール。" />
 <style>
   :root{ --brand:#578899; --brand-700:#456d77; --brand-300:#7aa5b4; --ink:#0f172a; --muted:#64748b; --bg:#f8fafc; --card:#ffffff; --line:#e2e8f0; --shadow:0 8px 24px rgba(15,23,42,.08); --radius:18px; }
@@ -82,7 +79,7 @@
 
   /* ---- Footer ---- */
   footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
-  .site-link{margin-top:8px;}
+  .credit-link{color:inherit;text-decoration:underline;text-underline-offset:2px;} 
   /* 変動損益チップは中央固定 */
   .wheel .corner.oncar{top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;}
 </style>
@@ -159,13 +156,17 @@
         <div class="badge">Σ</div>
         <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額/定率の償却費を即時計算。</p></div>
       </a>
+      <a class="tile" href="https://takatrp.github.io/kigyoubouei/" target="_blank" rel="noopener">
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/></svg></div>
+        <div class="ttext"><div class="title">標準保障額・保険料換算ツール</div><p class="desc">標準保障額と保険料の換算を簡易算出。</p></div>
+      </a>
     </div>
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> 税理士法人松本会計事務所 All Rights Reserved. / <span id="build-rev">r38</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r39</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
-    <div class="site-link"><a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener">税理士法人松本会計事務所HP</a></div>
+    
   </footer>
 
 <script>
