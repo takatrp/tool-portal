@@ -17,7 +17,7 @@
   .hero{position:relative; background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%); padding: 24px 16px 16px; border-bottom:1px solid var(--line);} 
   .hero .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:1100px; margin:0 auto;}
   .branding{display:flex; align-items:center; gap:12px;}
-  .logo{width:60px;height:60px;border-radius:12px;overflow:hidden;display:grid;place-items:center;}
+  .logo{width:60px;height:60px;border-radius:12px;overflow:hidden;display:grid;place-items:center;text-decoration:none;}
   .logo img{width:100%;height:100%;object-fit:contain;display:block;}
   .title{font-size: clamp(18px,2vw,24px); font-weight:800;}
   .subtitle{color:var(--muted); font-size: clamp(12px,1.8vw,14px);} 
@@ -103,7 +103,7 @@
   <header class="hero">
     <div class="topbar">
       <div class="branding">
-        <div class="logo"><img src="./ロゴ.jpg" alt="松本会計ロゴ"></div>
+        <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" aria-label="税理士法人松本会計事務所 公式サイト"><img src="./ロゴ.jpg" alt="松本会計ロゴ"></a>
         <div>
           <div class="title">松本会計｜オリジナルツールポータル</div>
           <div class="subtitle">黒字経営を加速する社内外向けリンク集</div>
@@ -189,7 +189,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r40</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r41</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
     
   </footer>
