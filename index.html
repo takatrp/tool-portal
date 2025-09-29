@@ -80,6 +80,15 @@
     #shitenno .wheel .corner.br{bottom:24%; right:12%;}
   }
 
+  /* ======= Tablet (768-1023px) ======= */
+  @media (min-width:768px) and (max-width:1023px){
+    /* タブレットでも明示的に座標を指定（表示抜け防止） */
+    #shitenno .wheel .corner.tl{top:26%; left:14%;}
+    #shitenno .wheel .corner.tr{top:26%; right:14%;}
+    #shitenno .wheel .corner.bl{bottom:26%; left:14%;}
+    #shitenno .wheel .corner.br{bottom:26%; right:14%;}
+  }
+
   /* ---- Footer ---- */
   footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
   .credit-link{color:inherit;text-decoration:underline;text-underline-offset:2px;} 
@@ -97,6 +106,18 @@
   .modal .modal-body img{display:block; width:100%; height:auto;}
   .modal .btn.close{position:absolute; top:8px; right:8px; padding:6px 10px; border-radius:999px;}
 
+  /* 画像のデフォルト保護 */
+  img{max-width:100%; height:auto;}
+
+  /* スマホの大きな写真（ヒーロー等）がはみ出したり細長くならないようにトリミング */
+  @media (max-width:767px){
+    .photo-frame, .hero-photo, .cover-photo, .kv{
+      position:relative; width:100%; aspect-ratio: 4 / 3; border-radius:16px; overflow:hidden; background:#eef3f7;
+    }
+    .photo-frame>img, .hero-photo>img, .cover-photo>img, .kv>img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
+    }
+  }
 </style>
 </head>
 <body>
@@ -189,7 +210,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r41</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r45</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
     
   </footer>
