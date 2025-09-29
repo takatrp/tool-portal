@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>オリジナルツールポータル</title>
+<title>松本会計｜オリジナルツールポータル</title>
 <meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営4WDと各種便利ツール。" />
 <link rel="icon" type="image/png" sizes="192x192" href="./favicon192192.png" />
 <link rel="shortcut icon" type="image/png" href="./favicon192192.png" />
 <link rel="apple-touch-icon" sizes="192x192" href="./favicon192192.png" />
 <style>
-  :root{$1 --logo-max-h: 104px;}
+  :root{ --brand:#578899; --brand-700:#456d77; --brand-300:#7aa5b4; --ink:#0f172a; --muted:#64748b; --bg:#f8fafc; --card:#ffffff; --line:#e2e8f0; --shadow:0 8px 24px rgba(15,23,42,.08); --radius:18px; }
   html,body{height:100%;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.55;}
 
@@ -17,8 +17,7 @@
   .hero{position:relative; background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%); padding: 24px 16px 16px; border-bottom:1px solid var(--line);} 
   .hero .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:1100px; margin:0 auto;}
   .branding{display:flex; align-items:center; gap:12px;}
-  .logo{display:grid; place-items:center; text-decoration:none; border-radius:12px; padding:0; /* サイズ固定をやめて原寸に近づける */}
-.logo img{width:auto; height:auto; max-height:var(--logo-max-h); object-fit:contain; display:block;} 
+  .logo{width:60px;height:60px;border-radius:12px;overflow:hidden;display:grid;place-items:center;text-decoration:none;}
   .logo img{width:100%;height:100%;object-fit:contain;display:block;}
   .title{font-size: clamp(18px,2vw,24px); font-weight:800;}
   .subtitle{color:var(--muted); font-size: clamp(12px,1.8vw,14px);} 
@@ -69,8 +68,6 @@
 
   /* ======= Mobile（スマホ） ======= */
   @media (max-width:767px){
-    :root{ --logo-max-h: 80px; }
-
     .layout-top{display:block;}
     .wheel{margin-top:4px;}
     .pllink{margin:8px 0;}
@@ -100,27 +97,15 @@
   .modal .modal-body img{display:block; width:100%; height:auto;}
   .modal .btn.close{position:absolute; top:8px; right:8px; padding:6px 10px; border-radius:999px;}
 
-  /* 画像のデフォルト保護 */
-  img{max-width:100%; height:auto;}
-
-  /* スマホの大きな写真（ヒーロー等）がはみ出したり細長くならないようにトリミング */
-  @media (max-width:767px){
-    .photo-frame, .hero-photo, .cover-photo, .kv{
-      position:relative; width:100%; aspect-ratio: 4 / 3; border-radius:16px; overflow:hidden; background:#eef3f7;
-    }
-    .photo-frame>img, .hero-photo>img, .cover-photo>img, .kv>img{
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
-    }
-  }
 </style>
 </head>
 <body>
   <header class="hero">
     <div class="topbar">
       <div class="branding">
-        <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" aria-label="税理士法人松本会計事務所 公式サイト"><img src="./ロゴ.png" alt="松本会計ロゴ"></a>
+        <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" aria-label="税理士法人松本会計事務所 公式サイト"><img src="./ロゴ.jpg" alt="松本会計ロゴ"></a>
         <div>
-          <div class="title">オリジナルツールポータル</div>
+          <div class="title">松本会計｜オリジナルツールポータル</div>
           <div class="subtitle">黒字経営を加速する社内外向けリンク集</div>
         </div>
       </div>
@@ -204,7 +189,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r44</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r41</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
     
   </footer>
