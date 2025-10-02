@@ -120,6 +120,18 @@
   }
   /* コンパクトボタン */
   .btn.compact{font-size:12px; padding:6px 10px; border-radius:10px;}
+  /* コンパクトボタン（既存） */
+  .btn.compact{font-size:12px; padding:6px 10px; border-radius:10px;}
+  /* ラベルの可変表示：デフォルトはフル、スマホは短縮 */
+  .btn .label-short{display:none;}
+  @media (max-width:767px){
+    .btn .label-full{display:none;}
+    .btn .label-short{display:inline;}
+  }
+  /* PC時のみ A2HS画像モーダルを少し大きく */
+  @media (min-width:1024px){
+    #a2hs-modal .modal-body{max-width:min(92vw, 720px);} /* 既定560px→720px */
+  }
 </style>
 </head>
 <body>
@@ -133,8 +145,8 @@
         </div>
       </div>
       <div class="actions">
-        <button id="qr-open" class="btn">共有用QR</button>
-        <button id="a2hs-open" class="btn compact">ホーム画面への追加方法</button>
+        <button id="qr-open" class="btn"><span class="label-full">共有用QR</span><span class="label-short">QR</span></button>
+        <button id="a2hs-open" class="btn compact"><span class="label-full">ホーム画面への追加方法</span><span class="label-short">ホーム追加</span></button>
       </div>
     </div>
   </header>
@@ -221,7 +233,7 @@
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r48</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r49</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
     
   </footer>
