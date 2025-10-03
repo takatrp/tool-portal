@@ -98,6 +98,10 @@
   .actions{display:flex; align-items:center; gap:8px;}
   .btn{border:1px solid var(--line); background:#fff; color:var(--brand-700); border-radius:12px; padding:8px 12px; font-weight:700; cursor:pointer; box-shadow:var(--shadow);} 
   .btn:hover{background:#fefefe;}
+  /* 同じ高さに統一（ヘッダーボタンのみ） */
+  .actions .btn{display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 12px;}
+  .actions .btn.compact{height:36px; padding:0 10px; font-size:12px; border-radius:12px;}
+  .btn .label-full, .btn .label-short{white-space:nowrap;}
 
   /* QR modal */
   .modal{position:fixed; inset:0; background:rgba(15,23,42,.5); display:none; align-items:center; justify-content:center; z-index:50;}
@@ -146,7 +150,7 @@
       </div>
       <div class="actions">
         <button id="qr-open" class="btn"><span class="label-full">共有用QR</span><span class="label-short">QR</span></button>
-        <button id="a2hs-open" class="btn compact"><span class="label-full">ホーム画面への追加方法</span><span class="label-short">ホーム追加</span></button>
+        <button id="a2hs-open" class="btn compact"><span class="label-full">ホーム画面への追加方法</span><span class="label-short">追加</span></button>
       </div>
     </div>
   </header>
@@ -188,7 +192,7 @@
       <div class="linklist pllink">
         <a class="tile" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
           <div class="badge">PL</div>
-          <div class="ttext"><div class="title">ボールで学ぶ変動損益計算書</div><p class="desc">売上高と限界利益、固定費の関係を直感的に理解。</p></div>
+          <div class="ttext"><div class="title">ボールで学ぶ変動損益計算書</div><p class="desc">売上高と限界利益、固定費の関係を直感的に理解</p></div>
         </a>
       </div>
     </div>
@@ -197,19 +201,19 @@
     <div class="tiles4 tiles4-row" aria-label="4WDの各ツール">
       <a class="tile" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></div>
-        <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">支出額を必要売上金額に即換算。</p></div>
+        <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">支出額を必要売上金額に即換算</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></div>
-        <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の売上・利益影響を試算。</p></div>
+        <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の売上・利益影響を試算</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
         <div class="badge">¥</div>
-        <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化。</p></div>
+        <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
         <div class="badge">⚙︎</div>
-        <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算。</p></div>
+        <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算</p></div>
       </a>
     </div>
   </section>
@@ -219,21 +223,21 @@
     <div class="tiles4">
       <a class="tile" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
         <div class="badge">%</div>
-        <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">源泉徴収税額の見込みと仕訳補助のための簡易計算。</p></div>
+        <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">源泉徴収税額の見込みと仕訳補助のための簡易計算</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">
         <div class="badge">Σ</div>
-        <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額法・定率法の償却費を即時計算。</p></div>
+        <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額法・定率法の償却費を即時計算</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/kigyoubouei/" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/></svg></div>
-        <div class="ttext"><div class="title">標準保障額・保険料換算ツール</div><p class="desc">標準保障額と保険料を売上高に換算。</p></div>
+        <div class="ttext"><div class="title">標準保障額・保険料換算ツール</div><p class="desc">標準保障額と保険料を売上高に換算</p></div>
       </a>
     </div>
   </section>
 
   <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r49</span></div>
+    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r52</span></div>
     <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
     
   </footer>
