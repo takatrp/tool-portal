@@ -136,6 +136,10 @@
   @media (min-width:1024px){
     #a2hs-modal .modal-body{max-width:min(92vw, 720px);} /* 既定560px→720px */
   }
+  /* --- Minimal, CC対応のフッター --- */
+  .mk-mini{font-size:12px; line-height:1.4; color:var(--muted); text-align:center; padding:8px 12px; border-top:1px solid var(--line);} 
+  .mk-mini a{color:inherit; text-decoration:underline; text-underline-offset:2px;}
+  @media (max-width:480px){ .mk-mini{ font-size:11px; } }
 </style>
 </head>
 <body>
@@ -236,18 +240,18 @@
     </div>
   </section>
 
-  <footer>
-    <div>Copyright (c) <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" class="credit-link">税理士法人松本会計事務所</a> All Rights Reserved. / <span id="build-rev">r52</span></div>
-    <div id="last-updated" style="margin-top:6px; font-size:13px; color:var(--muted);"></div>
-    <a href="/tool-portal/terms.html" target="_blank" rel="license">利用条件</a>
-
+  <footer class="mk-mini">
+    © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
+    <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
+    <span id="build-rev">r53</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
   (function(){
     const yEl = document.getElementById('cpy-year'); if (yEl) yEl.textContent = new Date().getFullYear();
-    const upd = document.getElementById('last-updated');
-    if (upd) { const d = new Date(document.lastModified); const p=n=>String(n).padStart(2,'0'); upd.textContent = `最終更新: ${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
+    const updDate = document.getElementById('last-updated-date');
+    if (updDate) { const d = new Date(document.lastModified); const p=n=>String(n).padStart(2,'0'); updDate.textContent = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
   })();
 
   // QR modal open/close
