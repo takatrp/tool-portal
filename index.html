@@ -9,7 +9,7 @@
 <link rel="shortcut icon" type="image/png" href="./favicon192192.png" />
 <link rel="apple-touch-icon" sizes="192x192" href="./favicon192192.png" />
 <style>
-  :root{ --brand:#578899; --brand-700:#456d77; --brand-300:#7aa5b4; --ink:#0f172a; --muted:#64748b; --bg:#f8fafc; --card:#ffffff; --line:#e2e8f0; --shadow:0 8px 24px rgba(15,23,42,.08); --radius:18px; }
+  :root{$1 --logo-max-h: 104px;}
   html,body{height:100%;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height:1.55;}
 
@@ -17,7 +17,8 @@
   .hero{position:relative; background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%); padding: 24px 16px 16px; border-bottom:1px solid var(--line);} 
   .hero .topbar{display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:1100px; margin:0 auto;}
   .branding{display:flex; align-items:center; gap:12px;}
-  .logo{width:60px;height:60px;border-radius:12px;overflow:hidden;display:grid;place-items:center;text-decoration:none;}
+  .logo{display:grid; place-items:center; text-decoration:none; border-radius:12px; padding:0; /* サイズ固定をやめて原寸に近づける */}
+.logo img{width:auto; height:auto; max-height:var(--logo-max-h); object-fit:contain; display:block;} 
   .logo img{width:100%;height:100%;object-fit:contain;display:block;}
   .title{font-size: clamp(18px,2vw,24px); font-weight:800;}
   .subtitle{color:var(--muted); font-size: clamp(12px,1.8vw,14px);} 
@@ -68,6 +69,8 @@
 
   /* ======= Mobile（スマホ） ======= */
   @media (max-width:767px){
+    :root{ --logo-max-h: 80px; }
+
     .layout-top{display:block;}
     .wheel{margin-top:4px;}
     .pllink{margin:8px 0;}
@@ -122,6 +125,11 @@
       position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
     }
   }
+  /* Compact button */
+  .btn.compact{font-size:12px; padding:6px 10px; border-radius:10px;}
+  /* PDF modal body */
+  .modal .doc-body{position:relative; background:#fff; border-radius:18px; padding:12px; width:min(96vw, 900px); height:min(90vh, 820px); box-shadow:var(--shadow); display:flex; flex-direction:column; gap:8px;}
+  .modal .doc-body iframe{flex:1 1 auto; width:100%; border:0; border-radius:10px; background:#eef3f7;}
   /* コンパクトボタン */
   .btn.compact{font-size:12px; padding:6px 10px; border-radius:10px;}
   /* コンパクトボタン（既存） */
@@ -140,13 +148,24 @@
   .mk-mini{font-size:12px; line-height:1.4; color:var(--muted); text-align:center; padding:8px 12px; border-top:1px solid var(--line);} 
   .mk-mini a{color:inherit; text-decoration:underline; text-underline-offset:2px;}
   @media (max-width:480px){ .mk-mini{ font-size:11px; } }
+  /* PC: 4WD横並びの各タイトルを1行化（長文対策） */
+  @media (min-width: 1024px){
+    #shitenno .grid .card h3,
+    #shitenno .grid .link-card h3,
+    #shitenno .grid a h3{
+      font-size:16px;           /* 既定18px→16px */
+      white-space:nowrap;       /* 折り返さない */
+      overflow:hidden;          /* はみ出し防止 */
+      text-overflow:ellipsis;   /* 万一溢れたら省略 */
+    }
+  }
 </style>
 </head>
 <body>
   <header class="hero">
     <div class="topbar">
       <div class="branding">
-        <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" aria-label="税理士法人松本会計事務所 公式サイト"><img src="./ロゴ.jpg" alt="松本会計ロゴ"></a>
+        <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" aria-label="税理士法人松本会計事務所 公式サイト"><img src="./ロゴ.png" alt="松本会計ロゴ"></a>
         <div>
           <div class="title">松本会計ツールポータル</div>
           <div class="subtitle">黒字経営を加速する、松本会計オリジナルツール集</div>
@@ -154,7 +173,7 @@
       </div>
       <div class="actions">
         <button id="qr-open" class="btn"><span class="label-full">共有用QR</span><span class="label-short">QR</span></button>
-        <button id="a2hs-open" class="btn compact"><span class="label-full">ホーム画面への追加方法</span><span class="label-short">追加</span></button>
+        \1追加\2
       </div>
     </div>
   </header>
@@ -163,6 +182,17 @@
     <div class="modal-body">
       <button class="btn close" id="qr-close" aria-label="閉じる">✕</button>
       <img src="./共有用QR.png" alt="共有用QRコード" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- ホーム画面追加ガイド（PDF）モーダル -->
+  <div id="a2hs-modal" class="modal" aria-hidden="true" role="dialog" aria-label="ホーム画面への追加方法">
+    <div class="doc-body">
+      <button class="btn close" id="a2hs-close" aria-label="閉じる">✕</button>
+      <iframe src="./ホーム画面に追加.pdf" title="ホーム画面への追加方法"></iframe>
+      <div style="font-size:12px; color:var(--muted); text-align:right;">
+        表示されない場合は <a href="./ホーム画面に追加.pdf" target="_blank" rel="noopener">こちら</a>
+      </div>
     </div>
   </div>
 
@@ -176,27 +206,7 @@
 
   <section id="shitenno" class="section">
     <h2>🚗 黒字経営4WD</h2>
-    <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。<br>（㈱TKCのFXクラウドシリーズとの併用を想定しています）</p>
-
-    <!-- 上段：左に車、右に変動PLリンク -->
-    <div class="layout-top">
-      <div class="wheel" aria-label="4WD配置">
-        <div class="hub">
-          <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" loading="eager" />
-        </div>
-        <!-- 中央：変動損益（厳密中央） -->
-        <a class="corner oncar" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener"><span class="mini-badge">PL</span><span>変動損益</span></a>
-        <!-- 四輪チップ（PCは30%/22%で中央寄り・タイヤから少し離す） -->
-        <a class="corner tl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></span><span>売上換算</span></a>
-        <a class="corner tr" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></span><span>価格改定</span></a>
-        <a class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>人件費</span></a>
-        <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 0-6M4.6 9a8 8 0 0 0 0 6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l1.41-1.41M6.34 17.66l-1.41 1.41"/></svg></span><span>自動化効果</span></a>
-      </div>
-
-      <div class="linklist pllink">
-        <a class="tile" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
-          <div class="badge">PL</div>
-          <div class="ttext"><div class="title">ボールで学ぶ変動損益計算書</div><p class="desc">売上高と限界利益、固定費の関係を直感的に理解</p></div>
+    <p class="desc">\1</p></div>
         </a>
       </div>
     </div>
@@ -205,19 +215,19 @@
     <div class="tiles4 tiles4-row" aria-label="4WDの各ツール">
       <a class="tile" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></div>
-        <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">支出額を必要売上金額に即換算</p></div>
+        <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">\1</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></div>
-        <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の売上・利益影響を試算</p></div>
+        <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">\1</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
         <div class="badge">¥</div>
-        <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化</p></div>
+        <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">\1</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
         <div class="badge">⚙︎</div>
-        <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算</p></div>
+        <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">\1</p></div>
       </a>
     </div>
   </section>
@@ -227,15 +237,15 @@
     <div class="tiles4">
       <a class="tile" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
         <div class="badge">%</div>
-        <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">源泉徴収税額の見込みと仕訳補助のための簡易計算</p></div>
+        <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">\1</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">
         <div class="badge">Σ</div>
-        <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額法・定率法の償却費を即時計算</p></div>
+        <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">\1</p></div>
       </a>
       <a class="tile" href="https://takatrp.github.io/kigyoubouei/" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/></svg></div>
-        <div class="ttext"><div class="title">標準保障額・保険料換算ツール</div><p class="desc">標準保障額と保険料を売上高に換算</p></div>
+        <div class="ttext"><div class="title">標準保障額・保険料換算ツール</div><p class="desc">\1</p></div>
       </a>
     </div>
   </section>
@@ -244,14 +254,14 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r53</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r54</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
   (function(){
     const yEl = document.getElementById('cpy-year'); if (yEl) yEl.textContent = new Date().getFullYear();
-    const updDate = document.getElementById('last-updated-date');
-    if (updDate) { const d = new Date(document.lastModified); const p=n=>String(n).padStart(2,'0'); updDate.textContent = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
+    const upd = document.getElementById('last-updated');
+    if (upd) { const d = new Date(document.lastModified); const p=n=>String(n).padStart(2,'0'); upd.textContent = `最終更新: ${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
   })();
 
   // QR modal open/close
