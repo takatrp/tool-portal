@@ -152,6 +152,10 @@
       display:block;
     }
   }
+  /* スマホ背景色とロゴサイズ調整 */
+  .branding img{height:56px; width:auto; display:block;}
+  @media (max-width:480px){ .branding img{height:48px;} }
+  @media (max-width:767px){ body{ background:#f7fafc; } }
 </style>
 </head>
 <body>
@@ -256,7 +260,7 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r56</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r57</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
@@ -287,5 +291,6 @@
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') modal?.classList.remove('show'); });
   })();
 </script>
+<script>(function(){try{var img=document.querySelector('.branding img');if(img){img.onerror=function(){this.onerror=null;this.src='./ロゴ.png';};img.src='./ロゴ.jpg';}}catch(e){}})();</script>
 </body>
 </html>
