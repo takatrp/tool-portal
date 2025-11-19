@@ -5,9 +5,163 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>松本会計ツールポータル</title>
 <meta name="description" content="黒字経営を加速する、松本会計オリジナルツール集" />
+<link rel="icon" href="favicon192192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="favicon192192.png" />
+<style>
+  :root{
+    --brand:#578899; --brand-700:#406473; --brand-soft:#e4eff4;
+    --ink:#0f172a; --muted:#64748b; --bg:#f7fafc; --card:#ffffff; --line:#e2e8f0;
+    --shadow:0 8px 24px rgba(15,23,42,.08); --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0; padding:0; background:var(--bg); color:var(--ink);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP", Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.6;
+  }
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" sizes="192x192" href="favicon192192.png" />
+  a{color:var(--brand-700); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  .shell{max-width:1080px; margin:0 auto; padding:0 12px 24px;}
+
+  /* ---------- HEADER ---------- */
+  .hero{
+    position:sticky; top:0; z-index:20;
+    background:linear-gradient(180deg,#ffffff 0%,#f3f7fb 100%);
+    border-bottom:1px solid var(--line);
+    margin-bottom:8px;
+  }
+  .hero-inner{
+    max-width:1080px; margin:0 auto; padding:10px 12px 8px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .brand-block{display:flex; align-items:center; gap:10px; min-width:0;}
+  .brand-logo-wrap{flex:0 0 auto;}
+  .brand-logo-wrap a{display:inline-block;}
+  .brand-logo{
+    display:block;
+    height:54px; width:auto;
+  }
+  .brand-text{min-width:0;}
+  .brand-title{font-size:20px; font-weight:800; letter-spacing:.03em;}
+  .brand-sub{font-size:12px; color:var(--muted); white-space:nowrap;}
+
+  .hero-actions{display:flex; align-items:center; gap:8px;}
+  .hero-btn{
+    border-radius:999px; border:1px solid var(--line);
+    background:#fff; padding:6px 12px; font-size:12px; font-weight:600;
+    display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+    box-shadow:0 4px 12px rgba(15,23,42,.06);
+  }
+  .hero-btn span{display:inline-block;}
+
+  @media (max-width:640px){
+    .hero-inner{padding:8px 10px 6px;}
+    .brand-title{font-size:18px;}
+    .brand-sub{font-size:11px;}
+    .brand-logo{height:48px;}
+    .hero-btn{padding:5px 10px; font-size:11px;}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  h2{margin:0 0 6px; font-size:22px; display:flex; align-items:center; gap:8px;}
+  h2 .emoji{font-size:22px;}
+  .section{margin-top:10px;}
+  .section-lead{font-size:14px; color:var(--muted);}
+
+  /* ---------- 4WD CAR BLOCK ---------- */
+  .fourwd{
+    margin-top:12px; margin-bottom:18px;
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+  }
+  .car-wrap{position:relative; width:min(420px,100%);}
+  .car-box{
+    margin:0 auto;
+    width:100%; max-width:320px;
+    aspect-ratio:3/4; position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .car-box img{width:100%; height:100%; object-fit:contain; display:block;}
+
+  .chip-center{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    background:#fff; border-radius:999px; padding:6px 18px;
+    box-shadow:var(--shadow); border:1px solid var(--line);
+    display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700;
+  }
+  .chip-center .pill{width:24px;height:24px;border-radius:999px;background:var(--brand);color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;}
+
+  .chip-wheel{
+    position:absolute; background:#fff; border-radius:999px;
+    padding:6px 14px; box-shadow:var(--shadow); border:1px solid var(--line);
+    display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700;
+  }
+  .chip-icon{
+    width:22px; height:22px; border-radius:999px; background:var(--brand);
+    display:inline-flex; align-items:center; justify-content:center; color:#fff; font-size:13px;
+  }
+
+  /* wheel positions - tuned so all 5 chips見える &タイヤ近め */
+  .chip-tl{top:8%; left:6%;}
+  .chip-tr{top:8%; right:6%;}
+  .chip-bl{bottom:8%; left:6%;}
+  .chip-br{bottom:8%; right:6%;}
+
+  @media (max-width:640px){
+    .fourwd{margin-top:6px; margin-bottom:10px;}
+    .car-box{max-width:260px;}
+    .chip-center{padding:5px 14px; font-size:12px;}
+    .chip-wheel{padding:5px 11px; font-size:12px;}
+    .chip-icon{width:20px;height:20px;font-size:12px;}
+    .chip-tl{top:5%; left:4%;}
+    .chip-tr{top:5%; right:4%;}
+    .chip-bl{bottom:5%; left:4%;}
+    .chip-br{bottom:5%; right:4%;}
+  }
+
+  /* ---------- TOOL LISTS ---------- */
+  .tool-section{margin-top:8px;}
+  .tool-list{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;}
+  .tool-card{
+    flex:1 1 calc(25% - 10px);
+    min-width:230px; max-width:258px;
+    background:var(--card); border-radius:16px;
+    border:1px solid var(--line);
+    padding:10px 12px 10px; box-shadow:0 6px 18px rgba(15,23,42,.06);
+  }
+  .tool-head{display:flex; align-items:flex-start; gap:10px;}
+  .tool-ic{
+    flex:0 0 auto; width:32px; height:32px; border-radius:999px;
+    background:var(--brand); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-size:16px; font-weight:700;
+  }
+  .tool-body{min-width:0;}
+  .tool-title{margin:0; font-size:15px; font-weight:700;}
+  .tool-title a{text-decoration:none; color:inherit;}
+  .tool-title a:hover{text-decoration:underline;}
+  .tool-desc{margin:2px 0 0; font-size:12px; color:var(--muted);}
+
+  @media (max-width:960px){
+    .tool-card{flex:1 1 calc(50% - 10px);}
+  }
+  @media (max-width:640px){
+    .tool-list{flex-direction:column;}
+    .tool-card{flex:none; width:100%; max-width:none;}
+  }
+
+  .tool-section h3{margin:14px 0 4px; font-size:17px;}
+
+  /* ---------- FOOTER ---------- */
+  footer.mk-mini{
+    font-size:12px; line-height:1.4; color:#666;
+    text-align:center; padding:10px 12px 18px; border-top:1px solid var(--line);
+    margin-top:18px; background:#f9fbff;
+  }
+  footer.mk-mini a{color:inherit; text-decoration:underline;}
+  @media (max-width:480px){footer.mk-mini{font-size:11px;}}
+</style>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-91JF4BT2QT"></script>
@@ -17,578 +171,159 @@
   gtag('js', new Date());
   gtag('config', 'G-91JF4BT2QT');
 </script>
-
-<style>
-:root{
-  --bg:#f7fafc;
-  --header:#f1f5f9;
-  --card:#ffffff;
-  --ink:#0f172a;
-  --muted:#64748b;
-  --brand:#578899;
-  --brand-soft:#e3eff5;
-  --accent:#f97316;
-  --line:#e2e8f0;
-  --shadow:0 8px 24px rgba(15,23,42,.08);
-  --radius:18px;
-}
-
-html,body{height:100%;}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
-  color:var(--ink);
-  background:var(--bg);
-}
-
-/* ---------- header ---------- */
-
-.hero{
-  background:var(--header);
-  border-bottom:1px solid var(--line);
-  padding:10px 16px;
-}
-.hero-inner{
-  max-width:1100px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-}
-.hero-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.hero-logo a{
-  display:inline-flex;
-  align-items:center;
-}
-.hero-logo img{
-  display:block;
-  height:60px;
-  width:auto;
-}
-.hero-texts{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
-}
-.hero-title{
-  font-size:20px;
-  font-weight:800;
-}
-.hero-subtitle{
-  font-size:13px;
-  color:var(--muted);
-}
-
-.hero-actions{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.hero-btn{
-  border-radius:999px;
-  border:1px solid var(--line);
-  background:#fff;
-  padding:6px 14px;
-  font-size:12px;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  cursor:pointer;
-  box-shadow:0 4px 12px rgba(15,23,42,.05);
-}
-.hero-btn span.icon{
-  font-size:13px;
-}
-.hero-btn span.label-short{display:none;}
-
-@media (max-width:640px){
-  .hero-inner{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:10px;
-  }
-  .hero-actions{
-    align-self:stretch;
-    justify-content:flex-end;
-  }
-  .hero-btn{
-    padding:5px 10px;
-    font-size:11px;
-  }
-  .hero-btn span.label-full{display:none;}
-  .hero-btn span.label-short{display:inline;}
-}
-
-/* ---------- sections ---------- */
-
-.section{
-  max-width:1100px;
-  margin:20px auto 24px;
-  padding:0 16px;
-}
-.section h2{
-  margin:0 0 6px;
-  font-size:20px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.section h2 .emoji{
-  font-size:22px;
-}
-.section .desc{
-  margin:0 0 6px;
-  font-size:13px;
-  color:var(--muted);
-}
-.section .desc span.sub{
-  display:block;
-}
-
-/* ---------- 4WD wheel ---------- */
-
-.wheel{
-  position:relative;
-  margin:18px auto 14px;
-  width:min(420px,80vw);
-}
-.hub{
-  position:relative;
-  width:100%;
-  max-width:360px;
-  margin:0 auto;
-}
-.hub img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-
-.wheel-chip{
-  position:absolute;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:8px 13px;
-  border-radius:999px;
-  background:#fff;
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  font-size:13px;
-  color:var(--brand);
-  text-decoration:none;
-  font-weight:700;
-  white-space:nowrap;
-}
-.wheel-chip .round{
-  width:24px;
-  height:24px;
-  border-radius:999px;
-  background:var(--brand);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:12px;
-}
-
-/* center */
-.wheel-chip.center{
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-}
-
-/* four wheels – PC 基準位置 */
-.wheel-chip.tl{top:10%;left:-10px;}
-.wheel-chip.tr{top:10%;right:-10px;}
-.wheel-chip.bl{bottom:10%;left:-10px;}
-.wheel-chip.br{bottom:10%;right:-10px;}
-
-/* ---------- tool lists ---------- */
-
-.tool-group{
-  margin-top:16px;
-}
-.tool-row{
-  list-style:none;
-  padding:0;
-  margin:0 -4px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:8px;
-}
-.tool-card{
-  padding:4px;
-}
-.tool-link{
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  padding:10px 14px;
-  border-radius:16px;
-  background:var(--card);
-  border:1px solid var(--line);
-  box-shadow:0 4px 14px rgba(15,23,42,.06);
-  text-decoration:none;
-  color:inherit;
-}
-.tool-ico{
-  width:32px;
-  height:32px;
-  border-radius:12px;
-  background:var(--brand);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:15px;
-  flex-shrink:0;
-}
-.tool-body{
-  flex:1;
-}
-.tool-title{
-  font-size:14px;
-  font-weight:700;
-  margin-bottom:3px;
-  line-height:1.4;
-}
-.tool-desc{
-  font-size:12px;
-  color:var(--muted);
-}
-
-/* 4WD 一列を PC で横並び */
-@media (min-width:900px){
-  #tools-main .tool-row{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-  }
-}
-
-/* その他便利ツール（4列まで） */
-@media (min-width:900px){
-  #tools-extra .tool-row{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-  }
-}
-
-/* タイトル幅調整：それ、売上に直すといくらですか？ を 1 行に */
-.tool-title.long{
-  font-size:13px;
-}
-
-/* ---------- modal（QR & ホーム追加） ---------- */
-
-.mk-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(15,23,42,.55);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:40;
-}
-.mk-modal.open{display:flex;}
-.mk-modal-inner{
-  background:#fff;
-  padding:12px;
-  border-radius:16px;
-  max-width:90vw;
-  max-height:90vh;
-  box-shadow:var(--shadow);
-}
-.mk-modal-inner img{
-  display:block;
-  max-width:76vw;
-  height:auto;
-}
-.mk-modal-inner .caption{
-  margin-top:6px;
-  font-size:12px;
-  color:var(--muted);
-  text-align:center;
-}
-.mk-modal-close{
-  position:absolute;
-  top:10px;
-  right:14px;
-  font-size:24px;
-  color:#fff;
-  cursor:pointer;
-}
-
-/* PC のときだけ少し大きく */
-@media (min-width:900px){
-  .mk-modal-inner img{
-    max-width:520px;
-  }
-}
-
-/* ---------- footer ---------- */
-
-footer.mk-mini{
-  border-top:1px solid var(--line);
-  padding:8px 12px 10px;
-  text-align:center;
-  font-size:12px;
-  color:#666;
-}
-footer.mk-mini a{
-  color:inherit;
-  text-decoration:underline;
-}
-
-/* ---------- 4WD スマホ最適化：5ツールを1画面に収める ---------- */
-
-@media (max-width:768px){
-  #shitenno.section{
-    margin-top:12px;
-    margin-bottom:14px;
-  }
-  #shitenno .desc{
-    margin-bottom:4px;
-  }
-  .wheel{
-    margin:8px auto 6px;
-  }
-  .hub{
-    width:60vw;
-    max-width:220px;
-  }
-}
-
-/* さらに小さなデバイスでの微調整 */
-@media (max-width:480px){
-  .wheel{
-    margin:6px auto 4px;
-  }
-  .hub{
-    width:62vw;
-    max-width:210px;
-  }
-}
-</style>
 </head>
 <body>
-
 <header class="hero">
   <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-logo">
-        <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener">
-          <img src="ロゴ.jpg" alt="税理士法人松本会計事務所ロゴ" />
-        </a>
-      </div>
-      <div class="hero-texts">
-        <div class="hero-title">松本会計ツールポータル</div>
-        <div class="hero-subtitle">黒字経営を加速する、松本会計オリジナルツール集</div>
+    <div class="brand-block">
+      <div class="brand-logo-wrap"><a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener"><img src="ロゴ.png" alt="税理士法人松本会計事務所" class="brand-logo" /></a></div>
+      <div class="brand-text">
+        <div class="brand-title">松本会計ツールポータル</div>
+        <div class="brand-sub">黒字経営を加速する、松本会計オリジナルツール集</div>
       </div>
     </div>
     <div class="hero-actions">
-      <button class="hero-btn" type="button" id="btn-qr">
-        <span class="icon">🔗</span>
-        <span class="label-full">共有用QR</span>
-        <span class="label-short">QR</span>
-      </button>
-      <button class="hero-btn" type="button" id="btn-home">
-        <span class="icon">📱</span>
-        <span class="label-full">ホーム画面への追加方法</span>
-        <span class="label-short">追加</span>
-      </button>
+      <button type="button" class="hero-btn" onclick="openQr()"><span>共有用QR</span></button>
+      <button type="button" class="hero-btn" onclick="openHomeGuide()"><span class="pc-label">ホーム画面への追加方法</span><span class="sp-label" style="display:none;">追加</span></button>
     </div>
   </div>
 </header>
 
-<main>
-  <!-- 黒字経営4WD -->
-  <section id="shitenno" class="section">
+<main class="shell">
+  <section class="section" id="fourwd">
     <h2><span class="emoji">🚗</span><span>黒字経営4WD</span></h2>
-    <p class="desc">
-      変動PL＋四つの実務ツールで、黒字経営を駆動する。<br />
-      <span class="sub">（㈱TKCのFXクラウドシリーズとの併用を想定しています）</span>
-    </p>
+    <p class="section-lead">変動PL＋四つの実務ツールで、黒字経営を駆動する。（㈱TKCのFXクラウドシリーズとの併用を想定しています）</p>
 
-    <div class="wheel" aria-label="黒字経営4WDツール配置">
-      <div class="hub">
-        <img src="四輪駆動.png" alt="4WDイメージ" />
-        <!-- center -->
-        <a href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener" class="wheel-chip center">
-          <span class="round">PL</span><span>変動損益</span>
-        </a>
+    <div class="fourwd">
+      <div class="car-wrap">
+        <div class="car-box">
+          <img src="四輪駆動.png" alt="4WDイメージ" decoding="async" loading="eager" />
+          <a href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener" class="chip-center"><span class="pill">PL</span><span>変動損益</span></a>
+
+          <a href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener" class="chip-wheel chip-tl"><span class="chip-icon">⇄</span><span>売上換算</span></a>
+          <a href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener" class="chip-wheel chip-tr"><span class="chip-icon">↕︎</span><span>価格改定</span></a>
+          <a href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener" class="chip-wheel chip-bl"><span class="chip-icon">¥</span><span>人件費</span></a>
+          <a href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener" class="chip-wheel chip-br"><span class="chip-icon">⚙︎</span><span>自動化効果</span></a>
+        </div>
       </div>
-      <!-- four tools -->
-      <a href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener" class="wheel-chip tl">
-        <span class="round">⇆</span><span>売上換算</span>
-      </a>
-      <a href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener" class="wheel-chip tr">
-        <span class="round">↕</span><span>価格改定</span>
-      </a>
-      <a href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener" class="wheel-chip bl">
-        <span class="round">⏱</span><span>人件費</span>
-      </a>
-      <a href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener" class="wheel-chip br">
-        <span class="round">⚙︎</span><span>自動化効果</span>
-      </a>
     </div>
 
-    <!-- tool list -->
-    <div id="tools-main" class="tool-group">
-      <ul class="tool-row">
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
-            <div class="tool-ico">PL</div>
+    <section class="tool-section" aria-label="黒字経営4WD ツール一覧">
+      <div class="tool-list">
+        <article class="tool-card">
+          <div class="tool-head">
+            <div class="tool-ic">PL</div>
             <div class="tool-body">
-              <div class="tool-title">ボールで学ぶ変動損益計算書</div>
-              <div class="tool-desc">売上高と限界利益、固定費の関係を直感的に理解</div>
+              <h3 class="tool-title"><a href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">ボールで学ぶ変動損益計算書</a></h3>
+              <p class="tool-desc">売上高と限界利益、固定費の関係を直感的に理解</p>
             </div>
-          </a>
-        </li>
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
-            <div class="tool-ico">⇆</div>
+          </div>
+        </article>
+        <article class="tool-card">
+          <div class="tool-head">
+            <div class="tool-ic">⇄</div>
             <div class="tool-body">
-              <div class="tool-title long">それ、売上に直すといくらですか？</div>
-              <div class="tool-desc">支出額を必要売上金額に即換算</div>
+              <h3 class="tool-title"><a href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">それ、売上に直すといくらですか？</a></h3>
+              <p class="tool-desc">支出額を必要売上金額に即換算</p>
             </div>
-          </a>
-        </li>
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
-            <div class="tool-ico">↕</div>
+          </div>
+        </article>
+        <article class="tool-card">
+          <div class="tool-head">
+            <div class="tool-ic">↕︎</div>
             <div class="tool-body">
-              <div class="tool-title">価格改定検討ツール</div>
-              <div class="tool-desc">価格改定の影響を試算</div>
+              <h3 class="tool-title"><a href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">価格改定検討ツール</a></h3>
+              <p class="tool-desc">価格改定の影響を試算</p>
             </div>
-          </a>
-        </li>
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
-            <div class="tool-ico">¥</div>
+          </div>
+        </article>
+        <article class="tool-card">
+          <div class="tool-head">
+            <div class="tool-ic">¥</div>
             <div class="tool-body">
-              <div class="tool-title">人件費見える化ツール</div>
-              <div class="tool-desc">時間単価で人件費を可視化</div>
+              <h3 class="tool-title"><a href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">人件費見える化ツール</a></h3>
+              <p class="tool-desc">時間単価で人件費を可視化</p>
             </div>
-          </a>
-        </li>
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
-            <div class="tool-ico">⚙︎</div>
+          </div>
+        </article>
+        <article class="tool-card">
+          <div class="tool-head">
+            <div class="tool-ic">⚙︎</div>
             <div class="tool-body">
-              <div class="tool-title">自動化効果試算ツール</div>
-              <div class="tool-desc">自動化の投資対効果を試算</div>
+              <h3 class="tool-title"><a href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">自動化効果試算ツール</a></h3>
+              <p class="tool-desc">自動化の投資対効果を試算</p>
             </div>
-          </a>
-        </li>
-      </ul>
-    </div>
+          </div>
+        </article>
+      </div>
+    </section>
   </section>
 
-  <!-- その他便利ツール -->
-  <section id="others" class="section">
-    <h2><span class="emoji">🧰</span><span>その他便利ツール</span></h2>
-
-    <div id="tools-extra" class="tool-group">
-      <ul class="tool-row">
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
-            <div class="tool-ico">%</div>
-            <div class="tool-body">
-              <div class="tool-title">受取利息・配当金 仕訳補助</div>
-              <div class="tool-desc">手取額から源泉徴収税額を逆算・仕訳を表示</div>
-            </div>
-          </a>
-        </li>
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">
-            <div class="tool-ico">Σ</div>
-            <div class="tool-body">
-              <div class="tool-title">減価償却費計算ツール</div>
-              <div class="tool-desc">定額法・定率法の償却費を即時計算</div>
-            </div>
-          </a>
-        </li>
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/kigyoubouei/" target="_blank" rel="noopener">
-            <div class="tool-ico">保</div>
-            <div class="tool-body">
-              <div class="tool-title">標準保障額・保険料換算ツール</div>
-              <div class="tool-desc">標準保障額と保険料を売上高に換算</div>
-            </div>
-          </a>
-        </li>
-        <li class="tool-card">
-          <a class="tool-link" href="https://takatrp.github.io/CCC/" target="_blank" rel="noopener">
-            <div class="tool-ico">C</div>
-            <div class="tool-body">
-              <div class="tool-title">CCC計算ツール</div>
-              <div class="tool-desc">キャッシュ・コンバージョン・サイクルを可視化</div>
-            </div>
-          </a>
-        </li>
-      </ul>
+  <section class="section tool-section" id="others">
+    <h3>その他便利ツール</h3>
+    <div class="tool-list">
+      <article class="tool-card">
+        <div class="tool-head">
+          <div class="tool-ic">%</div>
+          <div class="tool-body">
+            <h3 class="tool-title"><a href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">受取利息・配当金 仕訳補助</a></h3>
+            <p class="tool-desc">手取額から源泉徴収税額を逆算・仕訳を表示</p>
+          </div>
+        </div>
+      </article>
+      <article class="tool-card">
+        <div class="tool-head">
+          <div class="tool-ic">Σ</div>
+          <div class="tool-body">
+            <h3 class="tool-title"><a href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">減価償却費計算ツール</a></h3>
+            <p class="tool-desc">定額法・定率法の償却費を即時計算</p>
+          </div>
+        </div>
+      </article>
+      <article class="tool-card">
+        <div class="tool-head">
+          <div class="tool-ic">保</div>
+          <div class="tool-body">
+            <h3 class="tool-title"><a href="https://takatrp.github.io/kigyoubouei/" target="_blank" rel="noopener">標準保障額・保険料換算ツール</a></h3>
+            <p class="tool-desc">標準保障額と保険料を売上高に換算</p>
+          </div>
+        </div>
+      </article>
+      <article class="tool-card">
+        <div class="tool-head">
+          <div class="tool-ic">C</div>
+          <div class="tool-body">
+            <h3 class="tool-title"><a href="https://takatrp.github.io/CCC/" target="_blank" rel="noopener">CCC計算ツール</a></h3>
+            <p class="tool-desc">DIO・DSO・DPOとCCCを可視化</p>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 </main>
 
-<!-- modal -->
-<div class="mk-modal" id="mk-modal" aria-hidden="true">
-  <div class="mk-modal-close" id="mk-modal-close">×</div>
-  <div class="mk-modal-inner">
-    <img src="" alt="" id="mk-modal-img" />
-    <div class="caption" id="mk-modal-caption"></div>
-  </div>
-</div>
-
 <footer class="mk-mini">
-  © 2025 <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener">税理士法人松本会計事務所</a> ｜ 
-  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license">CC BY-NC-SA 4.0</a> ｜ 
-  <a href="https://takatrp.github.io/tool-portal/terms.html" target="_blank">利用条件</a> ｜ 
+  © 2025 税理士法人松本会計事務所 ｜
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license">CC BY-NC-SA 4.0</a> ｜
+  <a href="https://takatrp.github.io/tool-portal/terms.html" target="_blank">利用条件</a> ｜
   r52（2025-10-05）
 </footer>
 
 <script>
-(function(){
-  const modal = document.getElementById('mk-modal');
-  const img   = document.getElementById('mk-modal-img');
-  const cap   = document.getElementById('mk-modal-caption');
-  const btnQr   = document.getElementById('btn-qr');
-  const btnHome = document.getElementById('btn-home');
-  const closeBtn = document.getElementById('mk-modal-close');
-
-  function openModal(src, text){
-    img.src = src;
-    img.alt = text;
-    cap.textContent = text;
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
+  function openQr(){
+    window.open('共有用QR.png','_blank');
   }
-  function closeModal(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
+  function openHomeGuide(){
+    window.open('ホーム画面に追加.png','_blank');
   }
 
-  if(btnQr){
-    btnQr.addEventListener('click',function(){
-      openModal('共有用QR.png','共有用QRコード');
-    });
+  function syncLabels(){
+    const isSp = window.matchMedia('(max-width:640px)').matches;
+    document.querySelectorAll('.hero-btn .pc-label').forEach(el=>{el.style.display = isSp ? 'none':'inline';});
+    document.querySelectorAll('.hero-btn .sp-label').forEach(el=>{el.style.display = isSp ? 'inline':'none';});
   }
-  if(btnHome){
-    btnHome.addEventListener('click',function(){
-      openModal('ホーム画面に追加.png','ホーム画面への追加方法');
-    });
-  }
-  if(closeBtn){
-    closeBtn.addEventListener('click',closeModal);
-  }
-  modal.addEventListener('click',function(e){
-    if(e.target === modal){ closeModal(); }
-  });
-})();
+  syncLabels();
+  window.addEventListener('resize', syncLabels);
 </script>
-
 </body>
 </html>
