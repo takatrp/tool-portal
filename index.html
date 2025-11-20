@@ -91,7 +91,7 @@
 
     /* --- 車エリアの大幅コンパクト化 --- */
     .wheel {
-      width: min(280px, 85vw); /* 全体の幅を少し狭める */
+      width: min(280px, 85vw); 
       margin: -16px auto -16px; /* 上下の余白を大きくマイナスにして詰める */
     }
     
@@ -102,7 +102,6 @@
     }
 
     /* チップの位置調整：もっと車側（中央）に寄せる */
-    /* top/bottom: 18%->22%, left/right: 0%->4% */
     #shitenno .wheel .corner.tl{top:22%; left:4%;}
     #shitenno .wheel .corner.tr{top:22%; right:4%;}
     #shitenno .wheel .corner.bl{bottom:22%; left:4%;}
@@ -130,7 +129,9 @@
       padding: 4px 8px;
     }
 
-    .pllink{margin:0;} /* 車の下の余白削除 */
+    /* 修正箇所: ここだけ下マージンを10px追加して、次のリストとの間隔を確保 */
+    .pllink{margin: 0 0 10px 0;} 
+
     .tiles4-row{grid-template-columns: 1fr;}
     .card{min-height:auto;}
     
@@ -330,7 +331,7 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r63</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r64</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
