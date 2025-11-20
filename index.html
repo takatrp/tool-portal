@@ -83,42 +83,45 @@
 
   /* ======= Mobile（スマホ） ======= */
   @media (max-width:767px){
-    /* 全体の余白削減 */
-    .section h2 { margin-top: 8px; font-size: 18px; }
-    
+    /* ヘッダーとセクションの隙間を詰める */
+    .hero { padding-bottom: 8px; }
+    .section { margin-top: 8px; margin-bottom: 8px;}
+    .section h2 { margin-top: 0; margin-bottom: 4px; font-size: 18px; }
+    .desc { margin-bottom: 0; font-size: 12px; }
+
     /* --- 車エリアの大幅コンパクト化 --- */
-    /* コンテナサイズを小さくして上下の余白を消す */
     .wheel {
-      width: min(300px, 85vw); /* 幅を縮小 */
-      margin: -10px auto 0; /* ネガティブマージンで上の説明文との距離をさらに詰める */
+      width: min(280px, 85vw); /* 全体の幅を少し狭める */
+      margin: -16px auto -16px; /* 上下の余白を大きくマイナスにして詰める */
     }
     
-    /* 車の画像を小さくする (コンテナに対して55%程度) */
+    /* 車の画像サイズ（少し小さくして、チップ配置のスペース確保） */
     .hub {
-      width: 55%;
-      height: 55%;
+      width: 52%; 
+      height: 52%;
     }
 
-    /* ボタン配置：車が小さくなった分、配置を中央に寄せすぎないように調整 */
-    /* 文字が見切れないように左右の位置を微調整 */
-    #shitenno .wheel .corner.tl{top:18%; left:0;}
-    #shitenno .wheel .corner.tr{top:18%; right:0;}
-    #shitenno .wheel .corner.bl{bottom:18%; left:0;}
-    #shitenno .wheel .corner.br{bottom:18%; right:0;}
+    /* チップの位置調整：もっと車側（中央）に寄せる */
+    /* top/bottom: 18%->22%, left/right: 0%->4% */
+    #shitenno .wheel .corner.tl{top:22%; left:4%;}
+    #shitenno .wheel .corner.tr{top:22%; right:4%;}
+    #shitenno .wheel .corner.bl{bottom:22%; left:4%;}
+    #shitenno .wheel .corner.br{bottom:22%; right:4%;}
 
-    /* ボタンのデザイン：文字サイズを落とし、パディングを減らす */
+    /* ボタンのデザイン：さらにコンパクトに */
     .wheel .corner {
-      font-size: 11px;     /* 文字サイズ縮小 */
-      padding: 4px 8px;    /* 余白削減 */
-      gap: 4px;            /* アイコンとの間隔削減 */
-      height: 28px;        /* 高さ固定でコンパクトに */
+      font-size: 11px;
+      padding: 4px 8px;
+      gap: 4px;
+      height: 28px;
       border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(15,23,42,.12);
     }
     .mini-badge {
-      width: 16px; height: 16px; border-radius: 5px; /* アイコン枠縮小 */
+      width: 18px; height: 18px; border-radius: 5px;
     }
     .mini-badge svg {
-      width: 10px; height: 10px; /* アイコン縮小 */
+      width: 11px; height: 11px;
     }
 
     /* 中央のPLボタン */
@@ -132,8 +135,9 @@
     .card{min-height:auto;}
     
     /* ロゴ調整 */
-    .branding img{height:44px;}
-    .title{font-size: 18px;}
+    .branding img{height:40px;}
+    .logo{width:44px; height:44px;}
+    .title{font-size: 17px;}
   }
 
   /* ======= Tablet (768-1023px) ======= */
@@ -326,7 +330,7 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r62</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r63</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
