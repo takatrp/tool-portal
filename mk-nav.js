@@ -2,7 +2,7 @@
   const DEFAULT_PORTAL = 'https://takatrp.github.io/tool-portal/';
 
   const safeGet = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
-  const safeSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  const safeSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }; // Storage.setItem :contentReference[oaicite:2]{index=2}
 
   const strip = (u) => {
     try {
@@ -22,7 +22,7 @@
 
   const withPortalParam = (u, portal) => {
     try {
-      const x = new URL(u);
+      const x = new URL(u, location.href);
       x.searchParams.set('portal', portal);
       x.searchParams.set('from', 'tool-nav');
       return x.toString();
@@ -111,23 +111,59 @@
   `;
   document.body.appendChild(nav);
 
-  // wire next
   const nextBtn = nav.querySelector('#mk-next');
+
+  function advanceFlowIndex() {
+    try {
+      const flow = JSON.parse(safeGet('mk_flow') || 'null');
+      if (Array.isArray(flow) && flow.length) {
+        const here = strip(location.href);
+        let idx = -1;
+        for (let i = 0; i < flow.length; i++) { if (strip(flow[i]) === here) { idx = i; break; } }
+        if (idx >= 0) safeSet('mk_flow_i', String(Math.min(idx + 1, flow.length - 1)));
+      }
+    } catch (e) {}
+  }
+
   if (next && sameHostOk(next)) {
     const nextUrl = withPortalParam(next, portal);
     nextBtn.href = nextUrl;
     nextBtn.style.display = '';
 
-    nextBtn.addEventListener('click', () => {
-      try {
-        const flow = JSON.parse(safeGet('mk_flow') || 'null');
-        if (Array.isArray(flow) && flow.length) {
-          const here = strip(location.href);
-          let idx = -1;
-          for (let i = 0; i < flow.length; i++) { if (strip(flow[i]) === here) { idx = i; break; } }
-          if (idx >= 0) safeSet('mk_flow_i', String(Math.min(idx + 1, flow.length - 1)));
-        }
-      } catch (e) {}
-    }, { passive: true });
+    // ★ ここが重要：ツール側フックで「金額引継ぎ用URL」に差し替え可能にする
+    nextBtn.addEventListener('click', (e) => {
+      let cancel = false;
+      let overrideHref = null;
+
+      const hook = window.mkNavBeforeNext;
+      if (typeof hook === 'function') {
+        try {
+          const res = hook({ nextUrl: nextBtn.href, portalUrl: portal });
+
+          if (res === false) cancel = true;
+          else if (typeof res === 'string') overrideHref = res;
+          else if (res && typeof res === 'object') {
+            if (res.cancel) cancel = true;
+            if (res.href) overrideHref = res.href;
+          }
+        } catch (_) {}
+      }
+
+      if (cancel) {
+        // preventDefault :contentReference[oaicite:3]{index=3}
+        e.preventDefault();
+        return;
+      }
+
+      // 遷移する前提で flow を進める
+      advanceFlowIndex();
+
+      if (overrideHref) {
+        e.preventDefault();
+        const finalUrl = withPortalParam(overrideHref, portal);
+        window.location.href = finalUrl;
+      }
+      // override がなければ href 通りに遷移
+    });
   }
 })();
