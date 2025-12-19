@@ -14,6 +14,9 @@
     --brand:#578899; --brand-700:#456d77; --brand-300:#7aa5b4;
     --ink:#0f172a; --muted:#64748b; --bg:#f8fafc; --card:#ffffff;
     --line:#e2e8f0; --shadow:0 8px 24px rgba(15,23,42,.08); --radius:18px;
+    --shadow-btn: 0 6px 18px rgba(15,23,42,.14);
+    --shadow-btn-hover: 0 10px 26px rgba(15,23,42,.18);
+    --ring: rgba(87,136,153,.18);
   }
   html,body{height:100%;}
   body{
@@ -194,15 +197,77 @@
   .card h4{margin:0 0 6px; font-size:14px; font-weight:900; color:var(--brand-700);}
   .card .small{margin:0; font-size:12px; color:var(--muted); line-height:1.5;}
   .card .card-actions{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
-  .chipline{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
-  .chip{
-    display:inline-flex; align-items:center; gap:6px; padding:8px 10px;
-    border-radius:999px; border:1px solid var(--line); background:#fff;
-    text-decoration:none; font-weight:900; color:var(--ink);
+
+  /* ===== Buttons for start & shortcuts (chips) ===== */
+  .chipline{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:10px;
+    align-items:center; /* →の縦ズレ防止 */
   }
-  .chip:hover{border-color:#d7e2ea; background:#fdfefe;}
-  .arrow{color:var(--muted); font-weight:900;}
-  .list{display:grid; gap:8px; margin-top:10px;}
+  .chip{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:9px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:#fff;
+    text-decoration:none;
+    font-weight:900;
+    color:var(--ink);
+    font-size:13px; /* 少し小さく */
+    box-shadow: var(--shadow-btn); /* ボタンらしさ */
+    transform: translateY(0);
+    transition: box-shadow .15s ease, transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .chip:hover{
+    border-color:#d7e2ea;
+    background:#fdfefe;
+    box-shadow: var(--shadow-btn-hover);
+    transform: translateY(-1px);
+  }
+  .chip:active{transform: translateY(0); box-shadow: var(--shadow-btn);}
+
+  /* ラジオ用chip（診断モーダル内） */
+  #diag-form label.chip{
+    cursor:pointer;
+    user-select:none;
+  }
+  #diag-form label.chip input{
+    accent-color: var(--brand);
+    transform: translateY(1px);
+  }
+  #diag-form label.chip.is-on{
+    border-color: rgba(87,136,153,.95);
+    background: linear-gradient(180deg, rgba(87,136,153,.12) 0%, rgba(87,136,153,.06) 100%);
+    box-shadow: 0 0 0 4px var(--ring), var(--shadow-btn);
+  }
+
+  /* 診断の「→」表示（縦位置・バランス改善） */
+  .arrow{
+    color:var(--muted);
+    font-weight:900;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:34px;
+    padding:0 2px;
+    line-height:1;
+    font-size:14px;
+    transform: translateY(0);
+  }
+  @media (max-width:480px){
+    .chip{font-size:12.5px; padding:8px 11px;}
+    .arrow{height:32px; font-size:13px;}
+  }
+
+  .comp-row{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+  .seg{display:flex; gap:6px;}
+  .seg.sm .segbtn{padding:6px 10px; font-size:12px; border-radius:10px;}
+  .segbtn{background:#fff; border:1px solid rgba(87,136,153,.45); color:var(--brand-700); padding:10px 14px; border-radius:12px; cursor:pointer}
+  .segbtn.active{background:var(--brand); color:#fff}
+
+  .list{display:grid; gap:10px; margin-top:10px;}
   .note{font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5;}
 
   /* ---- Footer ---- */
@@ -262,7 +327,7 @@
               <button id="diag-open" class="btn primary">診断を開始</button>
               <a class="btn compact" href="?start=1" style="text-decoration:none; display:inline-flex; align-items:center;">リンク共有（展開）</a>
             </div>
-            <p class="note">診断で「順番」が出る場合、ツール側の「次へ →」にも反映されます。</p>
+            <p class="note">診断で「順番」が出る場合、左から順にクリックしてください（ツール側の「次へ →」にも連動します）。</p>
           </div>
 
           <div class="card">
@@ -321,6 +386,7 @@
           <label class="chip"><input type="radio" name="topic" value="labor"> 採用・配置</label>
           <label class="chip"><input type="radio" name="topic" value="auto"> 入力処理の合理化</label>
           <label class="chip"><input type="radio" name="topic" value="cash"> 資金繰り</label>
+          <label class="chip"><input type="radio" name="topic" value="acct"> 経理実務</label>
         </div>
 
         <div class="row">
@@ -462,7 +528,7 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r67</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r68</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
@@ -501,7 +567,7 @@
     startDetails.open = !!open;
     startToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 
-    // open時は「閉じる」表記（ご指定はデフォルトラベルのみのため、open時は簡潔に）
+    // open時は「閉じる」表記
     if(startLabel) startLabel.textContent = open ? '閉じる' : '🔰まずはここから';
     if(startLabelS) startLabelS.textContent = open ? '閉' : '🔰';
 
@@ -583,7 +649,10 @@
   const diagModal = document.getElementById('diag-modal');
   const diagOpen = document.getElementById('diag-open');
   const diagClose = document.getElementById('diag-close');
-  if(diagOpen && diagModal) diagOpen.addEventListener('click', ()=> diagModal.classList.add('show'));
+  if(diagOpen && diagModal) diagOpen.addEventListener('click', ()=>{
+    diagModal.classList.add('show');
+    refreshDiagRadios();
+  });
   if(diagClose && diagModal) diagClose.addEventListener('click', ()=> diagModal.classList.remove('show'));
   if(diagModal) diagModal.addEventListener('click', (e)=>{ if(e.target === diagModal) diagModal.classList.remove('show'); });
 
@@ -593,11 +662,19 @@
     price: { steps:['price'] },
     labor: { steps:['labor','sales'] },
     auto:  { steps:['auto','sales'] },
-    cash:  { steps:['ccc'] }
+    cash:  { steps:['ccc'] },
+    acct:  { steps:['withholding','dep'] } // 経理実務：利息配当仕訳補助 → 減価償却費計算
   };
   const labels = {
-    pl:'変動PL', sales:'売上換算', price:'価格改定', labor:'人件費見える化', auto:'自動化効果', ccc:'CCC',
-    withholding:'源泉逆算', dep:'減価償却', insurance:'保険換算'
+    pl:'変動PL',
+    sales:'売上換算',
+    price:'価格改定',
+    labor:'人件費見える化',
+    auto:'自動化効果',
+    ccc:'CCC',
+    withholding:'利息配当仕訳補助',
+    dep:'減価償却費計算',
+    insurance:'保険換算'
   };
   const toolLabel = (k)=> labels[k] || k;
 
@@ -625,11 +702,26 @@
   const diagResult = document.getElementById('diag-result');
   const diagSteps = document.getElementById('diag-steps');
 
+  function refreshDiagRadios(){
+    if(!diagForm) return;
+    diagForm.querySelectorAll('label.chip').forEach(l=>{
+      const r = l.querySelector('input[type="radio"]');
+      l.classList.toggle('is-on', !!r && r.checked);
+    });
+  }
+
+  if(diagForm){
+    diagForm.addEventListener('change', (e)=>{
+      if(e.target && e.target.name === 'topic') refreshDiagRadios();
+    });
+  }
+
   if(diagReset) diagReset.addEventListener('click', ()=>{
     diagResult.hidden = true;
     diagSteps.innerHTML = '';
     const first = diagForm?.querySelector('input[name="topic"]');
     if(first) first.checked = true;
+    refreshDiagRadios();
   });
 
   if(diagForm) diagForm.addEventListener('submit', (e)=>{
@@ -655,6 +747,9 @@
 
     diagResult.hidden = false;
   });
+
+  // 初期：診断ラジオ見た目を同期
+  refreshDiagRadios();
 
 })();
 </script>
