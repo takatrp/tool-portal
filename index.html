@@ -40,7 +40,6 @@
   /* ---- 4WD layout (car) ---- */
   .layout-top{display:block;}
   .wheel{position:relative;margin:0 auto;width:min(420px,92vw);aspect-ratio:1/1;}
-  /* デフォルト(PC等)のハブサイズ */
   .hub{position:absolute;top:50%;left:50%;translate:-50% -50%;width:clamp(260px,46vw,420px);height:clamp(260px,46vw,420px);} 
   .hub img.carimg{width:100%;height:100%;object-fit:contain;display:block !important;}
 
@@ -49,6 +48,25 @@
   .mini-badge svg{width:12px;height:12px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
 
   .tiles4{display:grid; gap:10px;}
+
+  /* ---- NEW: Quick start + flows ---- */
+  .h3{margin:10px 0 6px; font-size:14px; font-weight:900; color:var(--brand-700);} 
+  .start-grid{display:grid; gap:10px;}
+  .tile-btn{cursor:pointer;}
+  button.tile{width:100%; text-align:left;}
+  button.tile{appearance:none; -webkit-appearance:none; border:1px solid var(--line);} 
+  .flow-grid{display:grid; gap:10px; margin-top:8px;}
+  .flow-card{background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:10px 12px;}
+  .flow-title{font-weight:900; color:var(--ink); margin:0 0 6px; display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .kpi{display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--brand-700); background:#f3f7fb; border:1px solid #dbe7ee; padding:2px 8px; border-radius:999px; font-weight:800; white-space:nowrap;}
+  .flow-steps{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0;}
+  .chip{display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-weight:800; font-size:12px; color:var(--brand-700); background:#fff; border:1px solid #dbe7ee; padding:6px 10px; border-radius:999px;}
+  .chip:hover{background:#fbfdff; border-color:#cfe0ea;}
+  .arrow{color:var(--muted); font-weight:900;}
+  .flow-note{margin:6px 0 0; font-size:12px; color:var(--muted); line-height:1.4;}
+
+  /* NEW: collapsible start panel (closed by default) */
+  .collapse{max-height:0; overflow:hidden; transition:max-height .25s ease;}
 
   /* ======= Desktop (PC) ======= */
   @media (min-width:1024px){
@@ -68,7 +86,6 @@
     .layout-top{display:grid; grid-template-columns: 340px 1fr; grid-template-areas: "wheel pl"; align-items:center; gap:16px;}
     .wheel{grid-area: wheel; width:340px;}
     .hub{width:220px;height:220px;}
-    /* タイヤから少し離しつつ中央寄り（以前より外側へ） */
     #shitenno .wheel .corner.tl{top:18%; left:10%;}
     #shitenno .wheel .corner.tr{top:18%; right:10%;}
     #shitenno .wheel .corner.bl{bottom:18%; left:10%;}
@@ -76,90 +93,68 @@
     .wheel .corner{gap:8px; padding:8px 10px;}
 
     .pllink{grid-area: pl;}
-    /* 下段4つは同一行・フル幅 */
     .tiles4-row{grid-template-columns: repeat(4, 1fr);} 
     .tiles4{gap:12px;}
+
+    /* NEW */
+    .start-grid{grid-template-columns: 1fr 1fr 1fr;}
+    .flow-grid{grid-template-columns: 1fr 1fr;}
   }
 
   /* ======= Mobile（スマホ） ======= */
   @media (max-width:767px){
-    /* ヘッダーとセクションの隙間を詰める */
     .hero { padding-bottom: 8px; }
     .section { margin-top: 8px; margin-bottom: 8px;}
     .section h2 { margin-top: 0; margin-bottom: 4px; font-size: 18px; }
     .desc { margin-bottom: 0; font-size: 12px; }
 
-    /* --- 車エリアの大幅コンパクト化 --- */
-    .wheel {
-      width: min(280px, 85vw); 
-      margin: -16px auto -16px; /* 上下の余白を大きくマイナスにして詰める */
-    }
-    
-    /* 車の画像サイズ（少し小さくして、チップ配置のスペース確保） */
-    .hub {
-      width: 52%; 
-      height: 52%;
-    }
+    .wheel { width: min(280px, 85vw); margin: -16px auto -16px; }
+    .hub { width: 52%; height: 52%; }
 
-    /* チップの位置調整：もっと車側（中央）に寄せる */
     #shitenno .wheel .corner.tl{top:22%; left:4%;}
     #shitenno .wheel .corner.tr{top:22%; right:4%;}
     #shitenno .wheel .corner.bl{bottom:22%; left:4%;}
     #shitenno .wheel .corner.br{bottom:22%; right:4%;}
 
-    /* ボタンのデザイン：さらにコンパクトに */
-    .wheel .corner {
-      font-size: 11px;
-      padding: 4px 8px;
-      gap: 4px;
-      height: 28px;
-      border-radius: 14px;
-      box-shadow: 0 2px 8px rgba(15,23,42,.12);
-    }
-    .mini-badge {
-      width: 18px; height: 18px; border-radius: 5px;
-    }
-    .mini-badge svg {
-      width: 11px; height: 11px;
-    }
+    .wheel .corner { font-size: 11px; padding: 4px 8px; gap: 4px; height: 28px; border-radius: 14px; box-shadow: 0 2px 8px rgba(15,23,42,.12); }
+    .mini-badge { width: 18px; height: 18px; border-radius: 5px; }
+    .mini-badge svg { width: 11px; height: 11px; }
 
-    /* 中央のPLボタン */
-    .wheel .corner.oncar {
-      font-size: 11px;
-      padding: 4px 8px;
-    }
-
-    /* 修正箇所: ここだけ下マージンを10px追加して、次のリストとの間隔を確保 */
+    .wheel .corner.oncar { font-size: 11px; padding: 4px 8px; }
     .pllink{margin: 0 0 10px 0;} 
 
     .tiles4-row{grid-template-columns: 1fr;}
     .card{min-height:auto;}
-    
-    /* ロゴ調整 */
+
     .branding img{height:40px;}
     .logo{width:44px; height:44px;}
     .title{font-size: 17px;}
+
+    /* NEW */
+    .h3{margin-top:8px;}
   }
 
   /* ======= Tablet (768-1023px) ======= */
   @media (min-width:768px) and (max-width:1023px){
-    /* タブレットでも明示的に座標を指定（表示抜け防止） */
     #shitenno .wheel .corner.tl{top:26%; left:14%;}
     #shitenno .wheel .corner.tr{top:26%; right:14%;}
     #shitenno .wheel .corner.bl{bottom:26%; left:14%;}
     #shitenno .wheel .corner.br{bottom:26%; right:14%;}
+
+    /* NEW */
+    .start-grid{grid-template-columns: 1fr 1fr;}
+    .flow-grid{grid-template-columns: 1fr;}
   }
 
   /* ---- Footer ---- */
   footer{border-top:1px solid var(--line); padding:16px; color:var(--muted); text-align:center;}
   .credit-link{color:inherit;text-decoration:underline;text-underline-offset:2px;} 
-  /* 変動損益チップは中央固定 */
   .wheel .corner.oncar{top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;}
+
   /* Header actions & button */
-  .actions{display:flex; align-items:center; gap:8px;}
+  .actions{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
   .btn{border:1px solid var(--line); background:#fff; color:var(--brand-700); border-radius:12px; padding:8px 12px; font-weight:700; cursor:pointer; box-shadow:var(--shadow);} 
   .btn:hover{background:#fefefe;}
-  /* 同じ高さに統一（ヘッダーボタンのみ） */
   .actions .btn{display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 12px;}
   .actions .btn.compact{height:36px; padding:0 10px; font-size:12px; border-radius:12px;}
   .btn .label-full, .btn .label-short{white-space:nowrap;}
@@ -171,77 +166,94 @@
   .modal .modal-body img{display:block; width:100%; height:auto;}
   .modal .btn.close{position:absolute; top:8px; right:8px; padding:6px 10px; border-radius:999px;}
 
+  /* NEW: Diagnosis modal UI */
+  .modal-body .modal-title{font-weight:900; font-size:16px; margin:4px 0 8px; color:var(--ink);} 
+  .form{display:grid; gap:10px;}
+  .fieldset{border:1px solid var(--line); border-radius:14px; padding:10px;}
+  .legend{font-weight:900; color:var(--brand-700); font-size:13px;}
+  .opt{display:flex; align-items:flex-start; gap:10px; padding:8px; border-radius:12px;}
+  .opt:hover{background:#f8fafc;}
+  .opt input{margin-top:3px;}
+  .opt .olabel{display:flex; flex-direction:column; gap:2px;}
+  .opt .olabel .t{font-weight:900;}
+  .opt .olabel .d{font-size:12px; color:var(--muted);}
+  .diag-actions{display:flex; gap:8px; justify-content:flex-end; align-items:center; margin-top:10px;}
+  .btn.primary{background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff; border-color:transparent;}
+  .btn.primary:hover{filter:brightness(1.02);} 
+  .result{margin-top:10px; border-top:1px dashed #dbe7ee; padding-top:10px;}
+  .result .rtitle{font-weight:900; margin:0 0 6px;}
+  .result .rsteps{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:0;}
+  .result .rnote{margin:6px 0 0; color:var(--muted); font-size:12px;}
+
   /* 画像のデフォルト保護 */
   img{max-width:100%; height:auto;}
 
   /* スマホの大きな写真（ヒーロー等）がはみ出したり細長くならないようにトリミング */
   @media (max-width:767px){
-    .photo-frame, .hero-photo, .cover-photo, .kv{
-      position:relative; width:100%; aspect-ratio: 4 / 3; border-radius:16px; overflow:hidden; background:#eef3f7;
-    }
-    .photo-frame>img, .hero-photo>img, .cover-photo>img, .kv>img{
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
-    }
+    .photo-frame, .hero-photo, .cover-photo, .kv{ position:relative; width:100%; aspect-ratio: 4 / 3; border-radius:16px; overflow:hidden; background:#eef3f7; }
+    .photo-frame>img, .hero-photo>img, .cover-photo>img, .kv>img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; }
   }
+
   /* コンパクトボタン */
   .btn.compact{font-size:12px; padding:6px 10px; border-radius:10px;}
+
   /* ラベルの可変表示：デフォルトはフル、スマホは短縮 */
   .btn .label-short{display:none;}
   @media (max-width:767px){
     .btn .label-full{display:none;}
     .btn .label-short{display:inline;}
   }
+
   /* PC時のみ A2HS画像モーダルを少し大きく */
   @media (min-width:1024px){
-    #a2hs-modal .modal-body{max-width:min(92vw, 720px);} /* 既定560px→720px */
+    #a2hs-modal .modal-body{max-width:min(92vw, 720px);} 
+    #diag-modal .modal-body{max-width:min(92vw, 720px);} 
   }
+
   /* --- Minimal, CC対応のフッター --- */
   .mk-mini{font-size:12px; line-height:1.4; color:var(--muted); text-align:center; padding:8px 12px; border-top:1px solid var(--line);} 
   .mk-mini a{color:inherit; text-decoration:underline; text-underline-offset:2px;}
   @media (max-width:480px){ .mk-mini{ font-size:11px; } }
+
   /* PC: 4WD横並びの各タイトルを1行化（長文対策） */
   @media (min-width: 1024px){
-    /* フレックス内で省略記号を効かせるため min-width:0 を指定 */
     #shitenno .tiles4-row .tile .ttext{min-width:0;}
-    #shitenno .tiles4-row .tile .ttext .title{
-      font-size:16px;           /* 既定16pxを明示 */
-      white-space:nowrap;       /* 折り返さない */
-      overflow:hidden;          /* はみ出し防止 */
-      text-overflow:ellipsis;   /* 溢れた分は… */
-      display:block;
-    }
+    #shitenno .tiles4-row .tile .ttext .title{ font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; }
   }
+
   /* スマホ背景色とロゴサイズ調整 */
   .branding img{height:56px; width:auto; display:block;}
   @media (max-width:480px){ .branding img{height:48px;} }
   @media (max-width:767px){ body{ background:#f7fafc; } }
 </style>
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-91JF4BT2QT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G-91JF4BT2QT');
-  </script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-91JF4BT2QT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);} 
+  gtag('js', new Date());
+  gtag('config', 'G-91JF4BT2QT');
+</script>
 </head>
 <body>
   <header class="hero">
     <div class="topbar">
       <div class="branding">
-        <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" aria-label="税理士法人松本会計事務所 公式サイト"><img src="./ロゴ.jpg" onerror="this.onerror=null;this.src='./ロゴ.png'" alt="松本会計ロゴ"></a></a>
+        <a class="logo" href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener" aria-label="税理士法人松本会計事務所 公式サイト"><img src="./ロゴ.jpg" onerror="this.onerror=null;this.src='./ロゴ.png'" alt="松本会計ロゴ"></a>
         <div>
           <div class="title">松本会計ツールポータル</div>
           <div class="subtitle">黒字経営を加速する、松本会計オリジナルツール集</div>
         </div>
       </div>
       <div class="actions">
+        <button id="start-toggle" class="btn compact" aria-controls="start-panel" aria-expanded="false"><span class="label-full" id="start-label">まずはここから</span><span class="label-short" id="start-label-s">入口</span></button>
         <button id="qr-open" class="btn"><span class="label-full">共有用QR</span><span class="label-short">QR</span></button>
         <button id="a2hs-open" class="btn compact"><span class="label-full">ホーム画面への追加方法</span><span class="label-short">追加</span></button>
       </div>
     </div>
   </header>
+
   <!-- QRコード表示モーダル -->
   <div id="qr-modal" class="modal" aria-hidden="true" role="dialog" aria-label="共有用QRコード">
     <div class="modal-body">
@@ -258,6 +270,137 @@
     </div>
   </div>
 
+  <!-- NEW: 3分診断モーダル -->
+  <div id="diag-modal" class="modal" aria-hidden="true" role="dialog" aria-label="3分診断">
+    <div class="modal-body">
+      <button class="btn close" id="diag-close" aria-label="閉じる">✕</button>
+      <div class="modal-title">3分診断：最初の1本と、次の一手を提案します</div>
+
+      <form id="diag-form" class="form">
+        <div class="fieldset">
+          <div class="legend">今いちばん近いテーマはどれですか？</div>
+          <label class="opt"><input type="radio" name="topic" value="price" checked>
+            <div class="olabel"><div class="t">値上げ・価格改定</div><div class="d">価格を上げる／下げる判断材料が欲しい</div></div>
+          </label>
+          <label class="opt"><input type="radio" name="topic" value="cost">
+            <div class="olabel"><div class="t">支出・コストの妥当性</div><div class="d">その支出がどれくらい重いかを腹落ちさせたい</div></div>
+          </label>
+          <label class="opt"><input type="radio" name="topic" value="labor">
+            <div class="olabel"><div class="t">人件費・採用・配置</div><div class="d">時間単価や工数から、意思決定したい</div></div>
+          </label>
+          <label class="opt"><input type="radio" name="topic" value="auto">
+            <div class="olabel"><div class="t">DX・自動化投資</div><div class="d">初期費・月額に見合うかを見たい</div></div>
+          </label>
+          <label class="opt"><input type="radio" name="topic" value="cash">
+            <div class="olabel"><div class="t">資金繰り（回転）</div><div class="d">売上があるのに資金が残らない原因を特定したい</div></div>
+          </label>
+          <label class="opt"><input type="radio" name="topic" value="tax">
+            <div class="olabel"><div class="t">税務・実務（仕訳/償却）</div><div class="d">処理判断や計算の時短をしたい</div></div>
+          </label>
+        </div>
+
+        <div class="diag-actions">
+          <button type="button" class="btn" id="diag-reset">リセット</button>
+          <button type="submit" class="btn primary">結果を見る</button>
+        </div>
+
+        <div id="diag-result" class="result" hidden>
+          <div class="rtitle">おすすめの順番</div>
+          <div class="rsteps" id="diag-steps"></div>
+          <p class="rnote">各ステップを順に開いて、結果を見ながら次へ進めてください。ツール画面には「ポータルへ戻る」ナビを追加する想定です。</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- NEW: 入口の「使い方の型」 -->
+  <div id="start-panel" class="collapse" aria-hidden="true">
+    <section id="start" class="section">
+    <h2>🧭 まずはここから</h2>
+    <p class="desc">迷ったら「3分診断」で最初の1本を固定し、次の一手まで提示します。面談・社内検討の導線を作る目的です。</p>
+
+    <div class="start-grid" aria-label="クイックスタート">
+      <button id="diag-open" class="tile tile-btn" type="button" aria-label="3分診断を開く">
+        <div class="badge">3分</div>
+        <div class="ttext"><div class="title">3分診断（迷ったらこちら）</div><p class="desc">目的を選ぶだけで「最初の1本」と「次の一手」を提案</p></div>
+      </button>
+
+      <a class="tile" data-tool="sales" data-next="price" target="_blank" rel="noopener">
+        <div class="badge">▶</div>
+        <div class="ttext"><div class="title">3分スタート：売上換算</div><p class="desc">支出の重さを「必要売上」に置き換えて、意思決定を早める</p></div>
+      </a>
+
+      <a class="tile" data-tool="pl" data-next="sales" target="_blank" rel="noopener">
+        <div class="badge">▶</div>
+        <div class="ttext"><div class="title">3分スタート：変動損益（ボール）</div><p class="desc">限界利益と固定費の関係を、直感で腹落ちさせる</p></div>
+      </a>
+    </div>
+
+    <div class="h3">目的別ショートカット</div>
+    <div class="flow-grid" aria-label="目的別ショートカット">
+      <div class="flow-card">
+        <div class="flow-title">値上げ検討 <span class="kpi">粗利・利益</span></div>
+        <div class="flow-steps">
+          <a class="chip" data-tool="price" data-next="pl" target="_blank" rel="noopener">価格改定</a>
+          <span class="arrow">→</span>
+          <a class="chip" data-tool="pl" data-next="sales" target="_blank" rel="noopener">変動損益</a>
+        </div>
+        <p class="flow-note">価格改定の影響を把握したうえで、利益構造（限界利益）に落とし込みます。</p>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-title">コスト判断（支出の妥当性） <span class="kpi">必要売上</span></div>
+        <div class="flow-steps">
+          <a class="chip" data-tool="sales" data-next="pl" target="_blank" rel="noopener">売上換算</a>
+          <span class="arrow">→</span>
+          <a class="chip" data-tool="pl" data-next="price" target="_blank" rel="noopener">変動損益</a>
+        </div>
+        <p class="flow-note">「この支出は、売上に直すといくら必要か？」から議論を始めると早いです。</p>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-title">採用・配置・工数の見直し <span class="kpi">時間単価</span></div>
+        <div class="flow-steps">
+          <a class="chip" data-tool="labor" data-next="sales" target="_blank" rel="noopener">人件費</a>
+          <span class="arrow">→</span>
+          <a class="chip" data-tool="sales" data-next="price" target="_blank" rel="noopener">売上換算</a>
+        </div>
+        <p class="flow-note">時間単価を前提に「この工数は売上何円相当か」を合わせると、現場が動きやすくなります。</p>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-title">DX・自動化投資 <span class="kpi">回収・ROI</span></div>
+        <div class="flow-steps">
+          <a class="chip" data-tool="auto" data-next="sales" target="_blank" rel="noopener">自動化効果</a>
+          <span class="arrow">→</span>
+          <a class="chip" data-tool="sales" data-next="pl" target="_blank" rel="noopener">売上換算</a>
+        </div>
+        <p class="flow-note">削減時間→人件費→回収月数→意思決定、の順で面談がまとまります。</p>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-title">資金繰り（回転） <span class="kpi">CCC</span></div>
+        <div class="flow-steps">
+          <a class="chip" data-tool="ccc" data-next="sales" target="_blank" rel="noopener">CCC</a>
+          <span class="arrow">→</span>
+          <a class="chip" data-tool="sales" data-next="price" target="_blank" rel="noopener">売上換算</a>
+        </div>
+        <p class="flow-note">回転（運転資金の溜まり）を特定した後、打ち手の優先順位をつけます。</p>
+      </div>
+
+      <div class="flow-card">
+        <div class="flow-title">税務・実務の時短 <span class="kpi">処理効率</span></div>
+        <div class="flow-steps">
+          <a class="chip" data-tool="withholding" data-next="dep" target="_blank" rel="noopener">源泉・仕訳補助</a>
+          <span class="arrow">→</span>
+          <a class="chip" data-tool="dep" data-next="withholding" target="_blank" rel="noopener">減価償却</a>
+        </div>
+        <p class="flow-note">計算・仕訳の迷いを減らし、確認時間を短縮します。</p>
+      </div>
+    </div>
+  </section>
+  </div>
+
   <section id="shitenno" class="section">
     <h2>🚗 黒字経営4WD</h2>
     <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。<br>（㈱TKCのFXクラウドシリーズとの併用を想定しています）</p>
@@ -268,59 +411,62 @@
         <div class="hub">
           <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" loading="eager" />
         </div>
+
         <!-- 中央：変動損益（厳密中央） -->
-        <a class="corner oncar" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener"><span class="mini-badge">PL</span><span>変動損益</span></a>
-        <!-- 四輪チップ（スマホでは車が小さくなった分、外側に配置して文字を表示しきる） -->
-        <a class="corner tl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></span><span>売上換算</span></a>
-        <a class="corner tr" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></span><span>価格改定</span></a>
-        <a class="corner bl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>人件費</span></a>
-        <a class="corner br" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 0-6M4.6 9a8 8 0 0 0 0 6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l1.41-1.41M6.34 17.66l-1.41 1.41"/></svg></span><span>自動化効果</span></a>
+        <a class="corner oncar" data-tool="pl" data-next="sales" target="_blank" rel="noopener"><span class="mini-badge">PL</span><span>変動損益</span></a>
+
+        <!-- 四輪チップ -->
+        <a class="corner tl" data-tool="sales" data-next="price" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></span><span>売上換算</span></a>
+        <a class="corner tr" data-tool="price" data-next="pl" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></span><span>価格改定</span></a>
+        <a class="corner bl" data-tool="labor" data-next="sales" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>人件費</span></a>
+        <a class="corner br" data-tool="auto" data-next="sales" target="_blank" rel="noopener"><span class="mini-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 0-6M4.6 9a8 8 0 0 0 0 6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M17.66 6.34l1.41-1.41M6.34 17.66l-1.41 1.41"/></svg></span><span>自動化効果</span></a>
       </div>
 
       <div class="linklist pllink">
-        <a class="tile" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
+        <a class="tile" data-tool="pl" data-next="sales" target="_blank" rel="noopener">
           <div class="badge">PL</div>
           <div class="ttext"><div class="title">ボールで学ぶ変動損益計算書</div><p class="desc">売上高と限界利益、固定費の関係を直感的に理解</p></div>
         </a>
       </div>
     </div>
 
-    <!-- 一段下げ：4WDの4リンクを同一行（PC）／縦（モバイル）で表示 -->
+    <!-- 一段下げ：4WDの4リンク -->
     <div class="tiles4 tiles4-row" aria-label="4WDの各ツール">
-      <a class="tile" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="sales" data-next="price" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg></div>
         <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">支出額を必要売上金額に即換算</p></div>
       </a>
-      <a class="tile" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="price" data-next="pl" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg></div>
         <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の影響を試算</p></div>
       </a>
-      <a class="tile" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="labor" data-next="sales" target="_blank" rel="noopener">
         <div class="badge">¥</div>
         <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化</p></div>
       </a>
-      <a class="tile" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="auto" data-next="sales" target="_blank" rel="noopener">
         <div class="badge">⚙︎</div>
         <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算</p></div>
       </a>
     </div>
   </section>
+
   <section id="others" class="section">
     <h2>🧰 その他便利ツール</h2>
     <div class="tiles4">
-      <a class="tile" href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="withholding" data-next="dep" target="_blank" rel="noopener">
         <div class="badge">%</div>
         <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">手取額から源泉徴収税額を逆算・仕訳を表示</p></div>
       </a>
-      <a class="tile" href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="dep" data-next="withholding" target="_blank" rel="noopener">
         <div class="badge">Σ</div>
         <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額法・定率法の償却費を即時計算</p></div>
       </a>
-      <a class="tile" href="https://takatrp.github.io/kigyoubouei/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="insurance" data-next="sales" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z"/></svg></div>
         <div class="ttext"><div class="title">標準保障額・保険料換算ツール</div><p class="desc">標準保障額と保険料を売上高に換算</p></div>
       </a>
-      <a class="tile" href="https://takatrp.github.io/CCC/" target="_blank" rel="noopener">
+      <a class="tile" data-tool="ccc" data-next="sales" target="_blank" rel="noopener">
         <div class="badge"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/></svg></div>
         <div class="ttext"><div class="title">CCC計算ツール</div><p class="desc">キャッシュコンバージョンサイクルを計算</p></div>
       </a>
@@ -331,7 +477,7 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r64</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r65</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
@@ -339,6 +485,164 @@
     const yEl = document.getElementById('cpy-year'); if (yEl) yEl.textContent = new Date().getFullYear();
     const updDate = document.getElementById('last-updated-date');
     if (updDate) { const d = new Date(document.lastModified); const p=n=>String(n).padStart(2,'0'); updDate.textContent = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
+  })();
+
+  // ---- Tool routing params (for tool-side "Back to portal" nav) ----
+  (function(){
+    const PORTAL_HOME = 'https://takatrp.github.io/tool-portal/';
+    const tools = {
+      pl: 'https://takatrp.github.io/hendou_PL/',
+      sales: 'https://takatrp.github.io/convert-to-sales/',
+      price: 'https://takatrp.github.io/price-up-down/',
+      labor: 'https://takatrp.github.io/time-unit-cost/',
+      auto: 'https://takatrp.github.io/jidouka-kouka/',
+      withholding: 'https://takatrp.github.io/withholding/',
+      dep: 'https://takatrp.github.io/genkasyoukyaku/',
+      insurance: 'https://takatrp.github.io/kigyoubouei/',
+      ccc: 'https://takatrp.github.io/CCC/'
+    };
+
+    function buildToolUrl(toolKey, nextKey){
+      const base = tools[toolKey];
+      if(!base) return '#';
+      const u = new URL(base);
+      u.searchParams.set('from', 'tool-portal');
+      u.searchParams.set('portal', PORTAL_HOME);
+      if(nextKey && tools[nextKey]) u.searchParams.set('next', tools[nextKey]);
+      return u.toString();
+    }
+    function buildToolUrlNoNext(toolKey){
+      return buildToolUrl(toolKey, null);
+    }
+
+    function setFlow(urls, currentIndex){
+      try{
+        localStorage.setItem('mk_portal_url', PORTAL_HOME);
+        localStorage.setItem('mk_flow', JSON.stringify(urls));
+        localStorage.setItem('mk_flow_i', String(currentIndex||0));
+      }catch(e){}
+    }
+
+    // data-tool を持つリンク/チップ/ボタンに href をセット
+    document.querySelectorAll('[data-tool]').forEach(el=>{
+      const key = el.getAttribute('data-tool');
+      const nextKey = el.getAttribute('data-next');
+      const url = buildToolUrl(key, nextKey);
+
+      if(el.tagName.toLowerCase() === 'a'){
+        el.setAttribute('href', url);
+      } else if(el.tagName.toLowerCase() === 'button'){
+        el.addEventListener('click', ()=> window.open(url, '_blank', 'noopener'));
+      }
+
+      // ポータルURLを保存（ツール側が portal パラメータを読めない場合の保険）
+      el.addEventListener('click', ()=>{
+        try{ localStorage.setItem('mk_portal_url', PORTAL_HOME); }catch(e){}
+
+        // 2ステップ導線（data-next がある場合）を flow として保存
+        if(nextKey && tools[nextKey]){
+          const flow = [buildToolUrlNoNext(key), buildToolUrlNoNext(nextKey)];
+          setFlow(flow, 0);
+        }
+      }, {passive:true});
+    });
+
+    // 3分診断：テーマ→推奨フロー
+    const flows = {
+      price: { title:'値上げ・価格改定', steps:['price','pl'], note:'価格改定の影響を見た後、利益構造（限界利益）に落とし込みます。' },
+      cost:  { title:'支出・コストの妥当性', steps:['sales','pl'], note:'支出の重さを「必要売上」に置き換え、腹落ちを作ります。' },
+      labor: { title:'人件費・採用・配置', steps:['labor','sales'], note:'時間単価→売上換算の順に見ると、現場の合意形成が速いです。' },
+      auto:  { title:'DX・自動化投資', steps:['auto','sales'], note:'回収・ROI→必要売上換算まで繋げると、意思決定がブレません。' },
+      cash:  { title:'資金繰り（回転）', steps:['ccc','sales'], note:'回転（運転資金の溜まり）を特定してから、打ち手の優先順位をつけます。' },
+      tax:   { title:'税務・実務（時短）', steps:['withholding','dep'], note:'計算・処理の迷いを減らし、確認時間を短縮します。' }
+    };
+
+    function chip(label, toolKey, nextKey, flowUrls, flowIndex){
+      const a = document.createElement('a');
+      a.className = 'chip';
+      a.textContent = label;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.href = buildToolUrl(toolKey, nextKey);
+      a.addEventListener('click', ()=>{
+        try{
+          localStorage.setItem('mk_portal_url', PORTAL_HOME);
+          if(Array.isArray(flowUrls) && flowUrls.length){
+            localStorage.setItem('mk_flow', JSON.stringify(flowUrls));
+            localStorage.setItem('mk_flow_i', String(flowIndex||0));
+          }
+        }catch(e){}
+      }, {passive:true});
+      return a;
+    }
+
+    function toolLabel(k){
+      return ({
+        pl:'変動損益',
+        sales:'売上換算',
+        price:'価格改定',
+        labor:'人件費',
+        auto:'自動化効果',
+        ccc:'CCC',
+        withholding:'源泉・仕訳補助',
+        dep:'減価償却',
+        insurance:'標準保障額',
+      })[k] || k;
+    }
+
+    const diagOpen = document.getElementById('diag-open');
+    const diagModal = document.getElementById('diag-modal');
+    const diagClose = document.getElementById('diag-close');
+    const diagForm = document.getElementById('diag-form');
+    const diagReset = document.getElementById('diag-reset');
+    const diagResult = document.getElementById('diag-result');
+    const diagSteps = document.getElementById('diag-steps');
+
+    function openModal(m){ m?.classList.add('show'); }
+    function closeModal(m){ m?.classList.remove('show'); }
+
+    if(diagOpen && diagModal) diagOpen.addEventListener('click', ()=> openModal(diagModal));
+    if(diagClose && diagModal) diagClose.addEventListener('click', ()=> closeModal(diagModal));
+    if(diagModal) diagModal.addEventListener('click', (e)=>{ if(e.target === diagModal) closeModal(diagModal); });
+
+    if(diagReset) diagReset.addEventListener('click', ()=>{
+      diagResult.hidden = true;
+      diagSteps.innerHTML = '';
+      const first = diagForm?.querySelector('input[name="topic"]');
+      if(first) first.checked = true;
+    });
+
+    if(diagForm) diagForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const topic = diagForm.querySelector('input[name="topic"]:checked')?.value || 'price';
+      const flow = flows[topic] || flows.price;
+
+      // flowUrls は「next無し」のURLを全ステップ分
+      const flowUrls = (flow.steps || []).map(k => buildToolUrlNoNext(k));
+
+      diagSteps.innerHTML = '';
+      const steps = flow.steps;
+      steps.forEach((k, idx)=>{
+        const nextKey = steps[idx+1] || null;
+        diagSteps.appendChild(chip(toolLabel(k), k, nextKey, flowUrls, idx));
+        if(idx < steps.length - 1){
+          const s = document.createElement('span');
+          s.className = 'arrow';
+          s.textContent = '→';
+          diagSteps.appendChild(s);
+        }
+      });
+
+      // 診断結果を見た直後、最初のステップから進めるよう flow を保存
+      try{
+        localStorage.setItem('mk_flow', JSON.stringify(flowUrls));
+        localStorage.setItem('mk_flow_i', '0');
+      }catch(e){}
+
+      diagResult.hidden = false;
+    });
+
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeModal(diagModal); } });
   })();
 
   // QR modal open/close
@@ -351,6 +655,7 @@
     if (modal) modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.classList.remove('show'); });
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') modal?.classList.remove('show'); });
   })();
+
   // A2HS modal open/close
   (function(){
     const modal = document.getElementById('a2hs-modal');
@@ -362,6 +667,231 @@
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') modal?.classList.remove('show'); });
   })();
 </script>
-<script>(function(){try{var img=document.querySelector('.branding img');if(img){img.onerror=function(){this.onerror=null;this.src='./ロゴ.png';};img.src='./ロゴ.jpg';}}catch(e){}})();</script>
+
+<script>
+  (function(){
+    try{
+      var img=document.querySelector('.branding img');
+      if(img){
+        img.onerror=function(){this.onerror=null;this.src='./ロゴ.png';};
+        img.src='./ロゴ.jpg';
+      }
+    }catch(e){}
+  })();
+</script>
+
+<!-- =============================================================
+  各ツール側：下部固定ナビ（共通JS）
+
+  1) tool-portal リポジトリに、次のファイルを追加してください。
+     - /tool-portal/mk-nav.js
+
+  2) 各ツール（hendou_PL / convert-to-sales / price-up-down ...）の index.html の </body> 直前に
+     次の1行を追加してください。
+
+     <script src="https://takatrp.github.io/tool-portal/mk-nav.js" defer></script>
+
+  これで、ツール画面の下部に「← ポータル」「次へ →」が表示されます。
+  - portal/next はURLパラメータから取得
+  - さらに、ポータル側で localStorage に flow を保存しているため、次へボタンが2〜複数ステップでも機能します
+============================================================== -->
+
+<!-- ===== mk-nav.js（このまま mk-nav.js として保存） =====
+(() => {
+  const DEFAULT_PORTAL = 'https://takatrp.github.io/tool-portal/';
+
+  // --- helpers ---
+  const safeGet = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const safeSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+  const strip = (u) => {
+    try {
+      const x = new URL(u, location.href);
+      return x.origin + x.pathname;
+    } catch (e) {
+      return u;
+    }
+  };
+  const sameHostOk = (u) => {
+    try {
+      const x = new URL(u, location.href);
+      // GitHub Pages上の想定（必要なら matsumoto-kaikei.or.jp など許可ドメインを追加）
+      return x.hostname.endsWith('github.io');
+    } catch (e) { return false; }
+  };
+  const withPortalParam = (u, portal) => {
+    try {
+      const x = new URL(u);
+      x.searchParams.set('portal', portal);
+      x.searchParams.set('from', 'tool-nav');
+      return x.toString();
+    } catch (e) {
+      return u;
+    }
+  };
+
+  // --- resolve portal ---
+  const params = new URLSearchParams(location.search);
+  let portal = params.get('portal') || safeGet('mk_portal_url') || DEFAULT_PORTAL;
+  if (!portal.endsWith('/')) portal += '/';
+  safeSet('mk_portal_url', portal);
+
+  // --- resolve next ---
+  // 1) URLの next
+  let next = params.get('next');
+
+  // 2) localStorage の flow（mk_flow: [url1,url2,...], mk_flow_i: index）
+  if (!next) {
+    let flow = null;
+    try { flow = JSON.parse(safeGet('mk_flow') || 'null'); } catch (e) { flow = null; }
+
+    if (Array.isArray(flow) && flow.length) {
+      const here = strip(location.href);
+      let idx = -1;
+
+      // a) まずは現在URLに一致する index を探す
+      for (let i = 0; i < flow.length; i++) {
+        if (strip(flow[i]) === here) { idx = i; break; }
+      }
+
+      // b) 見つからなければ、保存されている index を採用
+      if (idx < 0) {
+        const saved = parseInt(safeGet('mk_flow_i') || '0', 10);
+        if (!Number.isNaN(saved)) idx = saved;
+      }
+
+      // c) 次があれば提示
+      if (idx >= 0 && idx < flow.length - 1) {
+        next = flow[idx + 1];
+        safeSet('mk_flow_i', String(idx));
+      }
+    }
+  }
+
+  // --- inject style ---
+  const css = `
+    :root{ --mk-brand:#578899; --mk-line:#e2e8f0; --mk-ink:#0f172a; --mk-muted:#64748b; }
+    .mk-nav{position:fixed; left:0; right:0; bottom:0; z-index:999; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.92); border-top:1px solid var(--mk-line); backdrop-filter:saturate(180%) blur(10px);} 
+    .mk-nav .inner{max-width:1100px; margin:0 auto; display:flex; gap:10px; align-items:center; justify-content:space-between;}
+    .mk-nav .left{display:flex; flex-direction:column; gap:2px; min-width:0;}
+    .mk-nav .brand{font-weight:900; color:var(--mk-ink); font-size:13px; line-height:1.2;}
+    .mk-nav .hint{font-size:11px; color:var(--mk-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.2;}
+    .mk-nav .btns{display:flex; gap:8px; flex:0 0 auto;}
+    .mk-nav a{display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 12px; border-radius:12px; border:1px solid var(--mk-line); text-decoration:none; font-weight:900; color:var(--mk-ink); background:#fff;}
+    .mk-nav a.primary{border-color:transparent; background:linear-gradient(135deg, var(--mk-brand) 0%, #7aa5b4 100%); color:#fff;}
+    .mk-nav a:active{transform:translateY(1px);} 
+    @media (max-width:420px){ .mk-nav .hint{display:none;} .mk-nav a{height:34px; padding:0 10px; font-size:12px;} }
+  `;
+  const style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
+
+  // body bottom padding
+  const pad = document.createElement('style');
+  pad.textContent = `body{ padding-bottom: calc(62px + env(safe-area-inset-bottom)); }`;
+  document.head.appendChild(pad);
+
+  // --- build nav DOM ---
+  const nav = document.createElement('div');
+  nav.className = 'mk-nav';
+  nav.setAttribute('role', 'navigation');
+  nav.innerHTML = `
+    <div class="inner">
+      <div class="left">
+        <div class="brand">松本会計ツール</div>
+        <div class="hint" id="mk-hint">ポータルへ戻る／次のおすすめへ</div>
+      </div>
+      <div class="btns">
+        <a href="${portal}" id="mk-back">← ポータル</a>
+        <a href="#" id="mk-next" class="primary" style="display:none;">次へ →</a>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(nav);
+
+  // --- wire next ---
+  const nextBtn = nav.querySelector('#mk-next');
+  if (next && sameHostOk(next)) {
+    const nextUrl = withPortalParam(next, portal);
+    nextBtn.href = nextUrl;
+    nextBtn.style.display = '';
+
+    nextBtn.addEventListener('click', () => {
+      // flow の index を進める（あれば）
+      try {
+        const flow = JSON.parse(safeGet('mk_flow') || 'null');
+        if (Array.isArray(flow) && flow.length) {
+          const here = strip(location.href);
+          let idx = -1;
+          for (let i = 0; i < flow.length; i++) { if (strip(flow[i]) === here) { idx = i; break; } }
+          if (idx >= 0) safeSet('mk_flow_i', String(Math.min(idx + 1, flow.length - 1)));
+        }
+      } catch (e) {}
+    }, { passive: true });
+  }
+
+})();
+===== /mk-nav.js ===== -->
+
+<!--
+<style>
+  :root{ --mk-brand:#578899; --mk-line:#e2e8f0; --mk-ink:#0f172a; --mk-muted:#64748b; }
+  .mk-nav{position:fixed; left:0; right:0; bottom:0; z-index:999; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.92); border-top:1px solid var(--mk-line); backdrop-filter:saturate(180%) blur(10px);} 
+  .mk-nav .inner{max-width:1100px; margin:0 auto; display:flex; gap:10px; align-items:center; justify-content:space-between;}
+  .mk-nav .left{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .mk-nav .hint{font-size:11px; color:var(--mk-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .mk-nav .btns{display:flex; gap:8px; flex:0 0 auto;}
+  .mk-nav a{display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 12px; border-radius:12px; border:1px solid var(--mk-line); text-decoration:none; font-weight:800; color:var(--mk-ink); background:#fff;}
+  .mk-nav a.primary{border-color:transparent; background:linear-gradient(135deg, var(--mk-brand) 0%, #7aa5b4 100%); color:#fff;}
+  @media (max-width:420px){
+    .mk-nav .hint{display:none;}
+    .mk-nav a{height:34px; padding:0 10px; font-size:12px;}
+  }
+  body{ padding-bottom: calc(62px + env(safe-area-inset-bottom)); }
+</style>
+
+<div class="mk-nav" id="mk-nav" hidden>
+  <div class="inner">
+    <div class="left">
+      <div style="font-weight:900;">松本会計ツール</div>
+      <div class="hint" id="mk-hint">ポータルへ戻る／次のおすすめへ</div>
+    </div>
+    <div class="btns">
+      <a href="https://takatrp.github.io/tool-portal/" id="mk-back">← ポータル</a>
+      <a href="#" id="mk-next" class="primary" hidden>次へ →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const portal = params.get('portal') || (function(){ try{return localStorage.getItem('mk_portal_url');}catch(e){return null;} })() || 'https://takatrp.github.io/tool-portal/';
+    const next = params.get('next');
+
+    const nav = document.getElementById('mk-nav');
+    const back = document.getElementById('mk-back');
+    const nextBtn = document.getElementById('mk-next');
+
+    if(back) back.href = portal;
+
+    if(next){
+      try{
+        // nextはURLとして来る想定。安全のため同一ドメイン以外は非表示
+        const u = new URL(next);
+        if(u.hostname.endsWith('github.io')){
+          nextBtn.href = next;
+          nextBtn.hidden = false;
+        }
+      }catch(e){}
+    }
+
+    // 保存（次回の保険）
+    try{ localStorage.setItem('mk_portal_url', portal); }catch(e){}
+
+    if(nav) nav.hidden = false;
+  })();
+</script>
+-->
+
 </body>
 </html>
