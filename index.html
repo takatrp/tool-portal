@@ -16,28 +16,39 @@
     --line:#e2e8f0; --shadow:0 8px 24px rgba(15,23,42,.08); --radius:18px;
   }
   html,body{height:100%;}
-  body{margin:0; background:var(--bg); color:var(--ink);
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
     font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     line-height:1.55;
   }
   img{max-width:100%; height:auto;}
 
   /* ---- Hero ---- */
-  .hero{position:relative; background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
-    padding: 16px 16px 12px; border-bottom:1px solid var(--line);
+  .hero{
+    position:relative;
+    background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
+    padding: 16px 16px 12px;
+    border-bottom:1px solid var(--line);
   }
-  .hero .topbar{display:flex; align-items:center; justify-content:space-between; gap:10px; max-width:1100px; margin:0 auto;}
+  .hero .topbar{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    max-width:1100px; margin:0 auto;
+  }
   .branding{display:flex; align-items:center; gap:10px;}
-  .logo{width:50px;height:50px;border-radius:10px;overflow:hidden;display:grid;place-items:center;text-decoration:none;flex-shrink:0;}
+  .logo{
+    width:50px;height:50px;border-radius:10px;overflow:hidden;
+    display:grid;place-items:center;text-decoration:none;flex-shrink:0;
+  }
   .logo img{width:100%;height:100%;object-fit:contain;display:block;}
-  .title{font-size: clamp(16px,2vw,24px); font-weight:800; line-height:1.3;}
+  .title{font-size: clamp(16px,2vw,24px); font-weight:900; line-height:1.3;}
   .subtitle{color:var(--muted); font-size: clamp(11px,1.8vw,14px); line-height:1.3;}
 
   /* Header actions & button */
   .actions{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
   .btn{
     border:1px solid var(--line); background:#fff; color:var(--brand-700);
-    border-radius:12px; padding:8px 12px; font-weight:800; cursor:pointer; box-shadow:var(--shadow);
+    border-radius:12px; padding:8px 12px; font-weight:900;
+    cursor:pointer; box-shadow:var(--shadow);
   }
   .btn:hover{background:#fefefe;}
   .actions .btn{display:inline-flex; align-items:center; justify-content:center; height:36px; padding:0 12px;}
@@ -51,19 +62,25 @@
 
   /* ---- Sections ---- */
   .section{max-width:1100px; margin:12px auto; padding:0 16px;}
-  .section h2{display:flex; align-items:center; gap:8px; font-size: clamp(16px,2.2vw,24px); margin:12px 0 8px; font-weight:900; color:var(--brand-700);}
+  .section h2{
+    display:flex; align-items:center; gap:8px;
+    font-size: clamp(16px,2.2vw,24px);
+    margin:12px 0 8px; font-weight:900; color:var(--brand-700);
+  }
   .desc{color:var(--muted); font-size:13px; margin:0 0 4px; line-height:1.4;}
 
   /* ---- Link tiles ---- */
   .linklist{display:grid; gap:10px;}
   .tile{
     display:flex; align-items:center; gap:10px; padding:10px 12px;
-    background:var(--card); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
-    text-decoration:none; color:var(--ink);
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    box-shadow:var(--shadow); text-decoration:none; color:var(--ink);
   }
   .tile:hover{background:#fdfefe; border-color:#d7e2ea;}
-  .badge{width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
-    background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%); color:#fff; font-weight:900; flex:0 0 auto;
+  .badge{
+    width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+    background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);
+    color:#fff; font-weight:900; flex:0 0 auto;
   }
   .badge svg{width:20px; height:20px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .tile .ttext{display:flex; flex-direction:column; gap:2px; min-width:0;}
@@ -73,16 +90,22 @@
   /* ---- 4WD layout (car) ---- */
   .layout-top{display:block;}
   .wheel{position:relative;margin:0 auto;width:min(420px,92vw);aspect-ratio:1/1;}
-  .hub{position:absolute;top:50%;left:50%;translate:-50% -50%;width:clamp(260px,46vw,420px);height:clamp(260px,46vw,420px);}
+  .hub{
+    position:absolute;top:50%;left:50%;translate:-50% -50%;
+    width:clamp(260px,46vw,420px);height:clamp(260px,46vw,420px);
+  }
   .hub img.carimg{width:100%;height:100%;object-fit:contain;display:block !important;}
 
   .wheel .corner{
-    position:absolute;display:inline-flex;align-items:center;gap:6px;text-decoration:none;background:#fff;
-    border:1px solid var(--line);color:var(--brand-700);font-weight:900;padding:6px 10px;border-radius:999px;
+    position:absolute;display:inline-flex;align-items:center;gap:6px;
+    text-decoration:none;background:#fff;border:1px solid var(--line);
+    color:var(--brand-700);font-weight:900;padding:6px 10px;border-radius:999px;
     box-shadow:var(--shadow);font-size:14px; white-space:nowrap; z-index:10;
   }
-  .mini-badge{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
-    background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);color:#fff;font-size:11px;font-weight:900; flex-shrink:0;
+  .mini-badge{
+    width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
+    background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);
+    color:#fff;font-size:11px;font-weight:900; flex-shrink:0;
   }
   .mini-badge svg{width:12px;height:12px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
   .wheel .corner.oncar{top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;}
@@ -90,7 +113,7 @@
   .tiles4{display:grid; gap:10px;}
   .tiles4-row{grid-template-columns: 1fr;}
 
-  /* ======= Desktop (PC) ======= */
+  /* ======= Desktop ======= */
   @media (min-width:1024px){
     .hero{padding: 24px 16px 16px;}
     .section{margin:18px auto;}
@@ -104,7 +127,10 @@
     .tile .ttext .desc{font-size:13px;}
     .wheel{margin:8px auto;}
 
-    .layout-top{display:grid; grid-template-columns: 340px 1fr; grid-template-areas: "wheel pl"; align-items:center; gap:16px;}
+    .layout-top{
+      display:grid; grid-template-columns: 340px 1fr;
+      grid-template-areas: "wheel pl"; align-items:center; gap:16px;
+    }
     .wheel{grid-area: wheel; width:340px;}
     .hub{width:220px;height:220px;}
     #shitenno .wheel .corner.tl{top:18%; left:10%;}
@@ -163,25 +189,20 @@
   .start-details summary{display:none;} /* header button controls it */
   .start-wrap{padding-bottom:6px;}
   .flow-grid{display:grid; gap:10px; margin-top:8px;}
-  @media (min-width:1024px){
-    .flow-grid{grid-template-columns: repeat(3, 1fr);}
-  }
-  .card{
-    background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);
-    padding:12px;
-  }
+  @media (min-width:1024px){ .flow-grid{grid-template-columns: repeat(3, 1fr);} }
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:12px;}
   .card h4{margin:0 0 6px; font-size:14px; font-weight:900; color:var(--brand-700);}
   .card .small{margin:0; font-size:12px; color:var(--muted); line-height:1.5;}
   .card .card-actions{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
   .chipline{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
   .chip{
-    display:inline-flex; align-items:center; gap:6px; padding:8px 10px; border-radius:999px;
-    border:1px solid var(--line); background:#fff; text-decoration:none; font-weight:900; color:var(--ink);
+    display:inline-flex; align-items:center; gap:6px; padding:8px 10px;
+    border-radius:999px; border:1px solid var(--line); background:#fff;
+    text-decoration:none; font-weight:900; color:var(--ink);
   }
   .chip:hover{border-color:#d7e2ea; background:#fdfefe;}
   .arrow{color:var(--muted); font-weight:900;}
   .list{display:grid; gap:8px; margin-top:10px;}
-  .list a{font-weight:900;}
   .note{font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5;}
 
   /* ---- Footer ---- */
@@ -214,6 +235,7 @@
       </div>
 
       <div class="actions">
+        <!-- PC: 🔰まずはここから / Mobile: 🔰 -->
         <button id="start-toggle" class="btn compact" aria-controls="start-details" aria-expanded="false">
           <span class="label-full" id="start-label">🔰まずはここから</span>
           <span class="label-short" id="start-label-s">🔰</span>
@@ -230,36 +252,38 @@
     <div class="start-wrap">
       <section id="start" class="section">
         <h2>🧭 まずはここから</h2>
-        <p class="desc">初見の方は「診断」または「3分スタート」から。継続利用の方は目的別ショートカットが便利です。</p>
+        <p class="desc">初めての方は「診断」または「3分スタート」から。目的が決まっている場合はショートカットが便利です。</p>
 
         <div class="flow-grid">
           <div class="card">
             <h4>3分でできる診断</h4>
-            <p class="small">用途を選ぶだけで、推奨ツールの順番を提示します（迷わせない導線）。</p>
+            <p class="small">目的を選ぶだけで、該当ツール（必要なら順番）を提示します。</p>
             <div class="card-actions">
               <button id="diag-open" class="btn primary">診断を開始</button>
               <a class="btn compact" href="?start=1" style="text-decoration:none; display:inline-flex; align-items:center;">リンク共有（展開）</a>
             </div>
-            <p class="note">診断結果の順番は、ツール側の「次へ →」にも反映されます。</p>
+            <p class="note">診断で「順番」が出る場合、ツール側の「次へ →」にも反映されます。</p>
           </div>
 
           <div class="card">
-            <h4>3分スタート（最初の1本）</h4>
-            <p class="small">まずはこの2つを触るだけで、面談の会話が作りやすくなります。</p>
+            <h4>3分スタート</h4>
+            <p class="small">考え方をつかむ（変動PL）→数字で確かめる（売上換算）の順で試せます。</p>
             <div class="chipline">
-              <a class="chip" data-tool="sales" data-next="pl" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">売上換算 → 変動PL</a>
               <a class="chip" data-tool="pl" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">変動PL（単体）</a>
+              <a class="chip" data-tool="pl" data-next="sales" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">変動PL → 売上換算</a>
             </div>
+            <p class="note">※変動PLは「考え方の学習」を目的とするコアツールです。診断・ショートカットでは、原則として他ツールと連結しません。</p>
           </div>
 
           <div class="card">
             <h4>目的別ショートカット</h4>
-            <p class="small">面談での「次の一手」を素早く出すための入口です。</p>
+            <p class="small">目的に合うツールへ最短で移動します。</p>
             <div class="list">
-              <a class="chip" data-tool="price" data-next="pl" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">値上げ検討 → 価格改定 → 変動PL</a>
-              <a class="chip" data-tool="auto" data-next="pl" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">投資判断 → 自動化効果 → 変動PL</a>
-              <a class="chip" data-tool="labor" data-next="pl" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">採用・配置 → 人件費見える化 → 変動PL</a>
-              <a class="chip" data-tool="ccc" href="https://takatrp.github.io/CCC/" target="_blank" rel="noopener">資金繰り → CCC</a>
+              <a class="chip" data-tool="sales" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">コスト判断：売上換算</a>
+              <a class="chip" data-tool="price" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">値上げ判断：価格改定</a>
+              <a class="chip" data-tool="labor" data-next="sales" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">採用・配置：人件費見える化 → 売上換算</a>
+              <a class="chip" data-tool="auto" data-next="sales" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">入力処理の合理化：自動化効果 → 売上換算</a>
+              <a class="chip" data-tool="ccc" href="https://takatrp.github.io/CCC/" target="_blank" rel="noopener">資金繰り：CCC</a>
             </div>
           </div>
         </div>
@@ -287,15 +311,15 @@
   <div id="diag-modal" class="modal" aria-hidden="true" role="dialog" aria-label="3分診断">
     <div class="modal-body">
       <button class="btn close" id="diag-close" aria-label="閉じる">✕</button>
-      <h3>3分診断（最適な順番を提案）</h3>
+      <h3>3分診断（目的別に提案）</h3>
       <p>目的に近いものを選び、「診断結果を表示」を押してください。</p>
 
       <form id="diag-form">
         <div class="row">
-          <label class="chip"><input type="radio" name="topic" value="price" checked> 値上げ・価格改定</label>
-          <label class="chip"><input type="radio" name="topic" value="invest"> 投資判断（DX等）</label>
-          <label class="chip"><input type="radio" name="topic" value="cost"> コストの妥当性</label>
-          <label class="chip"><input type="radio" name="topic" value="labor"> 採用・人件費</label>
+          <label class="chip"><input type="radio" name="topic" value="cost" checked> コスト判断</label>
+          <label class="chip"><input type="radio" name="topic" value="price"> 値上げ判断</label>
+          <label class="chip"><input type="radio" name="topic" value="labor"> 採用・配置</label>
+          <label class="chip"><input type="radio" name="topic" value="auto"> 入力処理の合理化</label>
           <label class="chip"><input type="radio" name="topic" value="cash"> 資金繰り</label>
         </div>
 
@@ -306,7 +330,7 @@
       </form>
 
       <div id="diag-result" hidden>
-        <p class="note">推奨順にクリックしてください（ツール側の「次へ →」にも連動します）。</p>
+        <p class="note">順番がある場合は、左から順にクリックしてください（ツール側の「次へ →」にも連動します）。</p>
         <div id="diag-steps" class="chipline"></div>
       </div>
     </div>
@@ -322,33 +346,35 @@
           <img class="carimg" alt="4WD car" src="./四輪駆動.png" decoding="async" loading="eager" />
         </div>
 
+        <!-- 中央：変動PL（単体・連結なし） -->
         <a class="corner oncar" data-tool="pl"
            href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
           <span class="mini-badge">PL</span><span>変動損益</span>
         </a>
 
-        <a class="corner tl" data-tool="sales" data-next="pl"
+        <!-- 四輪（連結なし） -->
+        <a class="corner tl" data-tool="sales"
            href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
           <span class="mini-badge">
             <svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg>
           </span><span>売上換算</span>
         </a>
 
-        <a class="corner tr" data-tool="price" data-next="pl"
+        <a class="corner tr" data-tool="price"
            href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
           <span class="mini-badge">
             <svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg>
           </span><span>価格改定</span>
         </a>
 
-        <a class="corner bl" data-tool="labor" data-next="pl"
+        <a class="corner bl" data-tool="labor"
            href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
           <span class="mini-badge">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           </span><span>人件費</span>
         </a>
 
-        <a class="corner br" data-tool="auto" data-next="pl"
+        <a class="corner br" data-tool="auto"
            href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
           <span class="mini-badge">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a8 8 0 0 0 0-6M4.6 9a8 8 0 0 0 0 6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
@@ -369,7 +395,7 @@
     </div>
 
     <div class="tiles4 tiles4-row" aria-label="4WDの各ツール">
-      <a class="tile" data-tool="sales" data-next="pl"
+      <a class="tile" data-tool="sales"
          href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
         <div class="badge">
           <svg viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M10 9l-3 3 3 3"/><path d="M14 9l3 3-3 3"/></svg>
@@ -377,7 +403,7 @@
         <div class="ttext"><div class="title">それ、売上に直すといくらですか？</div><p class="desc">支出額を必要売上金額に即換算</p></div>
       </a>
 
-      <a class="tile" data-tool="price" data-next="pl"
+      <a class="tile" data-tool="price"
          href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">
         <div class="badge">
           <svg viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M8 10l4-4 4 4"/><path d="M8 14l4 4 4-4"/></svg>
@@ -385,13 +411,13 @@
         <div class="ttext"><div class="title">価格改定検討ツール</div><p class="desc">価格改定の影響を試算</p></div>
       </a>
 
-      <a class="tile" data-tool="labor" data-next="pl"
+      <a class="tile" data-tool="labor"
          href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">
         <div class="badge">¥</div>
         <div class="ttext"><div class="title">人件費見える化ツール</div><p class="desc">時間単価で人件費を可視化</p></div>
       </a>
 
-      <a class="tile" data-tool="auto" data-next="pl"
+      <a class="tile" data-tool="auto"
          href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">
         <div class="badge">⚙︎</div>
         <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算</p></div>
@@ -436,7 +462,7 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r66</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r67</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
@@ -474,8 +500,11 @@
     if(!startDetails || !startToggle) return;
     startDetails.open = !!open;
     startToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if(startLabel) startLabel.textContent = open ? '閉じる' : 'まずはここから';
-    if(startLabelS) startLabelS.textContent = open ? '閉' : '入口';
+
+    // open時は「閉じる」表記（ご指定はデフォルトラベルのみのため、open時は簡潔に）
+    if(startLabel) startLabel.textContent = open ? '閉じる' : '🔰まずはここから';
+    if(startLabelS) startLabelS.textContent = open ? '閉' : '🔰';
+
     try{ localStorage.setItem('mk_start_open', open ? '1' : '0'); }catch(e){}
   }
 
@@ -544,7 +573,7 @@
     a.addEventListener('click', ()=>{
       try{ localStorage.setItem('mk_portal_url', PORTAL_HOME); }catch(e){}
       if(nextKey && tools[nextKey]){
-        // 2-step default flow
+        // 2-step flow（例：人件費→売上換算 / 自動化→売上換算 / 変動PL→売上換算）
         setFlow([buildToolUrlNoNext(k), buildToolUrlNoNext(nextKey)], 0);
       }
     }, {passive:true});
@@ -558,16 +587,17 @@
   if(diagClose && diagModal) diagClose.addEventListener('click', ()=> diagModal.classList.remove('show'));
   if(diagModal) diagModal.addEventListener('click', (e)=>{ if(e.target === diagModal) diagModal.classList.remove('show'); });
 
+  // 診断フロー（変動PLは原則連結しない：ここには入れない）
   const flows = {
-    price: { steps:['sales','price','pl'] },
-    invest:{ steps:['sales','auto','pl'] },
-    cost:  { steps:['sales','pl'] },
-    labor: { steps:['labor','pl'] },
+    cost:  { steps:['sales'] },
+    price: { steps:['price'] },
+    labor: { steps:['labor','sales'] },
+    auto:  { steps:['auto','sales'] },
     cash:  { steps:['ccc'] }
   };
   const labels = {
-    pl:'変動PL', sales:'売上換算', price:'価格改定', labor:'人件費', auto:'自動化効果',
-    withholding:'源泉逆算', dep:'減価償却', insurance:'保険換算', ccc:'CCC'
+    pl:'変動PL', sales:'売上換算', price:'価格改定', labor:'人件費見える化', auto:'自動化効果', ccc:'CCC',
+    withholding:'源泉逆算', dep:'減価償却', insurance:'保険換算'
   };
   const toolLabel = (k)=> labels[k] || k;
 
@@ -604,8 +634,8 @@
 
   if(diagForm) diagForm.addEventListener('submit', (e)=>{
     e.preventDefault();
-    const topic = diagForm.querySelector('input[name="topic"]:checked')?.value || 'price';
-    const flow = flows[topic] || flows.price;
+    const topic = diagForm.querySelector('input[name="topic"]:checked')?.value || 'cost';
+    const flow = flows[topic] || flows.cost;
     const steps = flow.steps || [];
 
     const flowUrls = steps.map(k => buildToolUrlNoNext(k));
