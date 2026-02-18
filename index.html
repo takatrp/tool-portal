@@ -90,6 +90,17 @@
   .tile .ttext .title{font-size:15px; font-weight:900;}
   .tile .ttext .desc{font-size:12px; color:var(--muted); margin:0;}
 
+  /* 横長タイル（全幅） */
+  .tile-wide{
+    grid-column: 1 / -1;
+    padding:12px 14px;
+  }
+  .tile-wide .ttext .title{font-size:15.5px;}
+  @media (min-width:1024px){
+    .tile-wide{padding:14px 16px;}
+    .tile-wide .ttext .title{font-size:16px;}
+  }
+
   /* ---- 4WD layout (car) ---- */
   .layout-top{display:block;}
   .wheel{position:relative;margin:0 auto;width:min(420px,92vw);aspect-ratio:1/1;}
@@ -114,7 +125,7 @@
   .wheel .corner.oncar{top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;}
 
   .tiles4{display:grid; gap:10px;}
-  .tiles4-row{grid-template-columns: 1fr;}
+  .tiles4-row{grid-template-columns: 1fr;} /* mobile default */
 
   /* ======= Desktop ======= */
   @media (min-width:1024px){
@@ -175,6 +186,7 @@
     #shitenno .wheel .corner.tr{top:26%; right:14%;}
     #shitenno .wheel .corner.bl{bottom:26%; left:14%;}
     #shitenno .wheel .corner.br{bottom:26%; right:14%;}
+    .tiles4-row{grid-template-columns: repeat(2, 1fr);}
   }
 
   /* ---- Modal ---- */
@@ -189,7 +201,7 @@
 
   /* ---- Start area (collapsible via <details>) ---- */
   .start-details{border-bottom:1px solid var(--line); background:linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%);}
-  .start-details summary{display:none;} /* header button controls it */
+  .start-details summary{display:none;}
   .start-wrap{padding-bottom:6px;}
   .flow-grid{display:grid; gap:10px; margin-top:8px;}
   @media (min-width:1024px){ .flow-grid{grid-template-columns: repeat(3, 1fr);} }
@@ -204,7 +216,7 @@
     flex-wrap:wrap;
     gap:10px;
     margin-top:10px;
-    align-items:center; /* →の縦ズレ防止 */
+    align-items:center;
   }
   .chip{
     display:inline-flex; align-items:center; gap:6px;
@@ -215,8 +227,8 @@
     text-decoration:none;
     font-weight:900;
     color:var(--ink);
-    font-size:13px; /* 少し小さく */
-    box-shadow: var(--shadow-btn); /* ボタンらしさ */
+    font-size:13px;
+    box-shadow: var(--shadow-btn);
     transform: translateY(0);
     transition: box-shadow .15s ease, transform .15s ease, background .15s ease, border-color .15s ease;
   }
@@ -229,21 +241,15 @@
   .chip:active{transform: translateY(0); box-shadow: var(--shadow-btn);}
 
   /* ラジオ用chip（診断モーダル内） */
-  #diag-form label.chip{
-    cursor:pointer;
-    user-select:none;
-  }
-  #diag-form label.chip input{
-    accent-color: var(--brand);
-    transform: translateY(1px);
-  }
+  #diag-form label.chip{cursor:pointer; user-select:none;}
+  #diag-form label.chip input{accent-color: var(--brand); transform: translateY(1px);}
   #diag-form label.chip.is-on{
     border-color: rgba(87,136,153,.95);
     background: linear-gradient(180deg, rgba(87,136,153,.12) 0%, rgba(87,136,153,.06) 100%);
     box-shadow: 0 0 0 4px var(--ring), var(--shadow-btn);
   }
 
-  /* 診断の「→」表示（縦位置・バランス改善） */
+  /* 診断の「→」 */
   .arrow{
     color:var(--muted);
     font-weight:900;
@@ -260,12 +266,6 @@
     .chip{font-size:12.5px; padding:8px 11px;}
     .arrow{height:32px; font-size:13px;}
   }
-
-  .comp-row{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
-  .seg{display:flex; gap:6px;}
-  .seg.sm .segbtn{padding:6px 10px; font-size:12px; border-radius:10px;}
-  .segbtn{background:#fff; border:1px solid rgba(87,136,153,.45); color:var(--brand-700); padding:10px 14px; border-radius:12px; cursor:pointer}
-  .segbtn.active{background:var(--brand); color:#fff}
 
   .list{display:grid; gap:10px; margin-top:10px;}
   .note{font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5;}
@@ -300,7 +300,6 @@
       </div>
 
       <div class="actions">
-        <!-- PC: 🔰まずはここから / Mobile: 🔰 -->
         <button id="start-toggle" class="btn compact" aria-controls="start-details" aria-expanded="false">
           <span class="label-full" id="start-label">🔰まずはここから</span>
           <span class="label-short" id="start-label-s">🔰</span>
@@ -311,7 +310,6 @@
     </div>
   </header>
 
-  <!-- 折りたたみ領域：まずはここから（デフォルト閉） -->
   <details id="start-details" class="start-details">
     <summary>まずはここから</summary>
     <div class="start-wrap">
@@ -327,27 +325,31 @@
               <button id="diag-open" class="btn primary">診断を開始</button>
               <a class="btn compact" href="?start=1" style="text-decoration:none; display:inline-flex; align-items:center;">リンク共有（展開）</a>
             </div>
-            <p class="note">診断で「順番」が出る場合、左から順にクリックしてください（ツール側の「次へ →」にも連動します）。</p>
+            <p class="note">順番がある場合は、左から順にクリックしてください（ツール側の「次へ →」にも連動します）。</p>
           </div>
 
           <div class="card">
             <h4>3分スタート</h4>
-            <p class="small">考え方をつかむ（変動PL）→数字で確かめる（売上換算）の順で試せます。</p>
+            <p class="small">考え方をつかむ（変動PL）→数字で確かめる（売上換算）→回収策（打ち手）まで一気に試せます。</p>
             <div class="chipline">
               <a class="chip" data-tool="pl" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">変動PL（単体）</a>
-              <a class="chip" data-tool="pl" data-next="sales" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">変動PL → 売上換算</a>
+              <a class="chip" data-chain="pl,sales" href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">変動PL → 売上換算</a>
+              <a class="chip" data-chain="sales,kit" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">売上換算 → 打ち手検討</a>
             </div>
-            <p class="note">※変動PLは「考え方の学習」を目的とするコアツールです。診断・ショートカットでは、原則として他ツールと連結しません。</p>
+            <p class="note">※変動PLは「考え方の学習」を目的とするコアツールです（診断・ショートカットでは原則連結しません）。</p>
           </div>
 
           <div class="card">
             <h4>目的別ショートカット</h4>
-            <p class="small">目的に合うツールへ最短で移動します。</p>
+            <p class="small">目的に合うツールへ最短で移動します（必要なら打ち手検討まで連結）。</p>
             <div class="list">
-              <a class="chip" data-tool="sales" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">コスト判断：売上換算</a>
+              <a class="chip" data-chain="sales,kit" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">コスト判断：売上換算 → 打ち手検討</a>
+
+              <!-- ★ここだけ元に戻す：価格改定は単体 -->
               <a class="chip" data-tool="price" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">値上げ判断：価格改定</a>
-              <a class="chip" data-tool="labor" data-next="sales" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">採用・配置：人件費見える化 → 売上換算</a>
-              <a class="chip" data-tool="auto" data-next="sales" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">入力処理の合理化：自動化効果 → 売上換算</a>
+
+              <a class="chip" data-chain="labor,sales,kit" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">採用・配置：人件費見える化 → 売上換算 → 打ち手検討</a>
+              <a class="chip" data-chain="auto,sales,kit" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">入力処理の合理化：自動化効果 → 売上換算 → 打ち手検討</a>
               <a class="chip" data-tool="ccc" href="https://takatrp.github.io/CCC/" target="_blank" rel="noopener">資金繰り：CCC</a>
             </div>
           </div>
@@ -404,7 +406,7 @@
 
   <section id="shitenno" class="section">
     <h2>🚗 黒字経営4WD</h2>
-    <p class="desc">変動PL＋四つの実務ツールで、黒字経営を駆動する。<br>（㈱TKCのFXクラウドシリーズとの併用を想定しています）</p>
+    <p class="desc">変動PL＋四つの実務ツール＋打ち手検討ツールで、黒字経営を駆動する。<br>（㈱TKCのFXクラウドシリーズとの併用を想定しています）</p>
 
     <div class="layout-top">
       <div class="wheel" aria-label="4WD配置">
@@ -418,7 +420,7 @@
           <span class="mini-badge">PL</span><span>変動損益</span>
         </a>
 
-        <!-- 四輪（連結なし） -->
+        <!-- 四輪 -->
         <a class="corner tl" data-tool="sales"
            href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
           <span class="mini-badge">
@@ -488,6 +490,21 @@
         <div class="badge">⚙︎</div>
         <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算</p></div>
       </a>
+
+      <!-- 横長（次行・全幅）：打ち手検討ツール -->
+      <a class="tile tile-wide" data-tool="kit"
+         href="https://takatrp.github.io/sale-kit/" target="_blank" rel="noopener">
+        <div class="badge">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 7h10"/><path d="M4 12h16"/><path d="M4 17h10"/>
+            <path d="M17 8l3 4-3 4"/>
+          </svg>
+        </div>
+        <div class="ttext">
+          <div class="title">打ち手検討ツール</div>
+          <p class="desc">回収の打ち手（単価↑・数量↑・自動化）を検討</p>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -528,7 +545,7 @@
     © <span id="cpy-year">2025</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
-    <span id="build-rev">r68</span>（<span id="last-updated-date"></span>）
+    <span id="build-rev">r72</span>（<span id="last-updated-date"></span>）
   </footer>
 
 <script>
@@ -556,7 +573,7 @@
   wireModal('qr-open','qr-modal','qr-close');
   wireModal('a2hs-open','a2hs-modal','a2hs-close');
 
-  // Start panel toggle (robust: <details>)
+  // Start panel toggle
   const startToggle = document.getElementById('start-toggle');
   const startDetails = document.getElementById('start-details');
   const startLabel = document.getElementById('start-label');
@@ -566,11 +583,8 @@
     if(!startDetails || !startToggle) return;
     startDetails.open = !!open;
     startToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-    // open時は「閉じる」表記
     if(startLabel) startLabel.textContent = open ? '閉じる' : '🔰まずはここから';
     if(startLabelS) startLabelS.textContent = open ? '閉' : '🔰';
-
     try{ localStorage.setItem('mk_start_open', open ? '1' : '0'); }catch(e){}
   }
 
@@ -589,7 +603,7 @@
     });
   }
 
-  // Tool URL builder: attach portal/next for tool-side nav
+  // Tool URLs
   const PORTAL_HOME = 'https://takatrp.github.io/tool-portal/';
   const tools = {
     pl: 'https://takatrp.github.io/hendou_PL/',
@@ -597,30 +611,30 @@
     price: 'https://takatrp.github.io/price-up-down/',
     labor: 'https://takatrp.github.io/time-unit-cost/',
     auto: 'https://takatrp.github.io/jidouka-kouka/',
+    kit: 'https://takatrp.github.io/sale-kit/',
     withholding: 'https://takatrp.github.io/withholding/',
     dep: 'https://takatrp.github.io/genkasyoukyaku/',
     insurance: 'https://takatrp.github.io/kigyoubouei/',
     ccc: 'https://takatrp.github.io/CCC/'
   };
 
-  function buildToolUrl(toolKey, nextKey){
-    const base = tools[toolKey];
-    if(!base) return '#';
-    const u = new URL(base);
-    u.searchParams.set('from', 'tool-portal');
-    u.searchParams.set('portal', PORTAL_HOME);
-    if(nextKey && tools[nextKey]) u.searchParams.set('next', tools[nextKey]);
-    return u.toString();
+  // チェーンURL（next を入れ子で作る）
+  function buildChainUrl(keys){
+    if(!Array.isArray(keys) || !keys.length) return '#';
+    let nextUrl = null;
+    for(let i=keys.length-1; i>=0; i--){
+      const k = keys[i];
+      const base = tools[k];
+      if(!base) return '#';
+      const u = new URL(base);
+      u.searchParams.set('from', 'tool-portal');
+      u.searchParams.set('portal', PORTAL_HOME);
+      if(nextUrl) u.searchParams.set('next', nextUrl);
+      nextUrl = u.toString();
+    }
+    return nextUrl;
   }
-
-  function buildToolUrlNoNext(toolKey){
-    const base = tools[toolKey];
-    if(!base) return '#';
-    const u = new URL(base);
-    u.searchParams.set('from', 'tool-portal');
-    u.searchParams.set('portal', PORTAL_HOME);
-    return u.toString();
-  }
+  function toolUrlNoNext(k){ return buildChainUrl([k]); }
 
   function setFlow(urls, idx){
     try{
@@ -630,17 +644,27 @@
     }catch(e){}
   }
 
-  // data-tool anchors: decorate href and persist portal/flow
+  // data-tool anchors: decorate href & persist flow
   document.querySelectorAll('a[data-tool]').forEach(a=>{
     const k = a.dataset.tool;
-    const nextKey = a.dataset.next || null;
-    a.href = buildToolUrl(k, nextKey);
+    const chainStr = (a.dataset.chain || '').trim();
+    const nextKey = (a.dataset.next || '').trim();
+
+    let keys = [];
+    if(chainStr){
+      keys = chainStr.split(',').map(s=>s.trim()).filter(Boolean);
+    }else{
+      keys = nextKey ? [k, nextKey] : [k];
+    }
+
+    if(keys.length && keys[0] !== k) keys.unshift(k);
+
+    a.href = buildChainUrl(keys);
 
     a.addEventListener('click', ()=>{
       try{ localStorage.setItem('mk_portal_url', PORTAL_HOME); }catch(e){}
-      if(nextKey && tools[nextKey]){
-        // 2-step flow（例：人件費→売上換算 / 自動化→売上換算 / 変動PL→売上換算）
-        setFlow([buildToolUrlNoNext(k), buildToolUrlNoNext(nextKey)], 0);
+      if(keys.length > 1){
+        setFlow(keys.map(toolUrlNoNext), 0);
       }
     }, {passive:true});
   });
@@ -656,14 +680,14 @@
   if(diagClose && diagModal) diagClose.addEventListener('click', ()=> diagModal.classList.remove('show'));
   if(diagModal) diagModal.addEventListener('click', (e)=>{ if(e.target === diagModal) diagModal.classList.remove('show'); });
 
-  // 診断フロー（変動PLは原則連結しない：ここには入れない）
+  // ★ 診断フロー：priceのみ元に戻す（kitなし）
   const flows = {
-    cost:  { steps:['sales'] },
-    price: { steps:['price'] },
-    labor: { steps:['labor','sales'] },
-    auto:  { steps:['auto','sales'] },
+    cost:  { steps:['sales','kit'] },
+    price: { steps:['price'] },          // ←ここだけ戻した
+    labor: { steps:['labor','sales','kit'] },
+    auto:  { steps:['auto','sales','kit'] },
     cash:  { steps:['ccc'] },
-    acct:  { steps:['withholding','dep'] } // 経理実務：利息配当仕訳補助 → 減価償却費計算
+    acct:  { steps:['withholding','dep'] } // 経理実務：打ち手は追加しない
   };
   const labels = {
     pl:'変動PL',
@@ -671,6 +695,7 @@
     price:'価格改定',
     labor:'人件費見える化',
     auto:'自動化効果',
+    kit:'打ち手検討',
     ccc:'CCC',
     withholding:'利息配当仕訳補助',
     dep:'減価償却費計算',
@@ -678,22 +703,25 @@
   };
   const toolLabel = (k)=> labels[k] || k;
 
-  function chip(label, toolKey, nextKey, flowUrls, flowIndex){
+  // 診断チップ：その地点からのチェーンURLで next を途切れさせない
+  function chip(label, suffixKeys, flowKeys, flowIndex){
     const a = document.createElement('a');
     a.className = 'chip';
     a.textContent = label;
     a.target = '_blank';
     a.rel = 'noopener';
-    a.href = buildToolUrl(toolKey, nextKey);
+
+    a.href = buildChainUrl(suffixKeys);
+
     a.addEventListener('click', ()=>{
       try{
         localStorage.setItem('mk_portal_url', PORTAL_HOME);
-        if(Array.isArray(flowUrls) && flowUrls.length){
-          localStorage.setItem('mk_flow', JSON.stringify(flowUrls));
-          localStorage.setItem('mk_flow_i', String(flowIndex||0));
+        if(Array.isArray(flowKeys) && flowKeys.length){
+          setFlow(flowKeys.map(toolUrlNoNext), flowIndex||0);
         }
       }catch(e){}
     }, {passive:true});
+
     return a;
   }
 
@@ -730,13 +758,12 @@
     const flow = flows[topic] || flows.cost;
     const steps = flow.steps || [];
 
-    const flowUrls = steps.map(k => buildToolUrlNoNext(k));
-    setFlow(flowUrls, 0);
+    setFlow(steps.map(toolUrlNoNext), 0);
 
     diagSteps.innerHTML = '';
     steps.forEach((k, idx)=>{
-      const nextKey = steps[idx+1] || null;
-      diagSteps.appendChild(chip(toolLabel(k), k, nextKey, flowUrls, idx));
+      const suffix = steps.slice(idx);
+      diagSteps.appendChild(chip(toolLabel(k), suffix, steps, idx));
       if(idx < steps.length - 1){
         const s = document.createElement('span');
         s.className = 'arrow';
@@ -748,7 +775,6 @@
     diagResult.hidden = false;
   });
 
-  // 初期：診断ラジオ見た目を同期
   refreshDiagRadios();
 
 })();
