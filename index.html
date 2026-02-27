@@ -118,7 +118,7 @@
   }
   .wheel .corner.front{
     top:7%; left:50%; transform:translateX(-50%);
-    padding:6px 16px;
+    padding:6px 24px;
   }
   .mini-badge{
     width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
@@ -153,8 +153,8 @@
     .hub{width:220px;height:220px;}
     #shitenno .wheel .corner.tl{top:18%; left:10%;}
     #shitenno .wheel .corner.tr{top:18%; right:10%;}
-    #shitenno .wheel .corner.bl{bottom:7%; left:10%;}
-    #shitenno .wheel .corner.br{bottom:7%; right:10%;}
+    #shitenno .wheel .corner.bl{bottom:16%; left:10%;}
+    #shitenno .wheel .corner.br{bottom:16%; right:10%;}
     .wheel .corner{gap:8px; padding:8px 10px;}
 
     .pllink{grid-area: pl;}
@@ -174,8 +174,10 @@
 
     #shitenno .wheel .corner.tl{top:22%; left:4%;}
     #shitenno .wheel .corner.tr{top:22%; right:4%;}
-    #shitenno .wheel .corner.bl{bottom:10%; left:4%;}
-    #shitenno .wheel .corner.br{bottom:10%; right:4%;}
+    #shitenno .wheel .corner.bl{bottom:18%; left:4%;}
+    #shitenno .wheel .corner.br{bottom:18%; right:4%;}
+
+    .wheel .corner.front { padding-inline: 20px; }
 
     .wheel .corner { font-size: 11px; padding: 4px 8px; gap: 4px; height: 28px; border-radius: 14px; box-shadow: 0 2px 8px rgba(15,23,42,.12); }
     .mini-badge { width: 18px; height: 18px; border-radius: 5px; }
@@ -188,8 +190,9 @@
   @media (min-width:768px) and (max-width:1023px){
     #shitenno .wheel .corner.tl{top:26%; left:14%;}
     #shitenno .wheel .corner.tr{top:26%; right:14%;}
-    #shitenno .wheel .corner.bl{bottom:12%; left:14%;}
-    #shitenno .wheel .corner.br{bottom:12%; right:14%;}
+    #shitenno .wheel .corner.bl{bottom:19%; left:14%;}
+    #shitenno .wheel .corner.br{bottom:19%; right:14%;}
+    .wheel .corner.front { padding-inline: 22px; }
     .tiles4-row{grid-template-columns: repeat(2, 1fr);}
   }
 
