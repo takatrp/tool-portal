@@ -280,7 +280,8 @@
      - PCでも離れない
      - 省略記号はテキスト側のみ
      =============================== */
-  .tile[data-tool="kit"] .ttext .title{
+  .tile[data-tool="kit"] .ttext .title,
+  .tile[data-tool="pdf-manager"] .ttext .title{
     display:flex;
     align-items:center;
     gap:8px;
@@ -289,12 +290,14 @@
     overflow:visible;   /* タイトル全体は切らない */
     text-overflow:clip;
   }
-  .tile[data-tool="kit"] .ttext .title .title-text{
+  .tile[data-tool="kit"] .ttext .title .title-text,
+  .tile[data-tool="pdf-manager"] .ttext .title .title-text{
     min-width:0;
     overflow:hidden;
     text-overflow:ellipsis;
   }
-  .tile[data-tool="kit"] .ttext .title .new-inline{
+  .tile[data-tool="kit"] .ttext .title .new-inline,
+  .tile[data-tool="pdf-manager"] .ttext .title .new-inline{
     flex:0 0 auto;
     display:inline-flex;
     align-items:center;
@@ -330,11 +333,14 @@
     }
   }
   @media (max-width:480px){
-    .tile[data-tool="kit"] .ttext .title{ gap:6px; }
-    .tile[data-tool="kit"] .ttext .title .new-inline{ height:20px; font-size:11px; padding:0 9px; }
+    .tile[data-tool="kit"] .ttext .title,
+    .tile[data-tool="pdf-manager"] .ttext .title{ gap:6px; }
+    .tile[data-tool="kit"] .ttext .title .new-inline,
+    .tile[data-tool="pdf-manager"] .ttext .title .new-inline{ height:20px; font-size:11px; padding:0 9px; }
   }
   @media (prefers-reduced-motion: reduce){
-    .tile[data-tool="kit"] .ttext .title .new-inline{ animation:none; }
+    .tile[data-tool="kit"] .ttext .title .new-inline,
+    .tile[data-tool="pdf-manager"] .ttext .title .new-inline{ animation:none; }
   }
 </style>
 
