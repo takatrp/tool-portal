@@ -280,7 +280,8 @@
      - PCでも離れない
      - 省略記号はテキスト側のみ
      =============================== */
-  .tile[data-tool="kit"] .ttext .title{
+  .tile[data-tool="kit"] .ttext .title,
+  .tile[data-tool="pdf-manager"] .ttext .title{
     display:flex;
     align-items:center;
     gap:8px;
@@ -289,12 +290,14 @@
     overflow:visible;   /* タイトル全体は切らない */
     text-overflow:clip;
   }
-  .tile[data-tool="kit"] .ttext .title .title-text{
+  .tile[data-tool="kit"] .ttext .title .title-text,
+  .tile[data-tool="pdf-manager"] .ttext .title .title-text{
     min-width:0;
     overflow:hidden;
     text-overflow:ellipsis;
   }
-  .tile[data-tool="kit"] .ttext .title .new-inline{
+  .tile[data-tool="kit"] .ttext .title .new-inline,
+  .tile[data-tool="pdf-manager"] .ttext .title .new-inline{
     flex:0 0 auto;
     display:inline-flex;
     align-items:center;
@@ -330,11 +333,14 @@
     }
   }
   @media (max-width:480px){
-    .tile[data-tool="kit"] .ttext .title{ gap:6px; }
-    .tile[data-tool="kit"] .ttext .title .new-inline{ height:20px; font-size:11px; padding:0 9px; }
+    .tile[data-tool="kit"] .ttext .title,
+    .tile[data-tool="pdf-manager"] .ttext .title{ gap:6px; }
+    .tile[data-tool="kit"] .ttext .title .new-inline,
+    .tile[data-tool="pdf-manager"] .ttext .title .new-inline{ height:20px; font-size:11px; padding:0 9px; }
   }
   @media (prefers-reduced-motion: reduce){
-    .tile[data-tool="kit"] .ttext .title .new-inline{ animation:none; }
+    .tile[data-tool="kit"] .ttext .title .new-inline,
+    .tile[data-tool="pdf-manager"] .ttext .title .new-inline{ animation:none; }
   }
 </style>
 
@@ -576,18 +582,6 @@
   <section id="others" class="section">
     <h2>🧰 その他便利ツール</h2>
     <div class="tiles4">
-      <a class="tile" data-tool="withholding"
-         href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
-        <div class="badge">%</div>
-        <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">手取額から源泉徴収税額を逆算・仕訳を表示</p></div>
-      </a>
-
-      <a class="tile" data-tool="dep"
-         href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">
-        <div class="badge">Σ</div>
-        <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額法・定率法の償却費を即時計算</p></div>
-      </a>
-
       <a class="tile" data-tool="insurance"
          href="https://takatrp.github.io/kigyoubouei/" target="_blank" rel="noopener">
         <div class="badge">
@@ -602,6 +596,30 @@
           <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/></svg>
         </div>
         <div class="ttext"><div class="title">CCC計算ツール</div><p class="desc">キャッシュコンバージョンサイクルを計算</p></div>
+      </a>
+
+      <a class="tile" data-tool="pdf-manager"
+         href="https://takatrp.github.io/pdf-manager/" target="_blank" rel="noopener">
+        <div class="badge">PDF</div>
+        <div class="ttext">
+          <div class="title">
+            <span class="title-text">セキュアPDFマネージャー</span>
+            <span class="new-inline" aria-label="新規">NEW!!</span>
+          </div>
+          <p class="desc">PDFの分割・結合・整理をブラウザで安全に実行</p>
+        </div>
+      </a>
+
+      <a class="tile" data-tool="withholding"
+         href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
+        <div class="badge">%</div>
+        <div class="ttext"><div class="title">受取利息・配当金 仕訳補助</div><p class="desc">手取額から源泉徴収税額を逆算・仕訳を表示</p></div>
+      </a>
+
+      <a class="tile" data-tool="dep"
+         href="https://takatrp.github.io/genkasyoukyaku/" target="_blank" rel="noopener">
+        <div class="badge">Σ</div>
+        <div class="ttext"><div class="title">減価償却費計算ツール</div><p class="desc">定額法・定率法の償却費を即時計算</p></div>
       </a>
     </div>
   </section>
