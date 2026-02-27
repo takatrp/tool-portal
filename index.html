@@ -103,6 +103,7 @@
 
   /* ---- 4WD layout (car) ---- */
   .layout-top{display:block;}
+  #shitenno .layout-top{margin-bottom:-14px;}
   .wheel{position:relative;margin:0 auto;width:min(420px,92vw);aspect-ratio:1/1;}
   .hub{
     position:absolute;top:50%;left:50%;translate:-50% -50%;
@@ -149,6 +150,7 @@
       display:grid; grid-template-columns: 340px 1fr;
       grid-template-areas: "wheel pl"; align-items:center; gap:16px;
     }
+    #shitenno .layout-top{margin-bottom:-24px;}
     .wheel{grid-area: wheel; width:340px;}
     .hub{width:220px;height:220px;}
     #shitenno .wheel .corner.tl{top:18%; left:10%;}
@@ -183,11 +185,13 @@
     .mini-badge { width: 18px; height: 18px; border-radius: 5px; }
     .mini-badge svg { width: 11px; height: 11px; }
 
+    #shitenno .layout-top{margin-bottom:-8px;}
     .pllink{margin: 0 0 10px 0;}
   }
 
   /* ======= Tablet ======= */
   @media (min-width:768px) and (max-width:1023px){
+    #shitenno .layout-top{margin-bottom:-16px;}
     #shitenno .wheel .corner.tl{top:26%; left:14%;}
     #shitenno .wheel .corner.tr{top:26%; right:14%;}
     #shitenno .wheel .corner.bl{bottom:19%; left:14%;}
