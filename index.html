@@ -292,7 +292,8 @@
      - 省略記号はテキスト側のみ
      =============================== */
   .tile[data-tool="kit"] .ttext .title,
-  .tile[data-tool="pdf-manager"] .ttext .title{
+  .tile[data-tool="pdf-manager"] .ttext .title,
+  .tile[data-tool="spending-reduction"] .ttext .title{
     display:flex;
     align-items:center;
     gap:8px;
@@ -302,13 +303,15 @@
     text-overflow:clip;
   }
   .tile[data-tool="kit"] .ttext .title .title-text,
-  .tile[data-tool="pdf-manager"] .ttext .title .title-text{
+  .tile[data-tool="pdf-manager"] .ttext .title .title-text,
+  .tile[data-tool="spending-reduction"] .ttext .title .title-text{
     min-width:0;
     overflow:hidden;
     text-overflow:ellipsis;
   }
   .tile[data-tool="kit"] .ttext .title .new-inline,
-  .tile[data-tool="pdf-manager"] .ttext .title .new-inline{
+  .tile[data-tool="pdf-manager"] .ttext .title .new-inline,
+  .tile[data-tool="spending-reduction"] .ttext .title .new-inline{
     flex:0 0 auto;
     display:inline-flex;
     align-items:center;
@@ -349,13 +352,16 @@
   }
   @media (max-width:480px){
     .tile[data-tool="kit"] .ttext .title,
-    .tile[data-tool="pdf-manager"] .ttext .title{ gap:6px; }
+    .tile[data-tool="pdf-manager"] .ttext .title,
+    .tile[data-tool="spending-reduction"] .ttext .title{ gap:6px; }
     .tile[data-tool="kit"] .ttext .title .new-inline,
-    .tile[data-tool="pdf-manager"] .ttext .title .new-inline{ height:20px; font-size:11px; padding:0 9px; }
+    .tile[data-tool="pdf-manager"] .ttext .title .new-inline,
+    .tile[data-tool="spending-reduction"] .ttext .title .new-inline{ height:20px; font-size:11px; padding:0 9px; }
   }
   @media (prefers-reduced-motion: reduce){
     .tile[data-tool="kit"] .ttext .title .new-inline,
-    .tile[data-tool="pdf-manager"] .ttext .title .new-inline{ animation:none; }
+    .tile[data-tool="pdf-manager"] .ttext .title .new-inline,
+    .tile[data-tool="spending-reduction"] .ttext .title .new-inline{ animation:none; }
   }
 
   /* ===============================
@@ -720,6 +726,18 @@
         </div>
       </a>
 
+      <a class="tile" data-tool="spending-reduction"
+         href="https://takatrp.github.io/spending-reduction/" target="_blank" rel="noopener">
+        <div class="badge">¥</div>
+        <div class="ttext">
+          <div class="title">
+            <span class="title-text">支出削減効果見える化ツール</span>
+            <span class="new-inline" aria-label="新規">NEW!!</span>
+          </div>
+          <p class="desc">固定費・変動費の削減効果を見える化して意思決定を支援</p>
+        </div>
+      </a>
+
       <a class="tile" data-tool="withholding"
          href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
         <div class="badge">%</div>
@@ -815,7 +833,8 @@
     dep: 'https://takatrp.github.io/genkasyoukyaku/',
     insurance: 'https://takatrp.github.io/kigyoubouei/',
     ccc: 'https://takatrp.github.io/CCC/',
-    'pdf-manager': 'https://takatrp.github.io/pdf-manager/'
+    'pdf-manager': 'https://takatrp.github.io/pdf-manager/',
+    'spending-reduction': 'https://takatrp.github.io/spending-reduction/'
   };
 
   // チェーンURL（next を入れ子で作る）
@@ -901,6 +920,7 @@
     withholding:'利息配当仕訳補助',
     dep:'減価償却費計算',
     insurance:'保険換算',
+    'spending-reduction':'支出削減見える化'
     'pdf-manager': 'PDFマネージャー'
   };
   const toolLabel = (k)=> labels[k] || k;
