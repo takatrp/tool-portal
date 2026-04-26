@@ -384,7 +384,7 @@
         </a>
         <div>
           <div class="title">松本会計ツールポータル</div>
-          <div class="subtitle">黒字経営を加速する、松本会計オリジナルツール集</div>
+          <div class="subtitle">必要売上の把握、打ち手の整理、月次での検証まで。<br>松本会計ツールポータルは、TKC方式を現場の意思決定につなぐ経営判断ポータルです。</div>
         </div>
       </div>
 
@@ -398,6 +398,26 @@
       </div>
     </div>
   </header>
+
+  <!-- ===============================
+       検索窓エリア
+       =============================== -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <!-- 虫眼鏡アイコン -->
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" id="tool-search" class="search-input" placeholder="課題やキーワードで検索（例: 値上げ, お金がない, 人を雇いたい, 車を買いたい）">
+    </div>
+  </div>
+
+  <!-- ===============================
+       検索結果表示エリア
+       =============================== -->
+  <section id="search-results-section" class="section">
+    <h2>🔍 検索結果</h2>
+    <p class="desc" id="search-count"></p>
+    <div class="linklist" id="search-results-list"></div>
+  </section>
 
   <details id="start-details" class="start-details">
     <summary>まずはここから</summary>
@@ -648,6 +668,18 @@
         </div>
       </a>
 
+      <a class="tile" data-tool="spending-reduction"
+         href="https://takatrp.github.io/spending-reduction/" target="_blank" rel="noopener">
+        <div class="badge">¥</div>
+        <div class="ttext">
+          <div class="title">
+            <span class="title-text">支出削減効果見える化ツール</span>
+            <span class="new-inline" aria-label="新規">NEW!!</span>
+          </div>
+          <p class="desc">固定費・変動費の削減効果を見える化して意思決定を支援</p>
+        </div>
+      </a>
+
       <a class="tile" data-tool="withholding"
          href="https://takatrp.github.io/withholding/" target="_blank" rel="noopener">
         <div class="badge">%</div>
@@ -693,10 +725,16 @@
     if (openBtn && modal) openBtn.addEventListener('click', ()=> modal.classList.add('show'));
     if (closeBtn && modal) closeBtn.addEventListener('click', ()=> modal.classList.remove('show'));
     if (modal) modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.classList.remove('show'); });
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') modal?.classList.remove('show'); });
   }
   wireModal('qr-open','qr-modal','qr-close');
   wireModal('a2hs-open','a2hs-modal','a2hs-close');
+
+  // Escapeキーで開いているモーダルを閉じる（共通化）
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') {
+      document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show'));
+    }
+  });
 
   // Start panel toggle
   const startToggle = document.getElementById('start-toggle');
@@ -771,29 +809,30 @@
     }catch(e){}
   }
 
-  // data-tool anchors: decorate href & persist flow
-  document.querySelectorAll('a[data-tool]').forEach(a=>{
-    const k = a.dataset.tool;
+  // data-tool / data-chain anchors: decorate href & persist flow
+  document.querySelectorAll('a[data-tool], a[data-chain]').forEach(a => {
+    const toolKey = (a.dataset.tool || '').trim();
     const chainStr = (a.dataset.chain || '').trim();
     const nextKey = (a.dataset.next || '').trim();
 
     let keys = [];
-    if(chainStr){
-      keys = chainStr.split(',').map(s=>s.trim()).filter(Boolean);
-    }else{
-      keys = nextKey ? [k, nextKey] : [k];
+
+    if (chainStr) {
+      keys = chainStr.split(',').map(s => s.trim()).filter(Boolean);
+    } else if (toolKey) {
+      keys = nextKey ? [toolKey, nextKey] : [toolKey];
     }
 
-    if(keys.length && keys[0] !== k) keys.unshift(k);
+    if (!keys.length) return;
 
     a.href = buildChainUrl(keys);
 
-    a.addEventListener('click', ()=>{
-      try{ localStorage.setItem('mk_portal_url', PORTAL_HOME); }catch(e){}
-      if(keys.length > 1){
+    a.addEventListener('click', () => {
+      try { localStorage.setItem('mk_portal_url', PORTAL_HOME); } catch(e) {}
+      if (keys.length > 1) {
         setFlow(keys.map(toolUrlNoNext), 0);
       }
-    }, {passive:true});
+    }, { passive: true });
   });
 
   // 3分診断 modal
@@ -810,7 +849,7 @@
   // ★ 診断フロー：priceのみ元に戻す（kitなし）
   const flows = {
     cost:  { steps:['sales','kit'] },
-    price: { steps:['price'] },          // ←ここだけ戻した
+    price: { steps:['price'] },
     labor: { steps:['labor','sales','kit'] },
     auto:  { steps:['auto','sales','kit'] },
     cash:  { steps:['ccc'] },
@@ -905,7 +944,219 @@
 
   refreshDiagRadios();
 
+  // ===============================
+  // NEW!! 検索機能の実装 (スコアリングと自然文対応へアップグレード + IME対応最適化)
+  // ===============================
+  const searchInput = document.getElementById('tool-search');
+  const searchResultsSection = document.getElementById('search-results-section');
+  const searchResultsList = document.getElementById('search-results-list');
+  const searchCount = document.getElementById('search-count');
+  const mainSections = ['start-details', 'shitenno', 'others'];
+
+  // 1. 各ツールの検索タグと「重み（優先度）」を定義
+  const searchDict = {
+    price: { tags: ['価格', '改定', '値上げ', '値下げ', '単価', '値引', '客離れ', 'コンペ', '安売り', '原価高騰', 'セーフティ', '安全', '維持', '限界利益率'], weight: 1.2 },
+    ccc: { tags: ['ccc', '資金繰り', 'キャッシュ', 'キャッシュフロー', 'サイクル', '運転資金', '資金', 'コンバージョン', 'お金がない', '残らない', 'タイムラグ', '業界平均', '手形', '在庫', '支払', '回収', 'サイト', '黒字'], weight: 1.2 },
+    labor: { tags: ['人件費', '採用', '配置', '給与', '時給', '残業', '時間単価', '見える化', '手作業', '会議', 'パート', '手入力', '無駄', '生産性', '時間コスト', '雇いたい', '事務員', '残業代'], weight: 1.2 },
+    dep: { tags: ['減価償却', '償却', '定額法', '定率法', '資産', '経理', '車を買', '決算対策', '節税', '中古車', '耐用年数', '経費', '月割り', '新車', '設備投資'], weight: 1.1 },
+    pl: { tags: ['pl', 'cvp', '変動', '損益', '利益', '固定費', '限界利益', '限界利益率', '赤字', '黒字', '分岐点', '損益分岐点', 'ボール', '儲からない', '目標', 'バウンド', 'ハードル', '稼ぐ力', '売上至上', '体質改善'], weight: 1.1 },
+    insurance: { tags: ['保険', '保障', 'リスク', '企業防衛', '標準保障額', '万が一', 'ストレステスト', '借入返済', '倒れたら', '節税', '借金', '家族'], weight: 1.0 },
+    auto: { tags: ['自動化', 'dx', 'tkc', 'fxクラウド', 'クラウド', 'デジタル', '効果', '効率化', '投資', 'システム', 'it', '合理化', 'ネットバンキング', '手数料', '手入力', 'データ連携', '手書き', '機会損失', '事務員', '経理'], weight: 1.0 },
+    'pdf-manager': { tags: ['pdf', '分割', '結合', '整理', 'セキュア', 'ファイル', 'マネージャー', 'パスワード', 'セキュリティ', '保護', 'ツール'], weight: 1.0 },
+    withholding: { tags: ['仕訳', '受取利息', '配当', '受取配当金', '源泉', '源泉徴収', '税金', '手取', '経理', '補助', '面倒', '税率', '地方税', '手計算', '利子割', '入力'], weight: 1.0 },
+    sales: { tags: ['売上', '換算', 'コスト', '経費', '費用', '投資', 'いくら', '車を買い', '車を買う', '人を雇', '給料', '給与', '投資対効果', '回収', '必要数', '妥当', '採用', '設備', '限界利益率'], weight: 0.9 },
+    kit: { tags: ['打ち手', '検討', '対策', '改善', 'アクション', '次の一手', '回収', '単価アップ', '行動', '宣言', 'やめる', 'コミット', '作戦', '一歩', '方向性', 'どうやって'], weight: 0.8 }
+  };
+
+  // 【追加】検索結果からの「推奨チェーン」定義
+  const recommendedChains = {
+    pl: ['pl'],
+    sales: ['sales', 'kit'],
+    price: ['price'],
+    labor: ['labor', 'sales', 'kit'],
+    auto: ['auto', 'sales', 'kit'],
+    kit: ['kit'],
+    insurance: ['insurance', 'kit'],
+    ccc: ['ccc'],
+    'pdf-manager': ['pdf-manager'],
+    withholding: ['withholding'],
+    dep: ['dep']
+  };
+
+  // 2. 自然文の意図を翻訳するシノニム辞書
+  const synonyms = [
+    { pattern: /人を雇いたい|採用したい|人が足りない|人手不足/g, replace: ' 採用 人件費 ' },
+    { pattern: /車を買いたい|車を買う|車を購入/g, replace: ' 設備投資 減価償却 車を買 ' },
+    { pattern: /黒字なのにお金がない|黒字なのにお金が残らない|現金がない/g, replace: ' 資金繰り ccc お金がない ' },
+    { pattern: /値上げしたいけど怖い|値上げが怖い|客離れが怖い/g, replace: ' 値上げ 価格改定 ' },
+    { pattern: /儲からない/g, replace: ' 利益 限界利益 儲からない ' }
+  ];
+
+  // 【追加】主訴ごとの意図ボーナス
+  const intentBoosts = [
+    { pattern: /人を雇いたい|採用したい|人手不足/, boosts: { labor: 30, sales: 10 } },
+    { pattern: /黒字なのにお金がない|お金が残らない|資金繰り/, boosts: { ccc: 35 } },
+    { pattern: /値上げしたい|値上げが怖い|客離れが怖い/, boosts: { price: 35 } },
+    { pattern: /儲からない|利益が残らない|赤字/, boosts: { pl: 28, sales: 12 } },
+    { pattern: /車を買いたい|設備投資したい/, boosts: { sales: 40, dep: 15 } }
+  ];
+
+  // DOMからツールタイル一覧を取得
+  const allTiles = Array.from(document.querySelectorAll('.linklist a.tile[data-tool], .tiles4 a.tile[data-tool]'));
+
+  let isComposing = false;
+
+  if (searchInput) {
+    searchInput.addEventListener('compositionstart', () => {
+      isComposing = true;
+    });
+
+    searchInput.addEventListener('compositionend', (e) => {
+      isComposing = false;
+      runSearch(e.target.value); // 変換確定時に明示的に検索を実行
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      if (isComposing || e.isComposing) return; // 日本語入力変換中は処理をスキップ
+      runSearch(e.target.value);
+    });
+  }
+
+  function runSearch(inputValue) {
+    let rawQuery = inputValue.replace(/　/g, ' ').trim().toLowerCase();
+
+    if (!rawQuery) {
+      searchResultsSection.style.display = 'none';
+      mainSections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('hidden-by-search');
+      });
+      return;
+    }
+
+    // 自然文をシノニム辞書で翻訳（置換）
+    let query = rawQuery;
+    synonyms.forEach(syn => {
+      query = query.replace(syn.pattern, syn.replace);
+    });
+
+    // 記号を削って単語の配列にする
+    const queryWords = query.replace(/[、。！？!?]/g, ' ').split(/\s+/).filter(w => w.length > 0);
+    
+    const scoredTiles = [];
+    const seenTools = new Set(); // 重複排除用
+
+    // 3. 各タイルに対してスコアリングを実行
+    allTiles.forEach(tile => {
+      const toolKey = tile.dataset.tool;
+      if (seenTools.has(toolKey)) return; // 既に評価・登録済みならスキップ
+      
+      let score = 0;
+      const titleText = tile.querySelector('.title')?.textContent.toLowerCase() || '';
+      const descText = tile.querySelector('.desc')?.textContent.toLowerCase() || '';
+      const dictInfo = searchDict[toolKey] || { tags: [], weight: 1 };
+      const tags = dictInfo.tags;
+      const weight = dictInfo.weight;
+
+      // 【A】単語ごとの部分一致スコア
+      queryWords.forEach(word => {
+        if (titleText.includes(word)) score += 10;
+        if (descText.includes(word)) score += 5;
+        if (tags.some(tag => tag.includes(word) || word.includes(tag))) score += 8;
+      });
+
+      // 【B】入力されたフレーズ全体がタグに直接含まれているか（強いシグナル）
+      const boostedQuery = `${rawQuery} ${query}`;
+      const strongMatches = tags.filter(tag => boostedQuery.includes(tag));
+      score += Math.min(strongMatches.length, 2) * 15;
+
+      // 【C】主訴ボーナス（意図ブースト）
+      intentBoosts.forEach(ib => {
+        if (rawQuery.match(ib.pattern)) {
+          if (ib.boosts[toolKey]) {
+            score += ib.boosts[toolKey];
+          }
+        }
+      });
+
+      if (score > 0) {
+        // 最終スコア ＝ 基礎点 × ツールの重み
+        scoredTiles.push({ tile, score: score * weight, toolKey });
+        seenTools.add(toolKey);
+      }
+    });
+
+    // 4. スコアが高い順（おすすめ順）に並び替え、上位3件に絞る
+    scoredTiles.sort((a, b) => b.score - a.score);
+    const topTiles = scoredTiles.slice(0, 3);
+
+    // kit (打ち手検討) は結論ツールのため、1位になった場合は2位と入れ替える
+    if (topTiles.length >= 2 && topTiles[0].toolKey === 'kit') {
+      [topTiles[0], topTiles[1]] = [topTiles[1], topTiles[0]];
+    }
+
+    // 5. 結果の描画
+    searchResultsList.innerHTML = ''; 
+    if (topTiles.length > 0) {
+      topTiles.forEach((item, index) => {
+        const clone = item.tile.cloneNode(true);
+        const toolKey = item.toolKey;
+        
+        // 1位のツールには「おすすめ」バッジを付与して推薦感を強める
+        if (index === 0) {
+           const ttext = clone.querySelector('.ttext');
+           if(ttext) {
+             const recBadge = document.createElement('span');
+             recBadge.className = 'recommend-badge';
+             recBadge.textContent = '💡 悩みに直結！';
+             ttext.insertBefore(recBadge, ttext.firstChild);
+           }
+        }
+
+        // 検索結果クリック時に「推奨チェーン」を持たせる
+        const keys = recommendedChains[toolKey] || [toolKey];
+        clone.href = buildChainUrl(keys);
+
+        clone.addEventListener('click', () => {
+          try { localStorage.setItem('mk_portal_url', PORTAL_HOME); } catch(e) {}
+          if (keys.length > 1) setFlow(keys.map(toolUrlNoNext), 0);
+        }, {passive:true});
+
+        // 視覚的にチェーンの流れを表示
+        if (keys.length > 1) {
+          const chainLabels = keys.map(k => toolLabel(k)).join(' → ');
+          const chainEl = document.createElement('div');
+          chainEl.className = 'chain-route';
+          chainEl.textContent = '🧭 流れ: ' + chainLabels;
+          const ttext = clone.querySelector('.ttext');
+          if (ttext) ttext.appendChild(chainEl);
+        }
+
+        searchResultsList.appendChild(clone);
+      });
+
+      // 最上位のツール名を取得してメッセージに組み込む
+      const topToolTitle = topTiles[0].tile.querySelector('.title-text')?.textContent || topTiles[0].tile.querySelector('.title')?.textContent;
+      if (topTiles.length === 1) {
+        searchCount.textContent = `この悩みには「${topToolTitle}」が最も近そうです。`;
+      } else {
+        searchCount.textContent = `おすすめ順に ${topTiles.length} 件表示しています。（まずは「${topToolTitle}」がおすすめです）`;
+      }
+    } else {
+      searchCount.innerHTML = '一致するツールが見つかりませんでした。<br>別のキーワードをお試しください。（例：お金がない、人を雇いたい、値上げ、など）';
+    }
+
+    // 検索中はメインコンテンツを隠す
+    mainSections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('hidden-by-search');
+    });
+    searchResultsSection.style.display = 'block';
+  }
+
 })();
 </script>
 </body>
 </html>
+
+
