@@ -751,8 +751,12 @@
     try{ localStorage.setItem('mk_start_open', open ? '1' : '0'); }catch(e){}
   }
 
-  let initOpen = false;
-  try{ initOpen = localStorage.getItem('mk_start_open') === '1'; }catch(e){}
+  let initOpen = true;
+  try{
+    const storedOpen = localStorage.getItem('mk_start_open');
+    if (storedOpen === '0') initOpen = false;
+    if (storedOpen === '1') initOpen = true;
+  }catch(e){}
   if(new URLSearchParams(location.search).get('start') === '1') initOpen = true;
   setStartOpen(initOpen);
 
