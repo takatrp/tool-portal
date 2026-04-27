@@ -732,6 +732,15 @@
     });
   }
 
+
+  // Remove accidental duplicate tiles for spending-reduction (keep the first one only)
+  const spendingTiles = document.querySelectorAll('#others .tile[data-tool="spending-reduction"]');
+  if (spendingTiles.length > 1) {
+    spendingTiles.forEach((tile, idx) => {
+      if (idx > 0) tile.remove();
+    });
+  }
+
   // Tool URLs
   const PORTAL_HOME = 'https://takatrp.github.io/tool-portal/';
   const tools = {
