@@ -26,7 +26,6 @@
   }
   img{max-width:100%; height:auto;}
 
-  /* ---- Hero ---- */
   .hero{
     position:relative;
     background: linear-gradient(180deg, #ffffff 0%, #f3f7fb 100%);
@@ -46,7 +45,6 @@
   .title{font-size: clamp(16px,2vw,24px); font-weight:900; line-height:1.3;}
   .subtitle{color:var(--muted); font-size: clamp(11px,1.8vw,14px); line-height:1.3;}
 
-  /* Header actions & button */
   .actions{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;}
   .btn{
     border:1px solid var(--line); background:#fff; color:var(--brand-700);
@@ -63,8 +61,6 @@
     .btn .label-short{display:inline;}
   }
 
-
-  /* ---- Search area ---- */
   .search-wrap{
     max-width:1100px;
     margin:10px auto 0;
@@ -130,8 +126,6 @@
     .search-input{font-size:13px;}
   }
 
-
-  /* ---- Sections ---- */
   .section{max-width:1100px; margin:12px auto; padding:0 16px;}
   .section h2{
     display:flex; align-items:center; gap:8px;
@@ -140,7 +134,6 @@
   }
   .desc{color:var(--muted); font-size:13px; margin:0 0 4px; line-height:1.4;}
 
-  /* ---- Link tiles ---- */
   .linklist{display:grid; gap:10px;}
   .tile{
     display:flex; align-items:center; gap:10px; padding:10px 12px;
@@ -158,7 +151,6 @@
   .tile .ttext .title{font-size:15px; font-weight:900;}
   .tile .ttext .desc{font-size:12px; color:var(--muted); margin:0;}
 
-  /* 横長タイル（全幅） */
   .tile-wide{
     grid-column: 1 / -1;
     padding:12px 14px;
@@ -169,7 +161,6 @@
     .tile-wide .ttext .title{font-size:16px;}
   }
 
-  /* ---- 4WD layout (car) ---- */
   .layout-top{display:block;}
   #shitenno .layout-top{margin-bottom:-14px;}
   .wheel{position:relative;margin:0 auto;width:min(420px,92vw);aspect-ratio:1/1;}
@@ -198,9 +189,8 @@
   .wheel .corner.oncar{top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;}
 
   .tiles4{display:grid; gap:10px;}
-  .tiles4-row{grid-template-columns: 1fr;} /* mobile default */
+  .tiles4-row{grid-template-columns: 1fr;}
 
-  /* ======= Desktop ======= */
   @media (min-width:1024px){
     .hero{padding: 24px 16px 16px;}
     .section{margin:18px auto;}
@@ -232,7 +222,6 @@
     .tiles4{gap:12px;}
   }
 
-  /* ======= Mobile ======= */
   @media (max-width:767px){
     .hero { padding-bottom: 8px; }
     .section { margin-top: 8px; margin-bottom: 8px;}
@@ -257,7 +246,6 @@
     .pllink{margin: 0 0 10px 0;}
   }
 
-  /* ======= Tablet ======= */
   @media (min-width:768px) and (max-width:1023px){
     #shitenno .layout-top{margin-bottom:-16px;}
     #shitenno .wheel .corner.tl{top:26%; left:14%;}
@@ -268,7 +256,6 @@
     .tiles4-row{grid-template-columns: repeat(2, 1fr);}
   }
 
-  /* ---- Modal ---- */
   .modal{position:fixed; inset:0; background:rgba(15,23,42,.5); display:none; align-items:center; justify-content:center; z-index:50;}
   .modal.show{display:flex;}
   .modal .modal-body{position:relative; background:#fff; border-radius:18px; padding:14px; max-width:min(92vw,720px); box-shadow:var(--shadow);}
@@ -278,7 +265,6 @@
   .modal .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
   .modal .btn.primary{border-color:transparent; color:#fff; background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);}
 
-  /* ---- Start area (collapsible via <details>) ---- */
   .start-details{border-bottom:1px solid var(--line); background:linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%);}
   .start-details summary{display:none;}
   .start-wrap{padding-bottom:6px;}
@@ -289,7 +275,6 @@
   .card .small{margin:0; font-size:12px; color:var(--muted); line-height:1.5;}
   .card .card-actions{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
 
-  /* ===== Buttons for start & shortcuts (chips) ===== */
   .chipline{
     display:flex;
     flex-wrap:wrap;
@@ -319,7 +304,6 @@
   }
   .chip:active{transform: translateY(0); box-shadow: var(--shadow-btn);}
 
-  /* ラジオ用chip（診断モーダル内） */
   #diag-form label.chip{cursor:pointer; user-select:none;}
   #diag-form label.chip input{accent-color: var(--brand); transform: translateY(1px);}
   #diag-form label.chip.is-on{
@@ -328,7 +312,6 @@
     box-shadow: 0 0 0 4px var(--ring), var(--shadow-btn);
   }
 
-  /* 診断の「→」 */
   .arrow{
     color:var(--muted);
     font-weight:900;
@@ -349,16 +332,10 @@
   .list{display:grid; gap:10px; margin-top:10px;}
   .note{font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5;}
 
-  /* ---- Footer ---- */
   .mk-mini{font-size:12px; line-height:1.4; color:var(--muted); text-align:center; padding:8px 12px; border-top:1px solid var(--line);}
   .mk-mini a{color:inherit; text-decoration:underline; text-underline-offset:2px;}
   @media (max-width:480px){ .mk-mini{ font-size:11px; } }
 
-  /* ===============================
-     NEW!! インラインバッジ（タイトル直後）
-     - PCでも離れない
-     - 省略記号はテキスト側のみ
-     =============================== */
   .tile[data-tool="kit"] .ttext .title,
   .tile[data-tool="pdf-manager"] .ttext .title,
   .tile[data-tool="spending-reduction"] .ttext .title{
@@ -367,7 +344,7 @@
     gap:8px;
     min-width:0;
     white-space:nowrap;
-    overflow:visible;   /* タイトル全体は切らない */
+    overflow:visible;
     text-overflow:clip;
   }
   .tile[data-tool="kit"] .ttext .title .title-text,
@@ -433,7 +410,6 @@
   }
 </style>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-91JF4BT2QT"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -467,20 +443,13 @@
     </div>
   </header>
 
-  <!-- ===============================
-       検索窓エリア
-       =============================== -->
   <div class="search-wrap">
     <div class="search-box">
-      <!-- 虫眼鏡アイコン -->
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       <input type="search" id="tool-search" class="search-input" placeholder="課題やキーワードで検索（例: 値上げ, お金がない, 人を雇いたい, 車を買いたい）">
     </div>
   </div>
 
-  <!-- ===============================
-       検索結果表示エリア
-       =============================== -->
   <section id="search-results-section" class="section">
     <h2>🔍 検索結果</h2>
     <p class="desc" id="search-count"></p>
@@ -521,10 +490,7 @@
             <p class="small">目的に合うツールへ最短で移動します（必要なら打ち手検討まで連結）。</p>
             <div class="list">
               <a class="chip" data-chain="sales,kit" href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">コスト判断：売上換算 → 打ち手検討</a>
-
-              <!-- ★ここだけ元に戻す：価格改定は単体 -->
               <a class="chip" data-tool="price" href="https://takatrp.github.io/price-up-down/" target="_blank" rel="noopener">値上げ判断：価格改定</a>
-
               <a class="chip" data-chain="labor,sales,kit" href="https://takatrp.github.io/time-unit-cost/" target="_blank" rel="noopener">採用・配置：人件費見える化 → 売上換算 → 打ち手検討</a>
               <a class="chip" data-chain="auto,sales,kit" href="https://takatrp.github.io/jidouka-kouka/" target="_blank" rel="noopener">入力処理の合理化：自動化効果 → 売上換算 → 打ち手検討</a>
               <a class="chip" data-tool="ccc" href="https://takatrp.github.io/CCC/" target="_blank" rel="noopener">資金繰り：CCC</a>
@@ -535,7 +501,6 @@
     </div>
   </details>
 
-  <!-- QRコード表示モーダル -->
   <div id="qr-modal" class="modal" aria-hidden="true" role="dialog" aria-label="共有用QRコード">
     <div class="modal-body">
       <button class="btn close" id="qr-close" aria-label="閉じる">✕</button>
@@ -543,7 +508,6 @@
     </div>
   </div>
 
-  <!-- ホーム画面追加ガイド（PNG）モーダル -->
   <div id="a2hs-modal" class="modal" aria-hidden="true" role="dialog" aria-label="ホーム画面への追加方法">
     <div class="modal-body">
       <button class="btn close" id="a2hs-close" aria-label="閉じる">✕</button>
@@ -551,7 +515,6 @@
     </div>
   </div>
 
-  <!-- 3分診断モーダル -->
   <div id="diag-modal" class="modal" aria-hidden="true" role="dialog" aria-label="3分診断">
     <div class="modal-body">
       <button class="btn close" id="diag-close" aria-label="閉じる">✕</button>
@@ -596,13 +559,11 @@
           <span class="mini-badge">→</span><span>打ち手検討</span>
         </a>
 
-        <!-- 中央：変動PL（単体・連結なし） -->
         <a class="corner oncar" data-tool="pl"
            href="https://takatrp.github.io/hendou_PL/" target="_blank" rel="noopener">
           <span class="mini-badge">PL</span><span>変動損益</span>
         </a>
 
-        <!-- 四輪 -->
         <a class="corner tl" data-tool="sales"
            href="https://takatrp.github.io/convert-to-sales/" target="_blank" rel="noopener">
           <span class="mini-badge">
@@ -673,7 +634,6 @@
         <div class="ttext"><div class="title">自動化効果試算ツール</div><p class="desc">自動化の投資対効果を試算</p></div>
       </a>
 
-      <!-- 横長（次行・全幅）：打ち手検討ツール -->
       <a class="tile tile-wide" data-tool="kit"
          href="https://takatrp.github.io/sale-kit/" target="_blank" rel="noopener">
         <div class="badge">
@@ -720,7 +680,7 @@
             <span class="title-text">支出削減効果見える化ツール</span>
             <span class="new-inline" aria-label="新規">NEW!!</span>
           </div>
-          <p class="desc">固定費の削減効果を見える化して意思決定を支援</p>
+          <p class="desc">固定費・変動費の削減効果を見える化して意思決定を支援</p>
         </div>
       </a>
 
@@ -733,18 +693,6 @@
             <span class="new-inline" aria-label="新規">NEW!!</span>
           </div>
           <p class="desc">PDFの分割・結合・整理をブラウザで安全に実行</p>
-        </div>
-      </a>
-
-      <a class="tile" data-tool="spending-reduction"
-         href="https://takatrp.github.io/spending-reduction/" target="_blank" rel="noopener">
-        <div class="badge">¥</div>
-        <div class="ttext">
-          <div class="title">
-            <span class="title-text">支出削減効果見える化ツール</span>
-            <span class="new-inline" aria-label="新規">NEW!!</span>
-          </div>
-          <p class="desc">固定費・変動費の削減効果を見える化して意思決定を支援</p>
         </div>
       </a>
 
@@ -771,7 +719,6 @@
 
 <script>
 (function(){
-  // Footer dates
   const yEl = document.getElementById('cpy-year');
   if (yEl) {
     const startYear = 2025;
@@ -785,7 +732,6 @@
     updDate.textContent = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
   }
 
-  // Modals: QR / A2HS
   function wireModal(openId, modalId, closeId){
     const modal = document.getElementById(modalId);
     const openBtn = document.getElementById(openId);
@@ -797,14 +743,12 @@
   wireModal('qr-open','qr-modal','qr-close');
   wireModal('a2hs-open','a2hs-modal','a2hs-close');
 
-  // Escapeキーで開いているモーダルを閉じる（共通化）
   document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape') {
       document.querySelectorAll('.modal.show').forEach(m => m.classList.remove('show'));
     }
   });
 
-  // Start panel toggle
   const startToggle = document.getElementById('start-toggle');
   const startDetails = document.getElementById('start-details');
   const startLabel = document.getElementById('start-label');
@@ -838,16 +782,6 @@
     });
   }
 
-
-  // Remove accidental duplicate tiles for spending-reduction (keep the first one only)
-  const spendingTiles = document.querySelectorAll('#others .tile[data-tool="spending-reduction"]');
-  if (spendingTiles.length > 1) {
-    spendingTiles.forEach((tile, idx) => {
-      if (idx > 0) tile.remove();
-    });
-  }
-
-  // Tool URLs
   const PORTAL_HOME = 'https://takatrp.github.io/tool-portal/';
   const tools = {
     pl: 'https://takatrp.github.io/hendou_PL/',
@@ -864,7 +798,6 @@
     'spending-reduction': 'https://takatrp.github.io/spending-reduction/'
   };
 
-  // チェーンURL（next を入れ子で作る）
   function buildChainUrl(keys){
     if(!Array.isArray(keys) || !keys.length) return '#';
     let nextUrl = null;
@@ -890,7 +823,6 @@
     }catch(e){}
   }
 
-  // data-tool / data-chain anchors: decorate href & persist flow
   document.querySelectorAll('a[data-tool], a[data-chain]').forEach(a => {
     const toolKey = (a.dataset.tool || '').trim();
     const chainStr = (a.dataset.chain || '').trim();
@@ -916,7 +848,6 @@
     }, { passive: true });
   });
 
-  // 3分診断 modal
   const diagModal = document.getElementById('diag-modal');
   const diagOpen = document.getElementById('diag-open');
   const diagClose = document.getElementById('diag-close');
@@ -927,14 +858,13 @@
   if(diagClose && diagModal) diagClose.addEventListener('click', ()=> diagModal.classList.remove('show'));
   if(diagModal) diagModal.addEventListener('click', (e)=>{ if(e.target === diagModal) diagModal.classList.remove('show'); });
 
-  // ★ 診断フロー：priceのみ元に戻す（kitなし）
   const flows = {
     cost:  { steps:['sales','kit'] },
     price: { steps:['price'] },
     labor: { steps:['labor','sales','kit'] },
     auto:  { steps:['auto','sales','kit'] },
     cash:  { steps:['ccc'] },
-    acct:  { steps:['withholding','dep'] } // 経理実務：打ち手は追加しない
+    acct:  { steps:['withholding','dep'] }
   };
   const labels = {
     pl:'変動PL',
@@ -951,7 +881,6 @@
   };
   const toolLabel = (k)=> labels[k] || k;
 
-  // 診断チップ：その地点からのチェーンURLで next を途切れさせない
   function chip(label, suffixKeys, flowKeys, flowIndex){
     const a = document.createElement('a');
     a.className = 'chip';
@@ -1025,16 +954,12 @@
 
   refreshDiagRadios();
 
-  // ===============================
-  // NEW!! 検索機能の実装 (スコアリングと自然文対応へアップグレード + IME対応最適化)
-  // ===============================
   const searchInput = document.getElementById('tool-search');
   const searchResultsSection = document.getElementById('search-results-section');
   const searchResultsList = document.getElementById('search-results-list');
   const searchCount = document.getElementById('search-count');
   const mainSections = ['start-details', 'shitenno', 'others'];
 
-  // 1. 各ツールの検索タグと「重み（優先度）」を定義
   const searchDict = {
     price: { tags: ['価格', '改定', '値上げ', '値下げ', '単価', '値引', '客離れ', 'コンペ', '安売り', '原価高騰', 'セーフティ', '安全', '維持', '限界利益率'], weight: 1.2 },
     ccc: { tags: ['ccc', '資金繰り', 'キャッシュ', 'キャッシュフロー', 'サイクル', '運転資金', '資金', 'コンバージョン', 'お金がない', '残らない', 'タイムラグ', '業界平均', '手形', '在庫', '支払', '回収', 'サイト', '黒字'], weight: 1.2 },
@@ -1049,7 +974,6 @@
     kit: { tags: ['打ち手', '検討', '対策', '改善', 'アクション', '次の一手', '回収', '単価アップ', '行動', '宣言', 'やめる', 'コミット', '作戦', '一歩', '方向性', 'どうやって'], weight: 0.8 }
   };
 
-  // 【追加】検索結果からの「推奨チェーン」定義
   const recommendedChains = {
     pl: ['pl'],
     sales: ['sales', 'kit'],
@@ -1061,10 +985,10 @@
     ccc: ['ccc'],
     'pdf-manager': ['pdf-manager'],
     withholding: ['withholding'],
-    dep: ['dep']
+    dep: ['dep'],
+    'spending-reduction': ['spending-reduction', 'kit']
   };
 
-  // 2. 自然文の意図を翻訳するシノニム辞書
   const synonyms = [
     { pattern: /人を雇いたい|採用したい|人が足りない|人手不足/g, replace: ' 採用 人件費 ' },
     { pattern: /車を買いたい|車を買う|車を購入/g, replace: ' 設備投資 減価償却 車を買 ' },
@@ -1073,7 +997,6 @@
     { pattern: /儲からない/g, replace: ' 利益 限界利益 儲からない ' }
   ];
 
-  // 【追加】主訴ごとの意図ボーナス
   const intentBoosts = [
     { pattern: /人を雇いたい|採用したい|人手不足/, boosts: { labor: 30, sales: 10 } },
     { pattern: /黒字なのにお金がない|お金が残らない|資金繰り/, boosts: { ccc: 35 } },
@@ -1082,7 +1005,6 @@
     { pattern: /車を買いたい|設備投資したい/, boosts: { sales: 40, dep: 15 } }
   ];
 
-  // DOMからツールタイル一覧を取得
   const allTiles = Array.from(document.querySelectorAll('.linklist a.tile[data-tool], .tiles4 a.tile[data-tool]'));
 
   let isComposing = false;
@@ -1094,11 +1016,11 @@
 
     searchInput.addEventListener('compositionend', (e) => {
       isComposing = false;
-      runSearch(e.target.value); // 変換確定時に明示的に検索を実行
+      runSearch(e.target.value);
     });
 
     searchInput.addEventListener('input', (e) => {
-      if (isComposing || e.isComposing) return; // 日本語入力変換中は処理をスキップ
+      if (isComposing || e.isComposing) return;
       runSearch(e.target.value);
     });
   }
@@ -1115,23 +1037,19 @@
       return;
     }
 
-    // 自然文をシノニム辞書で翻訳（置換）
     let query = rawQuery;
     synonyms.forEach(syn => {
       query = query.replace(syn.pattern, syn.replace);
     });
 
-    // 記号を削って単語の配列にする
     const queryWords = query.replace(/[、。！？!?]/g, ' ').split(/\s+/).filter(w => w.length > 0);
-    
     const scoredTiles = [];
-    const seenTools = new Set(); // 重複排除用
+    const seenTools = new Set();
 
-    // 3. 各タイルに対してスコアリングを実行
     allTiles.forEach(tile => {
       const toolKey = tile.dataset.tool;
-      if (seenTools.has(toolKey)) return; // 既に評価・登録済みならスキップ
-      
+      if (seenTools.has(toolKey)) return;
+
       let score = 0;
       const titleText = tile.querySelector('.title')?.textContent.toLowerCase() || '';
       const descText = tile.querySelector('.desc')?.textContent.toLowerCase() || '';
@@ -1139,19 +1057,16 @@
       const tags = dictInfo.tags;
       const weight = dictInfo.weight;
 
-      // 【A】単語ごとの部分一致スコア
       queryWords.forEach(word => {
         if (titleText.includes(word)) score += 10;
         if (descText.includes(word)) score += 5;
         if (tags.some(tag => tag.includes(word) || word.includes(tag))) score += 8;
       });
 
-      // 【B】入力されたフレーズ全体がタグに直接含まれているか（強いシグナル）
       const boostedQuery = `${rawQuery} ${query}`;
       const strongMatches = tags.filter(tag => boostedQuery.includes(tag));
       score += Math.min(strongMatches.length, 2) * 15;
 
-      // 【C】主訴ボーナス（意図ブースト）
       intentBoosts.forEach(ib => {
         if (rawQuery.match(ib.pattern)) {
           if (ib.boosts[toolKey]) {
@@ -1161,29 +1076,24 @@
       });
 
       if (score > 0) {
-        // 最終スコア ＝ 基礎点 × ツールの重み
         scoredTiles.push({ tile, score: score * weight, toolKey });
         seenTools.add(toolKey);
       }
     });
 
-    // 4. スコアが高い順（おすすめ順）に並び替え、上位3件に絞る
     scoredTiles.sort((a, b) => b.score - a.score);
     const topTiles = scoredTiles.slice(0, 3);
 
-    // kit (打ち手検討) は結論ツールのため、1位になった場合は2位と入れ替える
     if (topTiles.length >= 2 && topTiles[0].toolKey === 'kit') {
       [topTiles[0], topTiles[1]] = [topTiles[1], topTiles[0]];
     }
 
-    // 5. 結果の描画
-    searchResultsList.innerHTML = ''; 
+    searchResultsList.innerHTML = '';
     if (topTiles.length > 0) {
       topTiles.forEach((item, index) => {
         const clone = item.tile.cloneNode(true);
         const toolKey = item.toolKey;
-        
-        // 1位のツールには「おすすめ」バッジを付与して推薦感を強める
+
         if (index === 0) {
            const ttext = clone.querySelector('.ttext');
            if(ttext) {
@@ -1194,7 +1104,6 @@
            }
         }
 
-        // 検索結果クリック時に「推奨チェーン」を持たせる
         const keys = recommendedChains[toolKey] || [toolKey];
         clone.href = buildChainUrl(keys);
 
@@ -1203,7 +1112,6 @@
           if (keys.length > 1) setFlow(keys.map(toolUrlNoNext), 0);
         }, {passive:true});
 
-        // 視覚的にチェーンの流れを表示
         if (keys.length > 1) {
           const chainLabels = keys.map(k => toolLabel(k)).join(' → ');
           const chainEl = document.createElement('div');
@@ -1216,7 +1124,6 @@
         searchResultsList.appendChild(clone);
       });
 
-      // 最上位のツール名を取得してメッセージに組み込む
       const topToolTitle = topTiles[0].tile.querySelector('.title-text')?.textContent || topTiles[0].tile.querySelector('.title')?.textContent;
       if (topTiles.length === 1) {
         searchCount.textContent = `この悩みには「${topToolTitle}」が最も近そうです。`;
@@ -1227,7 +1134,6 @@
       searchCount.innerHTML = '一致するツールが見つかりませんでした。<br>別のキーワードをお試しください。（例：お金がない、人を雇いたい、値上げ、など）';
     }
 
-    // 検索中はメインコンテンツを隠す
     mainSections.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.add('hidden-by-search');
@@ -1239,4 +1145,3 @@
 </script>
 </body>
 </html>
-
