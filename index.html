@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>松本会計ツールポータル｜無料公開ツールで月次伴走を体験</title>
-<meta name="description" content="必要売上の把握、打ち手の整理、自動化効果、価格改定などを無料公開。松本会計の自計化・月次伴走の考え方を体験できる経営判断ポータルです。" />
+<title>松本会計ツールポータル</title>
+<meta name="description" content="松本会計の社内外向けツールを一画面に集約。黒字経営4WDと各種便利ツール。" />
 <link rel="icon" type="image/png" sizes="192x192" href="./favicon192192.png" />
 <link rel="shortcut icon" type="image/png" href="./favicon192192.png" />
 <link rel="apple-touch-icon" sizes="192x192" href="./favicon192192.png" />
@@ -59,79 +59,6 @@
   @media (max-width:767px){
     .btn .label-full{display:none;}
     .btn .label-short{display:inline;}
-  }
-
-  .public-panel{
-    max-width:1100px;
-    margin:12px auto 0;
-    padding:0 16px;
-  }
-  .public-panel-inner{
-    background:#fff;
-    border:1px solid var(--line);
-    border-left:5px solid var(--brand);
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    padding:14px;
-  }
-  .public-kicker{
-    display:inline-flex;
-    width:max-content;
-    margin-bottom:6px;
-    padding:3px 8px;
-    border-radius:999px;
-    background:rgba(87,136,153,.12);
-    color:var(--brand-700);
-    font-size:11px;
-    font-weight:900;
-  }
-  .public-panel h1{
-    margin:0 0 6px;
-    font-size:clamp(18px,2.5vw,28px);
-    line-height:1.3;
-    color:var(--ink);
-  }
-  .public-panel p{
-    margin:0;
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.65;
-  }
-  .scope-grid{
-    display:grid;
-    gap:10px;
-    margin-top:12px;
-  }
-  .scope-box{
-    padding:10px 12px;
-    border:1px solid var(--line);
-    border-radius:12px;
-    background:#f8fafc;
-  }
-  .scope-box strong{
-    display:block;
-    color:var(--brand-700);
-    font-size:13px;
-    margin-bottom:4px;
-  }
-  .portal-cta-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:12px;
-  }
-  .btn.primary-link{
-    border-color:transparent;
-    color:#fff;
-    background:linear-gradient(135deg, var(--brand) 0%, var(--brand-300) 100%);
-  }
-  @media (min-width:768px){
-    .scope-grid{grid-template-columns:1fr 1fr;}
-  }
-  @media (max-width:767px){
-    .public-panel{margin-top:8px; padding:0 12px;}
-    .public-panel-inner{padding:12px;}
-    .portal-cta-row .btn{width:100%; text-align:center;}
   }
 
   .search-wrap{
@@ -501,7 +428,7 @@
         </a>
         <div>
           <div class="title">松本会計ツールポータル</div>
-          <div class="subtitle">必要売上の把握、打ち手の整理、月次での検証まで。<br>無料公開ツールで、松本会計の月次伴走の考え方を体験できます。</div>
+          <div class="subtitle">必要売上の把握、打ち手の整理、月次での検証まで。<br>松本会計ツールポータルは、TKC方式を現場の意思決定につなぐ経営判断ポータルです。</div>
         </div>
       </div>
 
@@ -512,33 +439,9 @@
         </button>
         <button id="qr-open" class="btn"><span class="label-full">共有用QR</span><span class="label-short">QR</span></button>
         <button id="a2hs-open" class="btn compact"><span class="label-full">ホーム画面への追加方法</span><span class="label-short">追加</span></button>
-        <a class="btn primary-link compact" href="https://www.matsumoto-kaikei.or.jp/form/masatomi/inquiry" target="_blank" rel="noopener" data-cta="header-contact"><span class="label-full">顧問契約を相談</span><span class="label-short">相談</span></a>
       </div>
     </div>
   </header>
-
-  <section class="public-panel" aria-label="無料公開と顧問契約で深まる支援">
-    <div class="public-panel-inner">
-      <span class="public-kicker">完全公開</span>
-      <h1>記帳代行ではなく、自計化と月次の数字で、必要売上と次の打ち手まで一緒に決める。</h1>
-      <p>このポータルは、松本会計が大切にしている「数字を見て、次の行動まで決める」感覚を無料で体験する入口です。ツールは一般的な試算用として公開し、会社ごとの入力ルール整備、月次レビュー、実行方針の検証は顧問契約の中で伴走します。</p>
-      <div class="scope-grid">
-        <div class="scope-box">
-          <strong>無料公開で体験できること</strong>
-          <p>3分診断、変動PL、売上換算、自動化効果、価格改定、人件費、CCCなど、数字で考える入口。</p>
-        </div>
-        <div class="scope-box">
-          <strong>顧問契約で深めること</strong>
-          <p>月次レビュー、入力ルール整備、個社別の打ち手整理、実行結果の検証、次月の優先順位づけ。</p>
-        </div>
-      </div>
-      <div class="portal-cta-row">
-        <a class="btn primary-link" href="?start=1#start" data-cta="public-start">無料ツールを試す</a>
-        <a class="btn" href="https://takatrp.github.io/matsumoto-kaikei-jidouka/" target="_blank" rel="noopener" data-cta="public-lp">打ち手整理の考え方を見る</a>
-        <a class="btn" href="https://www.matsumoto-kaikei.or.jp/form/masatomi/inquiry" target="_blank" rel="noopener" data-cta="public-contact">顧問契約を相談する</a>
-      </div>
-    </div>
-  </section>
 
   <div class="search-wrap">
     <div class="search-box">
@@ -558,7 +461,7 @@
     <div class="start-wrap">
       <section id="start" class="section">
         <h2>🧭 まずはここから</h2>
-        <p class="desc">初めての方は「診断」または「3分スタート」から。目的が決まっている場合はショートカットが便利です。各ツールの結果は一般的な試算として確認し、実際の判断は月次の数字とあわせて検討します。</p>
+        <p class="desc">初めての方は「診断」または「3分スタート」から。目的が決まっている場合はショートカットが便利です。</p>
 
         <div class="flow-grid">
           <div class="card">
@@ -643,7 +546,7 @@
 
   <section id="shitenno" class="section">
     <h2>🚗 黒字経営4WD</h2>
-    <p class="desc">変動PL＋四つの実務ツール＋打ち手検討ツールで、黒字経営を駆動する。<br>無料公開で考え方を体験し、顧問契約後は㈱TKCのFXクラウドシリーズと月次伴走で実行・検証まで進めます。</p>
+    <p class="desc">変動PL＋四つの実務ツール＋打ち手検討ツールで、黒字経営を駆動する。<br>（㈱TKCのFXクラウドシリーズとの併用を想定しています）</p>
 
     <div class="layout-top">
       <div class="wheel" aria-label="4WD配置">
@@ -810,7 +713,6 @@
   <footer class="mk-mini">
     © <span id="cpy-year">2025-2026</span> <a href="https://www.matsumoto-kaikei.or.jp/" target="_blank" rel="noopener license">税理士法人松本会計事務所</a> ｜
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener">CC BY-NC-SA 4.0</a> ｜
-    <a href="https://www.matsumoto-kaikei.or.jp/form/masatomi/inquiry" target="_blank" rel="noopener" data-cta="footer-contact">顧問契約の相談</a> ｜
     <a href="/tool-portal/terms.html" target="_blank" rel="noopener">利用条件</a> ｜
     <span id="build-rev">r73</span>（最終更新日: <span id="last-updated-date"></span>）
   </footer>
@@ -829,18 +731,6 @@
     const p=n=>String(n).padStart(2,'0');
     updDate.textContent = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
   }
-
-  document.querySelectorAll('[data-cta]').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (typeof gtag === 'function') {
-        gtag('event', 'cta_click', {
-          cta_id: link.dataset.cta,
-          link_url: link.href || location.href,
-          page_role: 'tool_portal'
-        });
-      }
-    }, { passive: true });
-  });
 
   function wireModal(openId, modalId, closeId){
     const modal = document.getElementById(modalId);
